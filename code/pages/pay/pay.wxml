@@ -1,0 +1,21 @@
+<!--pages/pay/pay.wxml-->
+<view class='contain' wx:if='{{!showSuccess}}'>
+  <view class='order-detail'>
+    <view class='item'>支付编号： {{sn}}</view>
+    <view class='item'>支付金额： <span style='color:#fa3f06;'>￥{{money}}</span></view>
+  </view>
+  <view class='text'>支付方式</view>
+  <view class='pay-style flex-none' wx:for='{{payStyle}}' bindtap='pay' data-paytype='{{item.paytype}}'>
+    <image src='{{item.img}}'></image>
+    <view>{{item.name}}</view>
+  </view>
+</view>
+
+<!--支付成功之后显示  -->
+<view class='tixian-success' wx:if='{{showSuccess}}'>
+  <image class='tixian-img' src='{{tixian}}'></image>
+  <view class='success-text'>订单交易完成!</view>
+  <!--倒计时  -->
+  <view class='countdown'>{{Countdown}}s后跳转到我的订单</view>
+  <view class='look-my-order' bindtap='goOrder'>去我的订单查看</view>
+</view>

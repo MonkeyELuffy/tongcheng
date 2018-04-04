@@ -1,0 +1,119 @@
+<!--pages/dingdanxiangqing/dingdanxiangqing.wxml-->
+<view class="contain">
+  <view class='type  flex-between'>
+    <span>酒店地址</span>
+  </view>
+
+  <view class="address">
+    <view class="address-message">
+      <view>{{orderData.address.seller_name}}</view>
+      <view class="now-address">
+        <p class="xiaoziti">{{orderData.address.seller_address}}</p>
+      </view>
+    </view>
+  </view>
+
+  <view class='daodian'>
+    <view class='daodian-item flex-none'>
+      <view style='margin-right:20rpx;'>姓名:</view>
+      <input placeholder='请输入您的姓名，方便商家联系' placeholder-style='font-size:24rpx;' bindinput="inputName" maxlength='11' value='{{ship_name}}'></input>
+    </view>
+    <view class='daodian-item flex-none'>
+      <view style='margin-right:20rpx;'>手机号:</view>
+      <input placeholder='请输入您的手机号' placeholder-style='font-size:24rpx;' type='Number' maxlength='11' bindinput="inputPhone" value='{{ship_phone}}'></input>
+    </view>
+  </view>
+
+    <!--备注  -->
+    <view class='beizhu'>
+      <span style='color:#333;font-size:28rpx;'>备注：</span>
+      <textarea class='beizhu-input flex-all' placeholder-style='font-size:24rpx;' placeholder='给商家备注说明（30字以内）' bindinput="input" value='{{remark}}'></textarea>
+    </view>
+
+  <!--选择优惠券  -->
+  <view class='choose-youhuiquan flex-between' bindtap='chooseYouhui'>
+    <view class='youhuiquan-text flex-all'>优惠券</view>
+    <view class='youhuiquan-value' wx:if='{{youhuiquanValue>0}}'>-￥{{youhuiquanValue}}</view>
+    <image class='youhuiquan-img' src='{{more}}'></image>
+  </view> 
+
+  <view class="cartList">
+   <view class='good-contain'>
+    <!--酒店类订单入住时间表  -->
+    <view class='table-contain'>
+      <view class='tbody'>
+        <view class='th flex-center'>
+          <view class='table-item'>日期</view>
+          <view class='table-item'>房间数量</view>
+          <view class='table-item'>金额</view>
+        </view>
+        <view class='td flex-center' wx:for='{{orderData.goods_item}}'>
+          <view class='table-item'>{{item.spec_info}}</view>
+          <view class='table-item'>{{item.quantity}}</view>
+          <view class='table-item'>￥{{item.goods_price}}</view>
+        </view>
+        <view class='tf flex-center'>
+          <view class='table-item'>合计</view>
+          <view class='table-item'>{{dataTotalQuantity}}</view>
+          <view class='table-item'>￥{{dataTotalPrice}}</view>
+        </view>
+      </view>
+    </view>
+
+   </view>
+    
+    <view class='jiage-msg'>
+      <view class='total-price flex-between'>
+        <view class='total-name wenzi1' style='color:#333;font-size:28rpx;'>商品金额</view>
+        <view class='total-value big-price'>￥{{orderData.confirm_info.final_amount}}</view>
+      </view>
+      <!--有折扣的时候就显示  -->
+      <view class='zhekou-contain'>
+        <view class='zhekou-item flex-between'>
+          <view class='zhekou-name wenzi1'>优惠券折扣</view>
+          <view class='zhekou-value little-price'>-￥ {{orderData.cpns_info.cpns_amount || 0}}</view>
+        </view>
+        <view class='zhekou-item flex-between'>
+          <view class='zhekou-name wenzi1'>活动折扣</view>
+          <view class='zhekou-value little-price'>-￥ {{orderData.confirm_info.sale_amount || 0}}</view>
+        </view>
+      </view>
+      <!-- <view class='yunfei flex-between'>
+        <view class='yunfei-name wenzi1'>运费</view>
+        <view class='yunfei-value little-price'>￥{{order_data.yunfei}}</view>
+      </view> -->
+    </view>
+    <!--实际付款  -->
+    <!-- <view class='shijifukuan '>需付款：<span style='color:#f83030'>￥{{orderData.confirm_info.total_amount}}</span></view> -->
+
+    <!--按钮-->
+    <!-- <view class=" flex-between">
+      <view class='time-status' wx:if='{{order_data.stateText1}}'>
+        <view class='time'>{{order_data.stateText1}}</view>
+        <view class='time'>{{order_data.stateText2}}</view>
+      </view>
+      <view class='button-group  flex-all'>
+        <button wx:for="{{order_data.btns}}" data-ordersn="{{order_data.ordersn}}" data-now_all_price="{{order_data.goods_total}}" wx:for-item="itemName" bindtap="clickBtn" data-page="{{itemName.name}}" style='background-color:{{itemName.bgColor}}' >{{itemName.name}}</button>
+      </view>
+    </view> -->
+
+    <view class='jiage-msg zongjia'>
+      <view class='total-price flex-between'>
+        <view class='total-name wenzi1' style='color:#333;font-size:28rpx;'>总计：</view>
+        <view class='total-value big-price'>￥{{orderData.confirm_info.total_amount}}</view>
+      </view>
+    </view>
+
+    <!--购物车和结算按钮  -->
+    <view class="bottom-btn">
+      <view class="price">
+        <view class="total-price">
+          <span style='color:#333;font-size:28rpx;'>合计：</span>
+          ￥ {{orderData.confirm_info.total_amount}}
+        </view>
+        <!-- <view class="peisong">另配送￥ {{peisongPrice}}</view> -->
+      </view>
+      <view class="pay" bindtap="clickBtn">提交订单</view>
+    </view>
+  </view>
+</view>

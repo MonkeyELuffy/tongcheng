@@ -1,0 +1,25 @@
+
+<template name="dataItemTemp">
+  <view class='item  flex-none' wx:for='{{dataList}}' bindtap="clickItem" data-seller_id="{{item.seller_id}}" data-item="{{item}}">
+    <view class='img-contain'>
+      <image class='item-image' src='{{item.store_img_src}}'></image>
+    </view>
+    <view class='detail flex-all'>
+      <view class='detail-name'>{{item.seller_name}}</view>
+      <view class='label-and-haoping-contain flex-none'>
+        <!--标签  -->
+        <view class='label-contain flex-center'>
+          <view class='label-item' wx:for='{{item.special}}' >{{item == 1 ? '满减' : (item == 2 ? '折扣' : (item == 3 ? '品牌' : '星级'))}}</view>
+        </view>
+        <!--好评  -->
+        <view class='haoping' hidden='{{!item.rate}}'>好评{{item.rate}}</view>
+      </view>
+      <view class='des' hidden='{{!item.desc}}'>{{item.desc}}</view>
+      <!--销量和距离  -->
+      <view class='sale-and-juli flex-between'>
+        <view class='sale'>销量({{item.inventory || 0}})</view>
+        <view class='juli'>距离：{{item.cur_space}}</view>
+      </view>
+    </view>
+  </view>
+</template>

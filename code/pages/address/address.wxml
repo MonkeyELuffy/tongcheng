@@ -1,0 +1,26 @@
+<!--pages/address/address.wxml-->
+
+
+<view class="address" wx:for="{{address}}" >
+  <view class="address-message"  bindtap="choose"  wx:for-index="index" data-index="{{index}}" data-id="{{item.id}}">
+    <view class="address-name-tel">{{item.shr_name}} {{item.phone}}  </view>
+    <view class="now-address">{{item.shr_province}} {{item.shr_city}} {{item.shr_area}} {{item.address}}</view>
+  </view>
+  <view class="add-bottom" hidden='{{address.length<=0}}'>
+    <view class="left-nav" bindtap="chooseMoRen" data-item="{{item}}">
+      <image src="{{item.checked ? checkedImg : unCheckedImg}}"></image>
+      <view class="left-text">默认地址</view>
+    </view>
+    <view class="right-nav">
+      <view class="edit-btn" bindtap="editAddress" data-item="{{item}}">
+        <image class="edit" style="right:100rpx" src="{{edit}}"></image>
+        <view class="edit-text">编辑</view>
+      </view>
+      <view class="del-btn" bindtap="delAddress" data-item="{{item}}">
+        <image class="del" src="{{del}}"></image> 
+        <view class="edit-text">删除</view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="button" bindtap="addAdderss" data-page="add_address">新建地址</view>

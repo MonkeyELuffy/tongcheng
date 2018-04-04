@@ -1,0 +1,78 @@
+page {
+  background-color: #eee;
+}
+
+/*分类*/
+.fenlei-contianer {
+  background-color: #fff;
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  border-top: 10rpx solid #eee;
+}
+.fenlei-contianer .fenlei-title {
+  width: 100%;
+  height: 50rpx;
+  padding: 20rpx;
+  font-size: 30rpx;
+  margin: 30rpx 0;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+.fenlei-contianer .fenlei-title image {
+  width: 50rpx;
+  height: 50rpx;
+}
+.fenlei-contianer .fenlei-ul {
+  width: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.fenlei-contianer .fenlei-list {
+  padding: 20rpx 40rpx;
+  margin-bottom: 20rpx;
+  background-color: #fff;
+}
+/*数据列表  */
+.data-list{
+  width: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.item{
+  padding:40rpx 0 40rpx 40rpx;
+  background-color: #fff;
+  border-bottom: 10rpx solid #eee;
+}
+.detail-name{
+  font-size: 32rpx;
+  color: #333;
+  padding-bottom: 4rpx;
+}
+.detail{
+  padding: 20rpx 20rpx 0 0;
+}
+.time{
+  font-size: 24rpx;
+  color: #999;
+}
+.value{
+  color: #f67f79;
+  font-size: 36rpx;
+}
+.bili{
+  color: #333;
+  font-size: 30rpx;
+}
+.name{
+  font-size: 28rpx;
+  color: #333;
+  border-bottom: 2rpx solid rgb(19, 191, 222);
+  padding-bottom: 20rpx;
+}

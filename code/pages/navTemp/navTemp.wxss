@@ -1,0 +1,37 @@
+/* pages/navTemp/navTemp.wxss */
+.nav3-list {
+  background-color: #fff;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 40rpx;
+  box-sizing: border-box;
+  box-shadow: 0 8rpx 10rpx #ccc;
+  justify-content: space-between;
+  margin: 20rpx;
+  border-radius: 10rpx;
+}
+.nav3-list-image {
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nav3-list .nav3-item {
+  width: 24%;
+  display: flex;
+  padding-bottom: 54rpx;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.nav3-list .nav3-item image {
+ width: 100rpx;
+ height: 100rpx; 
+}
+.nav3-list .nav3-item .nav3-name {
+  font-size: 24rpx;
+  padding-top: 6rpx;
+  color: #666;
+}

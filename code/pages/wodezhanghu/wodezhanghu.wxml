@@ -1,0 +1,14 @@
+<!--pages/wodezhanghu/wodezhanghu.wxml-->
+<view class='total-contain'>
+  <view class='total'>{{userInfo.money}}</view>
+  <view class='total-text'>总资产</view>
+</view>
+
+<view class="center-nav" bindtap="{{goPage}}" data-page="b">
+  <view class="item">账单明细</view>
+  <image src="{{more}}" class="more"></image>        
+</view>
+
+
+<view class="button" bindtap="goPage" data-page="chongzhi">充值</view>
+<view class="button" bindtap="goPage" data-page="tixian">提现</view>

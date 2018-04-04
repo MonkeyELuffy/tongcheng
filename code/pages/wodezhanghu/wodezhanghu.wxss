@@ -1,0 +1,52 @@
+/* pages/wodezhanghu/wodezhanghu.wxss */
+
+.total-contain{
+  margin: 20rpx 40rpx;
+  background-color: #fff;
+  border-radius: 14rpx;
+  text-align: center;
+  padding: 120rpx 0;
+}
+.total{
+  font-size: 48rpx;
+  color: #333;
+  padding-bottom: 10rpx;
+}
+.total-text{
+  font-size: 30rpx;
+  color: #737373;
+}
+.center-nav {
+  position: relative;
+  background-color:#fff;
+  display:flex;
+  height: 90rpx;
+  align-items: center;
+  margin-bottom: 100rpx;
+  padding: 0 40rpx;
+}
+.center-nav .item {
+  padding-left:30rpx;
+  font-size: 24rpx;
+  word-spacing: 2rpx;
+  color: #666;
+}
+.button {
+  width: 100%;
+  height: 100rpx;
+  background: linear-gradient(to right,rgb(19, 191, 222), rgb(120, 233, 250));
+  color: #fff;
+  font-size: 34rpx;
+  line-height: 100rpx;
+  position: relative;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 40rpx;
+}
+.more {
+  position: absolute;
+  width: 20rpx;
+  height: 40rpx;
+  right: 30rpx;
+  top: 20rpx;
+}

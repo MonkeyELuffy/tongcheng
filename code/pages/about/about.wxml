@@ -1,0 +1,17 @@
+<!--pages/personCenter/personCenter.wxml-->
+<view class="contain">
+  <view class='top'>
+    <image class='logo' src='{{logo}}'></image>
+    <view class='appName'>{{appName}}</view>
+    <view class='version'>{{version}}</view>
+  </view>
+
+  <view class="userInfo" wx:for="{{Info1}}">
+    <view class= "key">{{item.key}}</view>
+    <view class="value">{{item.value}}</view>
+  </view>
+  <view class="userInfo2" wx:for="{{Info2}}">
+    <view class="company">{{item.key}}</view>
+    <view class="company-detail">{{item.value}}</view>
+  </view>
+</view>

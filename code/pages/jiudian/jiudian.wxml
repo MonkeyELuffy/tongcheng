@@ -1,0 +1,92 @@
+<import src="../imageSwiper/imageSwiper.wxml"/>
+<import src="../paixuTemplate/paixuTemplate.wxml"/>
+<import src="../navTemp/navTemp.wxml"/>
+<import src="../noMoreData/noMoreData.wxml"/>
+
+
+  <scroll-view class="fenlei-ul flex-center fenlei-contianer" style="max-height:{{scrollHeight}}px;" scroll-y="true" bindscrolltoupper="refresh" bindscrolltolower="bindDownLoad">
+<view class='top-contain'>
+  <!--轮播图组件  --> 
+  <template is="imageSwiper"  data="{{slider}}"></template>
+
+  <!--日期选择  -->
+  <view class='choose-data-contain'>
+    <view class='time-contain flex-center'>
+      <!--入住  -->
+      <view class='ruzhu-time'>
+        <view class='time-title'>入住时间</view>
+        <picker mode="date" value="{{ruzhuTime}}" start="{{nowTime}}"  bindchange="ruzhu">
+          <view class="picker">
+            {{ruzhuTimeText}}
+          </view>
+        </picker>
+      </view>
+      <!--离店  -->
+      <view class='ruzhu-time'>
+        <view class='time-title'>离店时间</view>
+        <picker mode="date" value="{{lidianTime}}" start="{{lidianStarTime}}" bindchange="lidian">
+          <view class="picker">
+            {{lidianTimeText}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class='time-contain flex-center'>
+      <view class='choose-item flex-between'>
+        <view class='title'>范围</view>
+        <picker class='picker-contain' range="{{fanwei}}" value="{{fanweiindex}}" bindchange="fanwei">
+          <view class="picker right-picker">
+            {{fanwei[fanweiindex]}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class='time-contain flex-center'>
+      <view class='choose-item flex-between'>
+        <view class='title'>酒店级别</view>
+        <picker class='picker-contain' range="{{jibie}}" value="{{jibieindex}}" bindchange="jibie">
+          <view class="picker right-picker">
+            {{jibie[jibieindex]}}
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <view class="button" bindtap="search">搜索</view>
+  </view>
+  
+  <!--菜单组件  -->
+  <template is="navTemp"  data="{{nav_3List}}"></template>
+  
+  <!--排序组件  -->
+  <template is="paixuTemplate" data="{{allData}}"></template>
+</view>
+
+<!--只保留竖直排列的商品样式  -->
+    <view class="fenlei-list" wx:for="{{dataList}}"  bindtap="goDetailPage" data-page="product_detail" data-seller_id="{{item.seller_id}}">
+      <view class='img-contain'>
+        <image src="{{item.store_img_src}}"></image>
+      </view>
+      <view class="fenlei-text">
+        <view class="text">
+          {{item.seller_name}}
+        </view>
+        <view class='label-and-haoping-contain flex-none'>
+          <!--标签  -->
+          <view class='label-contain flex-center'>
+            <view class='label-item' wx:for='{{item.special}}' >{{item == 1 ? '满减' : (item == 2 ? '折扣' : (item == 3 ? '品牌' : '星级'))}}</view>
+          </view>
+          <!--好评  -->
+          <!-- <view class='haoping'>好评{{item.haoping}}%</view> -->
+        </view>
+        <view class="fenlei-price-total flex-between flex-all">
+          <view class="fenlei-price">{{item.store_star}}星级</view>
+          <view class='juli'>{{item.cur_space}}</view>
+        </view>
+      </view>
+    </view>
+    <!--nomoreData  -->
+    <template is="noMoreData"></template>
+
+    <view style="width:100%;height:40rpx;"></view>
+  </scroll-view>

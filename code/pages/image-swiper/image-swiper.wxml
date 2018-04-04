@@ -1,0 +1,11 @@
+<!--pages/image-swiper/image-swiper.wxml-->
+  <!--轮播图  --> 
+  <view class="swiper-container">
+    <swiper circular="true" current="{{swiperCurrent}}"  class="swiper" indicator-dots="true">  
+      <block wx:for="{{slider}}" wx:key="unique">  
+        <swiper-item>  
+          <image src="{{item.img}}" class="img" data-id="{{item.id}}" bindtap='clickSwiper'></image> 
+        </swiper-item>  
+      </block>  
+    </swiper>  
+  </view> 

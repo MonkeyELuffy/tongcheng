@@ -1,0 +1,46 @@
+/* pages/tixian/tixian.wxss */
+.title{
+  font-size: 32rpx;
+  color: #333;
+  padding: 20rpx;
+}
+input{
+  width: 100%;
+  padding: 20rpx;
+  background-color: #fff;
+  color: #333;
+  margin-bottom: 240rpx;
+}
+.button {
+  width: 500rpx;
+  height: 100rpx;
+  background: linear-gradient(to right,rgb(19, 191, 222), rgb(120, 233, 250));
+  border-radius: 50rpx;
+  color: #fff;
+  font-size: 34rpx;
+  line-height: 100rpx;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 60rpx;
+  margin-bottom: 60rpx;
+}
+.tixian-success{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.tixian-img{
+  width: 120rpx;
+  height: 120rpx;
+  margin: 300rpx 0 80rpx 0;
+}
+.success-title{
+  font-size: 28rpx;
+  color: #999;
+}
+.success-text{
+  font-size: 32rpx;
+  color: #333;
+  margin-bottom: 20rpx;
+}

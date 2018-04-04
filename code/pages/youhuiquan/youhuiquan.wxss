@@ -1,0 +1,32 @@
+/* pages/youhuiquan/youhuiquan.wxss */
+.contain{
+  background-color: #eee;
+  padding: 20rpx 0;
+  min-height: 100vh;
+}
+.item{
+  margin: 20rpx;
+  border-radius: 10rpx;
+  background-color: #fff;
+  padding-left: 20rpx;
+}
+.title{
+  font-size: 36rpx;
+}
+.value{
+  font-size: 60rpx;
+  font-weight: 600;
+  padding-right: 20rpx;
+}
+.time,.discription{
+  font-size: 24rpx;
+}
+
+.lingqu{
+  font-size: 36rpx;
+  width: 140rpx;
+  padding: 60rpx 0rpx;
+  background:linear-gradient( rgb(120, 233, 250),rgb(19, 191, 222));
+  color: #fff;
+  border-radius: 0 10rpx 10rpx 0;
+}

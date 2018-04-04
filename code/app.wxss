@@ -1,0 +1,75 @@
+/**app.wxss**/
+page{
+  background-color: #eee;
+}
+button::after{
+  border-width: 0;
+}
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+} 
+image{
+  width: 100%;
+}
+.flex-all{
+  flex: 1 1 ;
+}
+.flex-none{
+  display: flex;
+  align-items: center;
+}
+.flex-center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flex-between{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.flex-around{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.flex-end{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.flex{
+  display: flex;
+}
+.swiper-container{
+  width: 100%;
+}
+.more {
+  position: absolute;
+  width: 20rpx;
+  height: 40rpx;
+  right: 30rpx;
+  top: 20rpx;
+}
+/* 整个页面无数据时展示的缺省样式 */
+.noData{
+  position:fixed;
+  top:50%;
+  text-align:center;
+  width:100%;
+  font-size:30rpx;
+  z-index: 11;
+}
+/*分页数据没有更多数据时候的展示字段  */
+.noMoreData{
+  text-align: center;
+  font-size: 28rpx;
+  color: #999;
+  padding: 40rpx 0;
+}

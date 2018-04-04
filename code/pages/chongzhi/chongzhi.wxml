@@ -1,0 +1,24 @@
+<!--pages/recharge/recharge.wxml-->
+<view class="contain">
+  <view class='title choose'>请选择充值方式</view>
+  
+  <view class="recharge-money">
+    <view class='recharge-type-contain flex-between'>
+      <view class='recharge-type-item flex-none' wx:for='{{rechargeType}}'>
+        <image src='{{item.img}}'></image>
+        <view>{{item.name}}</view>
+      </view>
+    </view>
+    <view class='title hasborder flex-between'>
+      <view>充值金额(元)</view>
+      <input type='number' placeholder='请输入充值金额' placeholder-style='color:#d4d4d4;' bindinput='input' value='{{amount}}'></input>
+    </view>
+    <view class="recharge-items">
+      <view class="recharge-item" bindtap="chooseNum" data-index="{{index}}"  wx:for="{{rechargeItem}}" wx:for-index="index" style="color:{{item.selected ? '#333' : '#aaa'}}; border-color:{{item.selected ?  'rgb(19, 191, 222)' : '#aaa'}}">
+          {{item.num}}
+      </view>
+    </view>
+  </view>
+
+    <view class="button" bindtap="submit">确定</view>
+</view>

@@ -1,0 +1,216 @@
+/* pages/valuation/valuation.wxss */
+.contain {
+   height: 100vh; 
+  background-color: #eee;
+}
+image {
+  width: 100%;
+  height: 100%;
+}
+/*评价内容包含框*/
+.quality-service-container {
+  background-color: #fff;
+  width: 100%;
+  padding: 8rpx 40rpx;
+  border-bottom: 2rpx solid #eee;
+  color: #666;
+  box-sizing: border-box
+}
+.quality-service-container .title {
+  font-size: 24rpx;
+}
+
+/*设备质量和服务态度*/
+.quality-service {
+  display: flex;
+  flex-direction: row;
+  height: 80rpx;
+  font-size: 24rpx;
+  color: #666;
+  align-items: center;
+}
+.item {
+ position: absolute;
+ top: 5rpx;
+ width: 20rpx;
+ height: 50rpx;
+}
+
+/*评价星星*/
+.stars {
+  width: 50%;
+  height: 80rpx;
+  position: relative;
+  display: flex;
+  align-items: center;
+  right: -254rpx;
+}
+.star-image {
+  position: absolute;
+  left: 0rpx;
+ width: 40rpx;
+ height: 40rpx;
+ src: "img/normal.png";
+}
+
+/*评价输入框*/
+.textarea-addimage {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  background-color: #eee;
+}
+.textarea-addimage .valuation-text {
+  box-sizing: border-box;
+  background-color: #fff;
+  flex: 1 1;
+  margin: 40rpx;
+  font-size: 28rpx;
+  color: #999;
+  height: 320rpx;
+  border: 2rpx solid rgb(0, 188, 213);
+  border-radius: 4rpx;
+  padding: 20rpx;
+}
+.add-image {
+  width: 170rpx;
+  height: 170rpx;
+    margin: 10rpx;
+    position: relative;
+    padding: 20rpx 20rpx 0 0 ;
+  box-sizing: border-box;
+}
+.textarea-addimage .add-image:after {
+  content: "发图片";
+  position: absolute;
+  bottom: 0rpx;
+  left: 48rpx;
+  font-size: 24rpx;
+  color: #aaa;
+}
+/*底部评价按钮*/
+.button {
+  width: 500rpx;
+  height: 100rpx;
+  background: linear-gradient(to left,rgb(19, 191, 222), rgb(120, 233, 250));
+  border-radius: 40rpx;
+  color: #fff;
+  font-size: 34rpx;
+  line-height: 100rpx;
+  position: relative;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 60rpx;
+  margin-bottom: 60rpx;
+}
+/* .button:active {
+  background-color: rgba(255, 0, 0, 0.8);
+  color: #fff;
+} */
+
+/*订单详情*/
+  .order-detail {
+    width: 100%;
+    display: flex;
+		border-bottom: 10rpx solid #eee;
+    padding: 20rpx;
+    box-sizing: border-box;
+    background-color: #fff;
+  }
+  /*产品图片*/
+  .order-img {
+    width: 160rpx;
+    height: 160rpx;
+    margin: 20rpx 0rpx;
+  }
+  /*产品介绍*/
+  .order-text-price {
+    flex: 1 1;
+    display: flex;
+    flex-direction: column;
+    margin: 40rpx 0 20rpx 20rpx;
+    padding-right: 20rpx;
+    box-sizing: border-box;
+  }
+  .order-text {
+    width: 100%;
+    padding-bottom: 20rpx;
+    font-size: 24rpx;
+    color: #666;
+  }
+  .order-price {
+    width: 100%;
+    height: 60rpx;
+    display: flex;
+    line-height: 60rpx;
+    justify-content: space-between;
+  }
+  /*实际价格*/
+  .order-price .order-real-price {
+    color: red;
+    font-size: 24rpx;
+    display: flex;
+    font-weight: 800;
+  }
+  /*原价*/
+  .order-price .order-before-price {
+    color: #999;
+    font-size: 20rpx;
+    text-decoration:line-through;
+    align-self: flex-start;
+    padding-left: 28rpx;
+  }
+  /*产品数量*/
+  .order-price .order-quantity {
+    color: #999;
+    font-size: 24rpx;
+  }
+  /*添加的图片  */
+  .image-contain {
+    position: relative;
+    width: 100%;
+    padding: 10rpx 40rpx;
+    box-sizing: border-box;
+  }
+  .img-with-del{
+    width: 170rpx;
+    height: 170rpx;
+  }
+  .add-img {
+    width: 170rpx;
+    height: 170rpx;
+    box-sizing: border-box;
+    margin: 10rpx 20rpx;
+    position: relative;
+    padding: 20rpx 20rpx 0 0 ;
+  }
+  .message{
+    color: #aaa;
+    font-size: 24rpx;
+    text-align: center;
+  }
+.up-img{
+  position: relative;
+}
+.del-img{
+  width: 30rpx;
+  height: 30rpx;
+  position: absolute;
+  z-index: 1;
+  right: 0rpx;
+  top: 0rpx;
+}
+.pingjia-contain{
+  color: #666;
+  font-size: 28rpx;
+}
+.pingjia-img{
+  width: 60rpx;
+  height: 60rpx;
+  margin-right: 20rpx;
+}
+.pingjia-item{
+  height: 90rpx;
+  padding: 0 20rpx;
+}

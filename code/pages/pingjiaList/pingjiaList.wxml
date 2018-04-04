@@ -1,0 +1,20 @@
+<!--pages/search/search.wxml-->
+<view class='contain'>
+  <!--数据列表  -->
+  <scroll-view class="data-list" style="height:{{scrollHeight}}px;" scroll-y="true" bindscrolltoupper="refresh" bindscrolltolower="bindDownLoad">
+    <!--子数据组件  -->
+    <view class='pingjia-item flex-between' wx:for='{{dataList}}'>
+      <image class='user-img' src='{{item.img_url}}'></image>
+      <view class='pingjia flex-all'>
+        <view class='name-time flex-between'>
+          <view class='pingjia-name'>{{item.nickname}}</view>
+          <view class='pingjia-time'>{{item.ctime_str}}</view>
+        </view>
+        <view class='pingjia-des'>{{item.content}}</view>
+      </view>
+    </view>
+
+    <view style="width:100%;height:400rpx;"></view>
+  </scroll-view>
+  <view class='noData' hidden='{{dataList.length>0}}'>无更多评价</view>
+</view>

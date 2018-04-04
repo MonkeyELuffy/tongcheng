@@ -1,0 +1,28 @@
+<import src="../imageSwiper/imageSwiper.wxml"/>
+<import src="../paixuTemplate/paixuTemplate.wxml"/>
+<import src="../navTemp/navTemp.wxml"/>
+<import src="../dataItemTemp/dataItemTemp.wxml"/>
+<import src="../noMoreData/noMoreData.wxml"/>
+
+<view class='contain'>
+  <scroll-view class="data-list" style="height:{{scrollHeight}}px;" scroll-y="true" bindscrolltoupper="refresh" bindscrolltolower="bindDownLoad">
+    <!--轮播图组件  --> 
+    <template is="imageSwiper" data="{{slider: slider1}}" ></template>
+
+    <!--菜单组件  -->
+    <template is="navTemp" data="{{nav_3List}}"></template>
+
+    <!--轮播图组件  --> 
+    <template is="imageSwiper" data="{{slider: slider2}}" ></template>
+
+    <!--排序组件  -->
+    <template is="paixuTemplate" data="{{allData}}"></template>
+
+    <!--子数据组件  -->
+    <template is="dataItemTemp" data="{{dataList}}" ></template>
+    
+    <!--nomoreData  -->
+    <template is="noMoreData"></template>
+
+  </scroll-view>
+</view>

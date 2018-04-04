@@ -1,0 +1,78 @@
+/* pages/recharge/recharge.wxss */
+.contain {
+  width: 100%;
+  height: 100vh;
+  background-color: #eee;
+}
+/*充值金额选项*/
+.recharge-money {
+  box-sizing: border-box;
+  width: 100%;
+  background-color: #fff;
+  color: #333;
+  font-size: 28rpx;
+  padding: 0 40rpx;
+  margin-bottom: 100rpx;
+  box-shadow: 0 4rpx 4rpx #aaa;
+}
+.recharge-items {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-bottom:40rpx;
+}
+/*充值选项*/
+.recharge-item {
+  width: 27%;
+  height: 90rpx;
+  border: 2rpx solid #aaa;
+  border-radius: 4rpx;
+  text-align: center;
+  margin-top: 40rpx;
+  font-size: 30rpx;
+  line-height: 90rpx;
+  color: #999;
+}
+
+.recharge-type-contain{
+  font-size: 30rpx;
+  color: #333;
+  padding: 30rpx 0;
+  border-bottom: 2rpx solid #eee;
+}
+.title{
+  font-size: 28rpx;
+  color: #333;
+  padding: 30rpx 0;
+}
+.hasborder{
+  font-size: 30rpx;
+  color: #333;
+  border-bottom: 2rpx solid #eee;
+}
+.choose{
+  padding: 20rpx 40rpx;
+}
+image{
+  width: 56rpx;
+  height: 50rpx;
+  margin-right: 40rpx;
+}
+.button {
+  width: 500rpx;
+  height: 100rpx;
+  background: linear-gradient(to left,rgb(19, 191, 222), rgb(120, 233, 250));
+  border-radius: 50rpx;
+  color: #fff;
+  font-size: 34rpx;
+  line-height: 100rpx;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 60rpx;
+  margin-bottom: 60rpx;
+}
+/* .button:active {
+  background-color: rgba(255, 0, 0, 0.8);
+  color: #fff;
+} */

@@ -1,0 +1,52 @@
+<!--pages/equipmentShare/equipmentShare.wxml-->
+<view class="contain">
+
+  <view class="user">
+    <view class="user-message flex-between" >
+      <!--头像昵称  -->
+      <view class="user-image-contain flex-between" bindtap="goPage" data-page="userMsg">
+        <image class="user-image" src="{{userInfo.img_url}}" ></image>
+        <view class="user-name">
+          {{userInfo.nickname}}
+        </view>
+      </view>
+      <!--头像右侧菜单  -->
+      <view class='top-nav flex-between'>
+        <view class='top-nav-item' wx:for='{{topNav}}' bindtap='saoyisao'>
+          <view class='top-nav-item-value'>{{item.value}}</view>
+          <image hidden='{{!item.img}}' class='top-nav-item-img' src='{{item.img}}'></image>
+          <view class='top-nav-item-name'>{{item.name}}</view>
+        </view>
+      </view>
+    </view>
+
+    <!--账户信息  -->
+    <view class='top-nav flex-all flex-between' style='padding:0 0 0 40rpx;'>
+      <view class='top-nav-item'  bindtap="goPage" data-page="wodezhanghu">
+        <view class='top-nav-item-value'>{{userInfo.money}}</view>
+        <!-- <image hidden='{{!item.img}}' class='top-nav-item-img' src='{{item.img}}'></image> -->
+        <view class='top-nav-item-name'>账户余额</view>
+      </view>
+      <view class='top-nav-item' bindtap="goPage" data-page="hongbao">
+        <view class='top-nav-item-value'>{{userInfo.pack_amount}}</view>
+        <!-- <image hidden='{{!item.img}}' class='top-nav-item-img' src='{{item.img}}'></image> -->
+        <view class='top-nav-item-name'>红包</view>
+      </view>
+      <!--充值按钮  -->
+      <view class='chongzhi flex-center' bindtap="goPage" data-page="chongzhi">充值</view>
+    </view>
+
+    <!--订单管理  -->
+    <view class='order'>订单管理</view>
+    <!-- 菜单 -->
+    <view class='bottom-nav top-nav flex-all flex-between'>
+      <view class='top-nav-item' wx:for='{{orderNav}}' bindtap="goPage" data-page="{{item.page}}">
+        <image class='top-nav-item-img' src='{{item.img}}'></image>
+        <view class='top-nav-item-name'>{{item.name}}</view>
+      </view>
+    </view>
+    
+  </view>
+  
+
+</view>

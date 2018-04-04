@@ -1,0 +1,256 @@
+@import "../navTemp/navTemp.wxss";
+@import "../paixuTemplate/paixuTemplate.wxss";
+@import "../imageSwiper/imageSwiper.wxss";
+
+/*横向排列的菜单*/
+.nav-title {
+  z-index: 100;
+  width: 100%;
+  background-color: #ddd;
+  color: #666;
+  font-size: 28rpx;
+  white-space: nowrap; 
+  box-shadow: 0rpx 0rpx 2rpx #ddd ;
+}
+.nav-item {
+  display: inline-block;
+  height: 60rpx;
+  width: 136rpx;
+  text-align: center;
+  line-height: 60rpx;
+  margin: 20rpx;
+  color: #fff;
+  border-radius: 10rpx;
+  
+}
+/*菜单定位*/
+.nav-title-clear {
+  width: 100%;
+  height: 60rpx;
+}
+
+
+/*特价商品列表*/
+.tejia-contianer {
+  background-color: #fff;
+  position: relative;
+  width: 99%;
+  margin: 0 auto;
+  padding: 210rpx 0rpx 20rpx 0rpx;
+  border-bottom: 10rpx solid #eee;
+}
+.tejia-title {
+  width: 100%;
+  height: 50rpx;
+  padding: 20rpx;
+  font-size: 30rpx;
+  margin: 30rpx 0;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+.tejia-title image {
+  width: 50rpx;
+  height: 50rpx;
+}
+.tejia-ul {
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.tejia-list {
+  text-align: center;
+  width: 30%;
+  padding: 20rpx 0rpx;
+}
+.tejia-list image {
+  width: 120rpx;
+  height: 120rpx;
+
+}
+.tejia-list .tejia-text {
+  font-size: 26rpx;
+  padding-bottom: 20rpx;
+}
+.tejia-list .tejia-price-total {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: space-around;
+}
+.tejia-list .tejia-price-total .tejia-price {
+  color: red;
+  font-size: 26rpx;
+}
+.tejia-list .tejia-price-total .tejia-total {
+  color: #aaa;
+  font-size: 20rpx;
+}
+
+/*商品分类*/
+.fenlei-contianer {
+  background-color: #fff;
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+.fenlei-contianer .fenlei-title {
+  width: 100%;
+  height: 50rpx;
+  padding: 20rpx;
+  font-size: 30rpx;
+  margin: 30rpx 0;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+.fenlei-contianer .fenlei-title image {
+  width: 50rpx;
+  height: 50rpx;
+}
+.fenlei-contianer .fenlei-ul {
+  position: relative;
+  background-color: #ddd;
+}
+
+.fenlei-contianer .fenlei-list {
+  width: 49%;
+  display:inline-block;
+  background-color: #fff;
+  margin-bottom: 20rpx;
+}
+.fenlei-contianer .fenlei-list:nth-child(2n+1){
+  margin-right: 2%;
+}
+.fenlei-contianer .fenlei-list .fenlei-text {
+  font-size: 24rpx;
+  padding: 10rpx 20rpx;
+  flex: 1 1;
+}
+.fenlei-contianer .fenlei-list .fenlei-text .text {
+  font-size: 28rpx;
+  color: #333;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    height: 40rpx;
+}
+.fenlei-contianer .fenlei-list .fenlei-price-total {
+  margin-top: 20rpx;
+}
+.fenlei-contianer .fenlei-list .fenlei-price-total .fenlei-price {
+  color: #f83030;
+  font-size: 24rpx;
+  padding: 0 10rpx;
+}
+.fenlei-contianer .fenlei-list .fenlei-price-total .fenlei-total {
+  color: #aaa;
+  font-size: 20rpx;
+  padding: 0 10rpx;
+}
+.biaozhi {
+  border: 2rpx solid #999;
+  font-size: 20rpx;
+  border-radius: 4rpx;
+  padding: 0 10rpx;
+  opacity: 0.4;
+}
+.label-contain{
+  font-size: 22rpx;
+}
+.label-item{
+  padding: 6rpx;
+  border-radius: 4rpx;
+  border: 1rpx solid #f68076;
+  margin-right: 8rpx;
+  text-align: center;
+  background-color: #f68076;
+  color: #fff;
+  line-height: 18rpx;
+}
+.haoping{
+  font-size: 24rpx;
+  color: #666;
+}
+
+.no-more{
+  width: 100%;
+  font-size: 24rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+  color: #999;
+  text-align: center;
+}
+
+.juli{
+  font-size: 20rpx;
+  color: #999;
+}
+/*日期筛选  */
+.choose-data-contain{
+  width: 80%;
+  margin: 30rpx auto;
+}
+.time-contain{
+  border-radius: 10rpx;
+  background-color: rgb(214, 247, 255);
+  padding: 4rpx 0;
+  font-size: 24rpx;
+  min-height: 90rpx;
+  margin-bottom: 10rpx;
+}
+.time-title{
+  text-align: center;
+  color: #999;
+  padding-bottom:4rpx;
+}
+.title{
+  width: 50%;
+  text-align: center;
+  color: #999;
+}
+.ruzhu-time{
+  width: 50%;
+  text-align: center;
+}
+.picker{
+  height: 42rpx;
+  font-size: 30rpx;
+  color: #333;
+}
+.choose-item{
+  width: 100%;
+}
+.picker-contain{
+  width: 50%;
+  text-align: center;
+}
+.button {
+  height: 100rpx;
+  background: linear-gradient(to left,rgb(19, 191, 222), rgb(120, 233, 250));
+  border-radius: 40rpx;
+  color: #fff;
+  font-size: 34rpx;
+  line-height: 100rpx;
+  margin: 20rpx auto;
+  text-align: center;
+}
+
+.img-contain{
+  width: 100%;
+  height: 210rpx;
+  overflow: hidden;
+}
+.img-contain image{
+  width: 100%;
+  max-height: 100%;
+  border-width:medium;
+border:1px solid #999;
+padding:6rpx;
+box-sizing:border-box;
+
+}

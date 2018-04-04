@@ -1,0 +1,44 @@
+<!--pages/valuation/valuation.wxml-->
+<view class="contain">
+
+  <!--订单详情-->
+  <view class="order-detail">
+    <!--产品图片-->
+    <view class="order-img">
+      <image src="{{imgHttp + (goodslist[0].logo_url || goodslist[0].goods_logo)}}"></image>
+    </view>
+    <!-- 产品介绍 -->
+    <view class="order-text-price">
+      <view class="order-text">{{goodslist[0].goods_name}}</view>
+      <view class="order-text">{{goodslist[0].spec_info || ""}}</view>
+      <view class="order-price">
+        <view class="order-real-price">￥{{goodslist[0].goods_price}}
+          <!-- <view class="order-before-price">￥{{goodslist[0].original_price}}</view> -->
+        </view>
+        <view class="order-quantity">x{{goodslist[0].goods_number}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!--评价  -->
+  <view class='pingjia-contain flex-between '>
+    <view  wx:for-index="index" data-index="{{index}}" wx:for='{{pingjiaList}}' class='pingjia-item  flex-center flex-all' style='background-color:{{item.checked ? "#ddd" : "#fff"}}' bindtap='choose'>
+      <image class='pingjia-img' src='{{item.img}}' ></image>
+      <view>{{item.name}}</view>
+    </view>
+  </view>
+
+  <view class="textarea-addimage">
+    <textarea class="valuation-text" placeholder="请输入对商品的评价" placeholder-style="color:#bbb;" bindinput="changeText"/>
+  </view>
+
+  <!-- <view class="image-contain">
+    <image wx:for-index="index" data-index="{{index}}" class="add-img" wx:for="{{pics}}" bindtap="clickImage" src="{{item}}" data-src="{{item}}" mode="aspecFill"><image src='../../img/del.png' class='del-img'  bindtap="deleteImag"  data-index="{{index}}"></image></image> 
+    <image src="{{add}}" class="add-image" bindtap="addImg"></image>
+  </view> -->
+
+  <view class="button" bindtap="submit">确定</view>
+  <view style="width:100%;height:2rpx;"></view>
+</view>
+
+

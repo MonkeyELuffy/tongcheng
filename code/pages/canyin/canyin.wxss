@@ -1,0 +1,146 @@
+@import "../paixuTemplate/paixuTemplate.wxss";
+@import "../navTemp/navTemp.wxss";
+@import "../dataItemTemp/dataItemTemp.wxss";
+@import "../imageSwiper/imageSwiper.wxss";
+
+.contain{
+  background-color: #eee;
+}
+.swiper{
+  height: 300rpx;
+}
+
+/*banner  */
+.swiper-container{
+  width: 100%;
+}
+.top-nav{
+  width: 100%;
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  padding: 30rpx;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+/*扫描  */
+.saomiao{
+  width: 56rpx;
+  height: 56rpx;
+}
+/*搜索框*/
+.search {
+  flex: 1 1;
+  z-index: 100;
+  background-color: transparent;
+  position: relative;
+  box-sizing: border-box;
+  padding: 0 20rpx;
+}
+.search input {
+  flex: 1 1;
+  height: 60rpx;
+  background-color: #fff;
+  color: #333;
+  font-size: 24rpx;
+  padding-left: 80rpx;
+  border-radius: 30rpx;
+}
+.search .icon {
+  position: absolute;
+  left: 40rpx;
+  top: 14rpx;
+  width: 30rpx;
+  height: 30rpx;
+}
+/*定位  */
+.position{
+  border-radius: 50rpx;
+  background-color: rgba(217, 217, 217, 0.5);
+  color: red;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10rpx;
+  height: 60rpx;
+  box-sizing: border-box;
+}
+.position-image{
+  width: 26rpx;
+  height: 32rpx;
+  margin-right: 10rpx;
+}
+
+/*数据列表  */
+.data-list{
+  width: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+/*客服  */
+.kefu,.ruzhu{
+  position: fixed;
+  right: 40rpx;
+  width: 100rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: 700;
+  font-size: 32rpx;
+  text-align: center;
+  box-sizing: border-box;
+}
+.kefu{
+  bottom: 40rpx;
+  background:linear-gradient(to right,rgb(19, 191, 222), rgb(120, 233, 250));
+}
+.ruzhu{
+  bottom: 160rpx;
+  background:linear-gradient(to right,rgb(255, 141, 151), rgb(250, 180, 180));
+}
+
+.nav2{
+  padding: 20rpx;
+  overflow: hidden;
+  border-radius: 10rpx;
+  color: #fff;
+}
+.nav2-item{
+  height: 194rpx;
+  margin-bottom: 10rpx;
+}
+.nav2-left{
+  font-size: 32rpx;
+  height: 194rpx;
+  width: 244rpx;
+  position: relative;
+  margin-right: 8rpx;
+  padding: 30rpx 0 0 30rpx;
+  box-sizing: border-box;
+}
+.nav2-img{
+  width: 130rpx;
+  height: 100rpx;
+  position: absolute;
+  z-index: 100;
+  right: 40rpx;
+  bottom: 20rpx;
+}
+.nav2-right{
+  flex-wrap: wrap;
+}
+.nav2-right-item{
+  font-size: 30rpx;
+  width: 49.5%;
+  height: 96rpx;
+  line-height: 96rpx;
+  text-align: center;
+  display: inline-block;
+  margin: 2rpx 0;
+}

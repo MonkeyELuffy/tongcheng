@@ -1,0 +1,17 @@
+/* pages/huodong/huodong.wxss */
+.contain{
+  background-color: #eee;
+}
+.huodong-item{
+  width: 100%;
+  box-shadow: 0 8rpx 8rpx #ccc;
+  margin-bottom: 20rpx;
+  color: #333;
+  font-size: 30rpx;
+}
+.img{
+  height: 360rpx;
+}
+.name{
+  padding: 30rpx 60rpx;
+}

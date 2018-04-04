@@ -1,0 +1,121 @@
+<!--pages/product_detail/product_detail.wxml-->
+<import src="../imageSwiper/imageSwiper.wxml"/>
+<!--轮播图组件  --> 
+<template is="imageSwiper" data="{{slider}}" ></template>  
+
+ <view class="contain">
+   <!--商品信息  -->
+  <view class="detail-contain">
+    <view class="name">{{productDetail.goods_name}}</view>
+    <view class="sale">售出：{{productDetail.inventory || 0}}</view>
+    <view class="price-contain">
+      <view class="xianjia">￥{{productDetail.price}}</view>
+      <view class="yuanjia">￥{{productDetail.old_price}}</view>
+    </view>
+    <view class="add-car" catchtap="chooseType" data-goods_id="{{productDetail.goods_id}}">选规格</view>
+  </view>
+  <!--联系商家  -->
+  <view class="call-shop" bindtap="call">
+    <view class="call-shop-text">联系商家</view>
+    <view class="tel-contain">
+      <image src="{{telImg}}"></image>
+      <view class="tel">{{productDetail.seller_phone}}</view>
+    </view>
+  </view>
+
+  <!--评价列表  -->
+  <view class="comment-contain" >
+    <!--评论  -->
+    <!-- <view class="comment-title">用户评价</view> -->
+    <view class='pingjia-top flex-between' bindtap='seeMore'>
+      <view class='pingjia-text'>用户评价</view>
+      <view class='look-more'>更多</view>
+      <image src='{{more}}' class='more'></image>
+    </view>
+    <view class='pingjia-item flex-between' wx:for='{{pingjiaList}}'>
+      <image class='user-img' src='{{item.img_url}}'></image>
+      <view class='pingjia flex-all'>
+        <view class='name-time flex-between'>
+          <view class='pingjia-name'>{{item.nickname}}</view>
+          <view class='pingjia-time'>{{item.ctime_str}}</view>
+        </view>
+        <view class='pingjia-des'>{{item.content}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!--购物车和结算按钮  -->
+  <view class="bottom-btn">
+    <image src="{{carIcon}}" bindtap="lookCar"></image>
+    <view class="car-count" hidden='{{carData.get_sum<=0}}'>{{carData.get_sum}}</view>
+    <view class="price">
+      <view class="total-price">￥ {{carData.price_sum}}</view>
+      <!-- <view class="peisong">另配送￥ {{peisongPrice}}</view> -->
+    </view>
+    <view class="pay" bindtap="goPay">去结算</view>
+  </view>
+  
+  <!--规格弹窗  -->
+  <view class="mengban"  hidden='{{!showType}}'></view>
+  <view class="type-contain"  hidden='{{!showType}}'>
+    <view class="type-contain-2">
+      <image src="{{closeImg}}" class="close" bindtap="close"></image>
+      <view class="type-title">{{nowProduct.name}}</view>
+      <!-- <view class="type-name">{{nowProduct.typeName}}：</view> -->
+      <view class="type-list">
+        <view class="type-item" style="background-color:{{item.checked ? 'rgb(0,188,213)' : '#fff'}};color:{{item.checked ? '#fff' : '#757575'}}" wx:for="{{nowProduct.typeList}}" wx:for-index="index" data-index="{{index}}" bindtap="chooseItemType">{{item.name}}</view>
+      </view>
+      <view class="count-contain">
+        <view class="num">数量：</view>
+        <view class="add-sub">
+          <image src="{{subImg}}" bindtap="sub"></image>
+          <view class="count">{{count}}</view>
+          <image src="{{addImg}}" bindtap="add"></image>
+        </view>
+      </view>
+      <view class="add-to-car-contain">
+        <view class="total-price">￥{{nowProductTotalPrice}}</view>
+      <view class="add-to-car" catchtap="addToCar">加入购物车</view>
+      </view>
+    </view>
+  </view>
+  <!--购物车弹窗  -->
+  <view class="mengban" bindtap="hiddenCar"  hidden='{{showCar  ? false : true}}'></view>
+  <view class="car-contain" style="bottom:{{showCar ? '0rpx;':'-756rpx'}}" >
+    <view class="car-top-contain">
+      <view class="car-title">购物车({{carData.get_sum}})</view>
+      <view class="clear-car" bindtap='removeAll'>
+        <image src="{{clear}}"></image>
+        <view >清空</view>
+      </view>
+    </view>
+    <scroll-view class="car-list-contain" scroll-y="true">
+      <view class="car-item" wx:for="{{carData.product_list}}">
+        <!-- <image src="{{item.checked ? clickBtn : unCheckedImg}}" class="click-btn" for:index='index' data-index='{{index}}' bindtap='chooseItem'></image>  -->
+        <view class="item-info">
+          <image class="item-img" src="{{imgHttp + item.goods_pic}}"></image>
+          <view class="item-name-price">
+            <view class="item-name">{{item.goods_name}}</view>
+            <view class="item-spec">{{item.spec_info}}</view>
+            <view class="item-price">￥{{item.price}}</view>
+          </view>
+        </view>
+        <view class="add-sub">
+          <image for:index='index' data-index='{{index}}' src="{{subImg}}" bindtap="subCarItem" data-product_id='{{item.product_id}}'></image>
+          <view class="count">{{item.get_num}}</view>
+          <image for:index='index' data-index='{{index}}' src="{{addImg}}" bindtap="addCarItem" data-product_id='{{item.product_id}}'></image>
+        </view>
+        <image class='clear-img' src='{{clear}}' data-product_id='{{item.product_id}}' bindtap="clearItem" ></image>
+      </view>
+    </scroll-view>
+    <view class="car-bottom-contain">
+      <!-- <view class="choose-all" bindtap='chooseAll'>
+        <image src="{{chooseAll ? checkedImg : unCheckedImg}}" class="click-btn" ></image> 
+        <span>全选</span>
+      </view> -->
+      <view class="car-total-price">合计： <span class='car-total-price-text'>￥{{carData.price_sum}}</span></view>
+      <view class="car-pay" bindtap="goPay">去结算({{carData.price_sum}})</view>
+    </view>
+  </view>
+
+</view>  

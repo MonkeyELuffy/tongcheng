@@ -1,0 +1,13 @@
+<!--pages/tixian/tixian.wxml-->
+<view class='contain' wx:if='{{!showSuccess}}'>
+  <view class='title'>提现金额</view>
+  <input type='number'></input>
+  <view class="button" bindtap="tixian">确定</view>
+</view>
+
+<!--提现成功之后显示  -->
+<view class='tixian-success' wx:if='{{showSuccess}}'>
+  <image class='tixian-img' src='{{tixian}}'></image>
+  <view class='success-text'>提现申请成功!</view>
+  <view class='success-title'>将于1-3日内打款到您的微信钱包</view>
+</view>

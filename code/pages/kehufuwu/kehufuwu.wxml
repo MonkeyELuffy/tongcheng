@@ -1,0 +1,44 @@
+
+<!--顶部菜单-->
+<view class="nav-title flex-center" style="width: 100%">
+  <view class="nav-item flex-all" wx:for="{{navItems}}" style="color: {{item.checked ? '#f67f79' : '#737373' }};" bindtap="checked" wx:for-index="index" data-id="{{item.id}}" data-index="{{index}}" data-name="{{item.name}}">
+    {{item.name}}
+  </view>
+</view>
+
+  <!--通知公告  -->
+<view class="fenlei-contianer">
+  <scroll-view wx:if='{{index == 2}}' class="fenlei-ul" style="height:{{scrollHeight}}px;" scroll-y="true" bindscrolltoupper="refresh" bindscrolltolower="bindDownLoad">
+    <!--子数据  -->
+    <view class='item  flex-none' wx:for='{{dataList}}' bindtap="goDetail" data-id="{{item.id}}" for:index='index' data-index='{{index}}'>
+      <image class='item-image' src='{{item.img}}'></image>
+      <view class='detail flex-all'>
+        <view class='detail-name flex-between'>{{item.name}}
+          <view class='time'>{{item.time}}</view>
+        </view>
+        <view class='sale-and-juli flex-between'>
+          <view class='sale'>{{item.text}}</view>
+        </view>
+        <view class='chakan flex-end' bindtap='chakan'>查看详情 》</view>
+      </view>
+    </view>
+    <!-- <view class="no-more">没有更多的数据了</view>  -->
+    <view style="width:100%;height:100rpx;"></view>
+  </scroll-view>
+
+  <!--意见反馈  -->
+  <view wx:if='{{index == 1}}' class='yijian-contain'>
+    <textarea class='yijian-text' placeholder='请输入对我们的建议。' placeholder-style='color:#999;'></textarea>
+
+    <view class="button" bindtap="submit">确定</view>
+  </view>
+
+  <!--常见问题  -->
+  <view  wx:if='{{index == 0}}' class='wenti'>
+    <view class='wenti-item' wx:for='{{queList}}'>
+      <view class='A'>A：{{item.A}}</view>
+      <view class='Q'>Q：{{item.Q}}</view>
+    </view>
+  </view>
+
+</view> 

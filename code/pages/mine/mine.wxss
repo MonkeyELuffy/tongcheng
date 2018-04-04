@@ -1,0 +1,168 @@
+/* pages/equipmentShare/equipmentShare.wxss */
+.contain {
+  width: 100%;
+  height: 100vh;
+  background-color: #eee;
+}
+image {
+  width: 100%;
+  height: 100%;
+}
+
+.bottom-btn {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 120rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: #fff;
+  z-index: 100;
+}
+
+.bar {
+  width: 50%;
+  box-sizing: border-box;
+  color: #bfbfbf;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 24rpx;
+}
+
+.bar image {
+  width: 60rpx;
+  height: 60rpx;
+}
+/*用户信息*/
+.bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+.user {
+  width: 100%;
+  position: relative;
+}
+.user-message{
+  padding: 40rpx;
+  background-color: #fff;
+  margin-bottom: 8rpx;
+  border-top: 10rpx solid #eee;
+}
+.user-image-contain{
+  text-align: center;
+}
+.user-image {
+  width: 115rpx;
+  height: 115rpx;
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.user-name {
+  font-size: 30rpx;
+  color: #333;
+  padding-left: 40rpx;
+}
+.top-nav{
+  font-size: 28rpx;
+  background-color: #fff;
+  margin-bottom: 4rpx;
+  flex-wrap: wrap;
+}
+.top-nav-item{
+  text-align: center;
+}
+.top-nav-item-img{
+  width: 68rpx;
+  height: 68rpx;
+}
+.top-nav-item-name{
+  margin-top: 14rpx;
+  font-size: 30rpx;
+  color: #333;
+}
+.top-nav-item-value{
+  color: #e61c04;
+  font-size: 36rpx;
+}
+.bottom-nav{
+  background-color: #eee;
+  padding: 4rpx 0 0 4rpx;
+}
+.bottom-nav .top-nav-item{
+  width: 25%;
+  box-sizing: border-box;
+  border-right:4rpx solid #eee; 
+  border-bottom:4rpx solid #eee; 
+  padding: 30rpx 0;
+  background-color: #fff;
+  margin-bottom: 0rpx;
+}
+
+.chongzhi{
+  font-size: 36rpx;
+  width: 160rpx;
+  padding: 60rpx 0rpx;
+  background:linear-gradient(to right, rgb(120, 233, 250),rgb(19, 191, 222));
+  color: #fff;
+}
+.order{
+  background-color: #fff;
+  font-size: 30rpx;
+  padding: 20rpx 40rpx;
+  color: #333;
+  font-weight: 600;
+}
+
+/*个人菜单*/
+.nav {
+  background-color:#ddd;
+}
+.center-nav {
+  position: relative;
+  background-color:#fff;
+  display:flex;
+  height: 90rpx;
+  align-items: center;
+  margin-bottom: 6rpx;
+  padding: 0 40rpx;
+}
+
+.gopage {
+  position: absolute;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  z-index: 100;
+  background-color: transparent;
+}
+.center-nav .icon {
+  width: 60rpx;
+  height: 60rpx;
+}
+.center-nav .item {
+  padding-left:30rpx;
+  font-size: 24rpx;
+  word-spacing: 2rpx;
+  line-height: 80rpx;
+  color: #666;
+}
+
+.bottom-nav-clear {
+  width: 100%;
+  height: 40px;
+  background-color: transparent;
+}
+
+.more {
+  position: absolute;
+  width: 20rpx;
+  height: 40rpx;
+  right: 30rpx;
+  top: 20rpx;
+}

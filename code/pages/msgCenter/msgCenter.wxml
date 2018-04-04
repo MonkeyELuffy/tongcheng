@@ -1,0 +1,19 @@
+<view class="fenlei-contianer">
+  <scroll-view class="fenlei-ul" style="height:{{scrollHeight}}px;" scroll-y="true" bindscrolltoupper="refresh" bindscrolltolower="bindDownLoad">
+    <!--子数据  -->
+    <view class='item  flex-none' wx:for='{{dataList}}' bindtap="goDetail" data-id="{{item.id}}" for:index='index' data-index='{{index}}'>
+      <image class='item-image' src='{{item.img}}'></image>
+      <view class='detail flex-all'>
+        <view class='detail-name flex-between'>{{item.name}}
+          <view class='time'>{{item.time}}</view>
+        </view>
+        <view class='sale-and-juli flex-between'>
+          <view class='sale'>{{item.text}}</view>
+        </view>
+        <view class='chakan flex-end' bindtap='chakan'>查看详情 》</view>
+      </view>
+    </view>
+    <!-- <view class="no-more">没有更多的数据了</view>  -->
+    <view style="width:100%;height:100rpx;"></view>
+  </scroll-view>
+</view> 

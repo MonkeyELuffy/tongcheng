@@ -1,0 +1,80 @@
+/* pages/cashOutDetail/cashOutDetail.wxss */
+.contain {
+  width: 100%;
+  height: 100vh;
+  background-color: #eee;
+}
+/*顶部数值*/
+.recharge-money {
+  position: relative;
+  box-sizing: border-box;
+  background-color: #fff;
+  font-size: 40rpx;
+  color: #e61c04;
+  padding: 40rpx;
+  text-align: center;
+  border-top: 10rpx solid #eee;
+  font-weight: 600;
+}
+
+
+/*分类*/
+.fenlei-contianer {
+  background-color: #fff;
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+.fenlei-contianer .fenlei-title {
+  width: 100%;
+  height: 50rpx;
+  padding: 20rpx;
+  font-size: 30rpx;
+  margin: 30rpx 0;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+.fenlei-contianer .fenlei-title image {
+  width: 50rpx;
+  height: 50rpx;
+}
+.fenlei-contianer .fenlei-ul {
+  width: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin:10rpx 0;
+}
+.fenlei-contianer .fenlei-list {
+  padding: 20rpx 40rpx;
+  margin-bottom: 20rpx;
+  background-color: #fff;
+}
+/*数据列表  */
+.data-list{
+  width: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.item{
+  padding:20rpx 40rpx;
+  background-color: #fff;
+  border-bottom: 4rpx solid #eee;
+}
+.time{
+  font-size: 24rpx;
+  color: #b2b2b2;
+}
+.detail{
+  font-size: 30rpx;
+  color: #333;
+  padding-bottom: 4rpx;
+}
+.value{
+  font-size: 34rpx;
+}

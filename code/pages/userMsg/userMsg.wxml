@@ -1,0 +1,10 @@
+<!--pages/personCenter/personCenter.wxml-->
+<view class="contain">
+  <view class="userInfo" wx:for="{{userInfo}}">
+   <view class= "key">{{item.key}}</view>
+   <input type="{{item.key==='手机号码' ? 'number' : 'text'}}" class="value" disabled="{{item.can_change}}" value="{{item.value}}" bindinput="changeNameAndMobil" wx:for-index="index" data-index="{{index}}"/>
+   <image style="display: {{item.image ? 'block' : 'none'}}" src="{{item.image}}" bindtap='changeImg'></image>
+  </view>
+
+  <view class="button" bindtap="sure">保存</view>
+</view>

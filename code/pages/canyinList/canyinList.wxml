@@ -1,0 +1,16 @@
+<!--pages/search/search.wxml-->
+<import src="../paixuTemplate/paixuTemplate.wxml"/>
+<import src="../dataItemTemp/dataItemTemp.wxml"/>
+<view class='contain'>
+  <!--排序组件  -->
+  <template is="paixuTemplate" data="{{allData}}"></template>
+
+  <!--数据列表  -->
+  <scroll-view class="data-list" style="height:{{scrollHeight}}px;" scroll-y="true" bindscrolltoupper="refresh" bindscrolltolower="bindDownLoad">
+    <!--子数据组件  -->
+    <template is="dataItemTemp" data="{{dataList}}" ></template>
+
+    <view style="width:100%;height:400rpx;"></view>
+  </scroll-view>
+  <view class='noData' hidden='{{dataList.length>0}}'>无相关数据，请重新搜索</view>
+</view>

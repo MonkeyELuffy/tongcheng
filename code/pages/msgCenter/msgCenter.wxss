@@ -1,0 +1,168 @@
+page {
+  background-color: #eee;
+}
+/*横向排列的菜单*/
+.nav-title {
+  position: fixed;
+  z-index: 100;
+  background-color: #fff;
+  color: #666;
+  font-size: 32rpx;
+  white-space: nowrap; 
+  box-shadow: 0rpx 0rpx 2rpx #ddd ;
+  padding: 20rpx 40rpx;
+  box-sizing:border-box;
+  border-top: 10rpx solid #eee;
+}
+.nav-item {
+  display: inline-block;
+  height: 80rpx;
+  text-align: center;
+  line-height: 80rpx;
+}
+
+/*分类*/
+.fenlei-contianer {
+  background-color: #fff;
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+.fenlei-contianer .fenlei-title {
+  width: 100%;
+  height: 50rpx;
+  padding: 20rpx;
+  font-size: 30rpx;
+  margin: 30rpx 0;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+.fenlei-contianer .fenlei-title image {
+  width: 50rpx;
+  height: 50rpx;
+}
+.fenlei-contianer .fenlei-ul {
+  width: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin:20rpx 0;
+}
+.fenlei-contianer .fenlei-list {
+  padding: 20rpx 40rpx;
+  margin-bottom: 20rpx;
+  background-color: #fff;
+}
+/*数据列表  */
+.data-list{
+  width: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.item{
+  padding:40rpx;
+  background-color: #fff;
+  border-bottom: 10rpx solid #eee;
+}
+.item-image{
+  width: 84rpx;
+  height: 84rpx;
+  box-sizing: border-box;
+  margin-right: 30rpx;
+  align-self:flex-start;
+}
+.detail-name{
+  font-size: 32rpx;
+  color: #333;
+  padding-bottom: 4rpx;
+}
+.label-contain{
+  font-size: 24rpx;
+}
+.label-item{
+  padding: 5rpx 10rpx;
+  border: 1rpx solid #f68076;
+  margin-right: 8rpx;
+  min-width: 76rpx;
+  text-align: center;
+}
+.haoping{
+  font-size: 28rpx;
+  color: #666;
+  padding-left: 10rpx;
+}
+.sale-and-juli,.chakan{
+  margin-top: 20rpx;
+  color: #b2b2b2;
+  font-size: 28rpx;
+}
+.juli{
+  padding-right: 20rpx;
+}
+.detail{
+  padding-top: 6rpx;
+}
+.time{
+  font-size: 24rpx;
+  color: #999;
+}
+
+/*意见反馈  */
+.yijian-contain{
+  width: 100%;
+  position: absolute;
+  margin:120rpx 0;
+}
+.yijian-text{
+  box-sizing: border-box;
+  background-color: #fff;
+  border: 2rpx solid rgba(19, 191, 222,0.6);
+  padding: 20rpx 40rpx;
+  width: 80%;
+  margin: 50rpx auto;
+  margin-bottom: 140rpx;
+  height: 460rpx;
+  border-radius: 20rpx;
+  font-size: 30rpx;
+}
+.button {
+  width: 500rpx;
+  height: 100rpx;
+  background: linear-gradient(to right,rgb(19, 191, 222), rgb(120, 233, 250));
+  border-radius: 50rpx;
+  color: #fff;
+  font-size: 34rpx;
+  line-height: 100rpx;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 60rpx;
+  margin-bottom: 60rpx;
+}
+
+/*常见问题  */
+.wenti{
+  width: 100%;
+  position: absolute;
+  margin:120rpx 0;
+}
+.wenti-item{
+  width: 100%;
+  padding: 40rpx;
+  box-sizing: border-box;
+  font-size: 30rpx;
+  background-color: #fff;
+  border-bottom: 4rpx solid #eee;
+  line-height: 50rpx;
+}
+.A{
+  color: #333;
+  padding-bottom: 10rpx;
+}
+.Q{
+  color: #999;
+}

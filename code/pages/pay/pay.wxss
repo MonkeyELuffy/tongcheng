@@ -1,0 +1,46 @@
+/* pages/pay/pay.wxss */
+.item,.pay-style{
+  padding: 30rpx;
+  font-size: 28rpx;
+  color: #333;
+  border-bottom: 2rpx solid #eee;
+  background-color: #fff;
+}
+image{
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 30rpx;
+}
+.text{
+  color: #333;
+  font-size: 28rpx;
+  padding: 30rpx;
+}
+
+.tixian-success{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.tixian-img{
+  width: 120rpx;
+  height: 120rpx;
+  margin: 300rpx 0 80rpx 0;
+}
+.success-title{
+  font-size: 28rpx;
+  color: #999;
+}
+.success-text{
+  font-size: 32rpx;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+.look-my-order{
+  position: absolute;
+  bottom: 100rpx;
+  color: #333;
+  width: 100%;
+  text-align: center;
+}

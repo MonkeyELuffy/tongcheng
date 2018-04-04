@@ -1,0 +1,74 @@
+/* pages/personCenter/personCenter.wxss */
+.contain {
+  width: 100%;
+  height: 100vh;
+  background-color: #eee;
+  padding: 30rpx;
+  box-sizing: border-box;
+}
+
+.userInfo {
+  background-color: #fff;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 40rpx;
+  box-sizing: border-box;
+  border-bottom: 2rpx solid #eee;
+}
+.userInfo2 {
+  background-color: #fff;
+  width: 100%;
+  padding: 20rpx 0rpx;
+  box-sizing: border-box;
+  border-bottom: 10rpx solid #eee;
+}
+.key {
+  color: #333;
+  font-size: 32rpx;
+  width: 200rpx;
+}
+.value {
+  color: #999;
+  font-size: 28rpx;
+}
+.company{
+  color: #333;
+  font-size: 32rpx;
+  widows: 100%;
+  border-bottom: 2rpx solid #eee;
+  padding: 20rpx 40rpx;
+}
+.company-detail{
+  widows: 100%;
+  padding: 20rpx 40rpx;
+  color: #999;
+  font-size: 28rpx;
+}
+
+.top{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  padding: 40rpx 0;
+  margin-bottom: 10rpx;
+}
+.logo{
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 8rpx;
+  margin-bottom: 20rpx;
+}
+.appName{
+  color: #333;
+  font-size: 32rpx;
+  margin-bottom: 10rpx;
+}
+.version{
+  font-size: 28rpx;
+  color: #999;
+}

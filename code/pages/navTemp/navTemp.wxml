@@ -1,0 +1,11 @@
+
+<template name="navTemp">
+  <view class="nav3-list">
+    <view class="nav3-item" wx:for="{{nav_3List}}" bindtap="clickNav" data-item="{{item}}">
+      <view class="nav3-list-image">
+        <image src="{{item.img}}"></image>
+      </view>
+      <view class="nav3-name">{{item.text}}</view>
+    </view>
+  </view>
+</template>

@@ -1,0 +1,74 @@
+<!--pages/oder/oder.wxml-->
+<view class="contain">
+  <view class="nav-title">
+    <view class="nav-item" wx:for="{{navItems}}" style="color: {{item.checked ? '#e61c04' : '#737373' }}; " bindtap="checked" wx:for-index="index" data-index="{{index}}">
+      {{item.name}}
+    </view>
+  </view>
+  <view class="nav-title-clear"></view>
+  <scroll-view class='order-list'  style="height:{{scrollHeight-100}}px;" scroll-y="true" bindscrolltolower="bindDownLoad">
+    <view class="order-message" wx:for="{{orders.data}}" >
+
+    <!--订单标题-->
+    <view class="order-title">
+      <view class='shop-name-img flex-between'>
+        <image class='shop-img' src='{{item.img}}'></image>
+        <view class='shop-name'>{{item.name}}</view>
+      </view>
+      <view class="status">{{item.status}}</view>
+    </view>
+
+    <!--订单详情-->
+    <view class="order-detail" wx:for="{{item.goods}}" wx:for-item="good">
+      <!--产品图片-->
+      <view class="order-img">
+        <image src="{{good.image}}"></image>
+      </view>
+      <!--产品介绍-->
+      <view class="order-text-price">
+        <view class="order-text">{{good.name}} {{good.norms || ""}}</view>
+        <view class="order-price">
+          <view class="order-real-price">￥{{good.goods_price}}
+          </view>
+          <view class="order-quantity">x{{good.num}}</view>
+        </view>
+      </view>
+    </view>
+      <!--合计价格-->
+      <!-- <view class="total-price">
+        <view class="total-price-text">合计：</view>
+        <view class="total-price-real">￥{{item.goods_total}}</view>
+      </view> -->
+      <!--按钮-->
+      <view class="flex-between">
+        <view class='time-status flex-between flex-all'>
+          <view class='time'>{{item.create_time}} {{item.timeStatus}}</view>
+          <!-- <view class='timeStatus'></view> -->
+        </view>
+        <view class='button-group flex-between'>
+          <button wx:for="{{btns}}" data-ordersn="{{item.ordersn}}" data-now_all_price="{{item.goods_total}}" wx:for-item="itemName" bindtap="clickBtn" data-tel='{{item.tel}}' data-page="{{itemName}}" >{{itemName}}</button>
+        </view>
+      </view>
+      <!--物流-->
+      <view style="display:{{now_list ? 'none' : 'flex'}}" class="stream">
+        <!--物流信息-->
+        <view class="stream-list" wx:for="{{item.logistic}}" >
+
+          <view class="icon">
+            <image src="{{stream_icon}}"></image>
+          </view>
+          <view class="stream-list-text-time" >
+            <view class="stream-list-text">{{item.content}}</view>
+            <view class="stream-list-time">{{item.create_time}}</view>
+          </view>
+        </view>
+
+      </view>
+    </view>
+      <!-- <view class="no-more">没有更多的数据了</view>  -->
+  </scroll-view>
+  
+
+  <view class="classname"></view>
+</view>
+

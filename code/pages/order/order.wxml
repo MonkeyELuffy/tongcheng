@@ -1,0 +1,63 @@
+<!--pages/oder/oder.wxml-->
+<import src="../noMoreData/noMoreData.wxml"/>
+<view class="contain">
+  <!--我的订单  -->
+  <view class='my-order flex-between'>
+    <view wx:for='{{orderTypeList}}' style="color: {{item.checked ? '#e61c04' : '#737373' }}; " class='text' bindtap='chooseOrderType' data-order='{{item.order}}'>{{item.name}}</view>
+  </view>
+  <view class="nav-title">
+    <view class="nav-item" wx:for="{{navItems}}" style="color: {{item.checked ? '#e61c04' : '#737373' }}; " bindtap="checked" wx:for-index="index" data-index="{{index}}" data-item='{{item}}'>
+      {{item.name}}
+    </view>
+  </view>
+  <view class="nav-title-clear"></view>
+  <scroll-view class='order-list'  style="height:{{scrollHeight}}px;" scroll-y="true" bindscrolltolower="bindDownLoad" bindscrolltoupper="refreshData" >
+    <view class="order-message" wx:for="{{orders}}" >
+    <!--订单标题-->
+    <view class="order-title">
+      <view class='shop-name-img flex-between'>
+        <image class='shop-img' src='{{shopImg}}'></image>
+        <view class='shop-name'>{{item.seller_name}}</view>
+      </view>
+      <view class="status">{{item.order_type == '1' ? '当面交易' : '同城交易'}}</view>
+    </view>
+
+    <!--订单详情-->
+    <view class="order-detail" wx:for="{{item.goodslist}}" wx:for-item="good" bindtap='goOrderDetail' data-order_id='{{item.order_id}}'>
+      <!--产品图片-->
+      <view class="order-img">
+        <image src="{{imgHttp + good.goods_logo}}"></image>
+      </view>
+      <!--产品介绍-->
+      <view class="order-text-price">
+        <view class="order-text flex-all">{{good.goods_name}}</view>
+        <view class="order-text flex-all">{{good.spec_info || ""}}</view>
+        <view class="order-price">
+          <view class="order-real-price">
+            <view>￥{{good.goods_price}}</view>   
+            <!--酒店订单需展示预定时间  -->
+            <view class='order-date' wx:if='good.orderDate'>{{good.orderDate}}</view>
+          </view>
+          <view class="order-quantity">x{{good.goods_number}}</view>
+        </view>
+      </view>
+    </view>
+      <!--按钮-->
+      <view class="flex-between">
+        <view class='time-status flex-between flex-all'>
+          <view class='time'>{{item.showTime}} {{item.showText}}</view>
+          <!-- <view class='timeStatus'></view> -->
+        </view>
+        <view class='button-group flex-between'>
+          <button wx:for="{{btns}}" data-order_id="{{item.order_id}}" data-item="{{item}}" data-now_all_price="{{item.goods_total}}" wx:for-item="itemName" bindtap="clickBtn" data-phone='{{item.phone}}' data-page="{{itemName}}" >{{itemName}}</button>
+        </view>
+      </view>
+    </view>
+    <view style="width:100%;height:80rpx;"></view>
+    <!--nomoreData  -->
+    <template is="noMoreData"></template>
+      <!-- <view class="no-more">没有更多的数据了</view>  -->
+  </scroll-view>
+  
+</view>
+

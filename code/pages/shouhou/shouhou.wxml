@@ -1,0 +1,31 @@
+<view class="fenlei-contianer">
+    <!--子数据  -->
+    <block wx:for="{{dataList}}" wx:key='item.key'>
+      <view class="goods">
+        <!--产品左侧图片-->
+        <view class='flex-none'>
+          <image src='{{checkedImg}}' class="checked" />
+          <image src='{{item.img}}' class="good-img" />
+        </view>
+        <!--右侧说明部分-->
+        <view class="good-cont flex-all">
+          <!--文字说明-->
+          <view class="goods-navigator">
+            <text class="good-name">{{item.name}}</text>
+          </view>
+          <!--价钱和购物加减的父盒子-->
+          <view class="good-price flex-between">
+            <text class="price">￥{{item.price}}</text>
+            <view class="order-quantity">x{{item.num}}</view>
+          </view>
+        </view>
+      </view>
+    </block>
+  <view class='tuikuan' bindtap='tuikuan'>
+    <view  class='text'>退款</view>
+    <image class='more' src='../../img/more.png'></image>
+  </view>
+  <view class='ketuikuan'>可退款：<span class='totalprice'>￥{{total}}</span></view>
+
+  <view class="button" bindtap="add">确定</view>
+</view> 

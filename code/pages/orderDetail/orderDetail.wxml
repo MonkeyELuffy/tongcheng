@@ -1,0 +1,120 @@
+<!--pages/dingdanxiangqing/dingdanxiangqing.wxml-->
+
+
+<view class="contain">
+  <!--收货方式  -->
+  <view class='type'>{{orderDetail.ship_type == '1' ? '到店取货-取货地址' : '送货上门-收货地址'}}</view>
+  <view class="address" bindtap="dizhi">
+    <view class="address-message">
+      <view class="now-address">
+        <!--取货地址或者寄送地址  -->
+        <view class=''>{{orderDetail.seller_name}}</view>
+        <p class="xiaoziti">{{orderDetail.take_address}}</p>
+      </view>
+      <!--送货到家的时候，ship_name，ship_phone代表用户的姓名和电话 -->
+      <view class="address-name-tel" wx:if='{{orderDetail.ship_type == "2"}}'>{{orderDetail.ship_name}} {{orderDetail.ship_phone}} </view>
+    </view>
+  </view>
+  <!--到店取货时显示  -->
+  <view class='daodian' wx:if='{{orderDetail.ship_type == "1"}}'>
+    <!--取货人信息  -->
+    <view class='daodian-item'>取货人姓名:<span style='padding:6px;font-size:24rpx;'></span>{{orderDetail.ship_name}}</view>
+    <view class='daodian-item'>取货人手机号:<span style='padding:6px;font-size:24rpx;'></span>{{orderDetail.ship_phone}}</view>
+  </view>
+  <!--订单号  -->
+  <view class="wenzi1">订单号：{{orderDetail.order_bn}}</view>
+
+  <view class="cartList">
+   <view class='good-contain'>
+    <!--list item订单-->
+    <block wx:for="{{orderDetail.items_list}}">
+      <view class="goods">
+        <!--产品左侧图片-->
+        <view>
+          <image src='{{httpUrl + item.logo_url}}' class="good-img" />
+        </view>
+        <!--右侧说明部分-->
+        <view class="good-cont">
+          <!--文字说明-->
+          <view class="goods-navigator">
+            <text class="good-name">{{item.goods_name}}</text>
+          </view>
+          <view class="goods-navigator">
+            <text class="good-name">{{item.spec_info || ""}}</text>
+          </view>
+          <!--价钱和购物加减的父盒子-->
+          <view class="good-price">
+            <text class="price">￥{{item.goods_price}}</text>
+            <view class="order-quantity">x{{item.goods_number}}</view>
+            <!-- <button bindtap="clickBtn" class="pingjia" data-goodsid="{{item.goods_id}}" data-ordersn="{{orderDetail.ordersn}}" hidden="{{(item.is_evaluate === 0 || item.is_evaluate === 1) ? false : true}}"  wx:for-index="index"  data-index="{{index}}">{{item.is_evaluate === 0 ? '立即评价':'已评价'}}</button> -->
+          </view>
+        </view>
+      </view>
+    </block>
+    <!--酒店类订单入住时间表  -->
+    <view class='table-contain' wx-if='{{orderDetail.differ == "2"}}'>
+      <view class='tbody'>
+        <view class='th flex-center'>
+          <view class='table-item'>日期</view>
+          <view class='table-item'>房间数量</view>
+          <view class='table-item'>金额</view>
+        </view>
+        <view class='td flex-center' wx:for='{{orderDetail.items_list}}'>
+          <view class='table-item'>{{item.spec_info}}</view>
+          <view class='table-item'>{{item.goods_number}}</view>
+          <view class='table-item'>￥{{item.goods_price}}</view>
+        </view>
+        <view class='tf flex-center'>
+          <view class='table-item'>合计</view>
+          <view class='table-item'>{{dataTotalQuantity}}</view>
+          <view class='table-item'>￥{{dataTotalPrice}}</view>
+        </view>
+      </view>
+    </view>
+
+    <!--备注  -->
+    <view class='beizhu'><span style='color:#333;font-size:28rpx;'>备注：</span>{{orderDetail.remark}}</view>
+   </view>
+    
+    <view class='jiage-msg'>
+      <view class='total-price flex-between'>
+        <view class='total-name wenzi1'>商品总额</view>
+        <view class='total-value big-price'>￥{{orderDetail.final_amount}}</view>
+      </view>
+      <view class='total-price flex-between'>
+        <view class='total-name wenzi1'>活动折扣</view>
+        <view class='total-value big-price'>￥{{orderDetail.sale_amount || 0}}</view>
+      </view>
+      <view class='total-price flex-between'>
+        <view class='total-name wenzi1'>优惠券</view>
+        <view class='total-value big-price'>￥{{orderDetail.cpns_amount || 0}}</view>
+      </view>
+      <view class='yunfei flex-between' hidden='{{orderDetail.differ == "2"}}'>
+        <view class='yunfei-name wenzi1'>运费</view>
+        <view class='yunfei-value little-price'>￥{{orderDetail.cost_amount || 0}}</view>
+      </view>
+    </view>
+    <!--实际付款  -->
+    <view class='shijifukuan '>需付款：<span style='color:#f83030'>￥{{orderDetail.total_amount}}</span></view>
+    <!--时间信息  -->
+    <view class='time-msg'>
+      <view class='time-item' wx:if='{{orderDetail.addtime}}'>下单时间: {{orderDetail.addtime}}</view>
+      <view class='time-item' wx:if='{{orderDetail.pay_time}}'>付款时间: {{orderDetail.paytime}}</view>
+      <view class='time-item' wx:if='{{orderDetail.confirmtime}}'>收货时间: {{orderDetail.confirmtime}}</view>
+    </view>
+
+    <!--按钮-->
+    <view class=" flex-between">
+      <view class='time-status' wx:if='{{orderDetail.stateText1}}'>
+        <view class='time'>{{orderDetail.stateText1}}</view>
+        <view class='time'>{{orderDetail.stateText2}}</view>
+      </view>
+      <view class='button-group  flex-all'>
+        <!--根据订单状态展示不同的按钮组件  -->
+        <button wx:for="{{btns}}" bindtap="clickBtn" style='background-color:{{item.bgColor}}' data-order_id='{{orderDetail.order_id}}'  data-page='{{item.name}}' data-item='{{orderDetail}}'>{{item.name}}</button>
+      </view>
+    </view>
+
+    <view class="clear"></view>
+  </view>
+</view>

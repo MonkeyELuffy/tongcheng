@@ -1,0 +1,51 @@
+<import src="../imageSwiper/imageSwiper.wxml"/>
+<import src="../paixuTemplate/paixuTemplate.wxml"/>
+<import src="../navTemp/navTemp.wxml"/>
+<import src="../dataItemTemp/dataItemTemp.wxml"/>
+<import src="../noMoreData/noMoreData.wxml"/>
+
+  <scroll-view class="data-list" style="max-height:{{scrollHeight}}px;" scroll-y="true" bindscrolltoupper="refresh" bindscrolltolower="bindDownLoad">
+<view class='contain'>
+  <!--扫描、搜索、定位  -->
+  <view class='top-nav'>
+    <!--扫描  -->
+    <view class='saomiao-contain flex-center'>
+      <image class='saomiao' src='{{saomiao}}' bindtap='saoyisao'></image>
+    </view>
+    <!--搜索框-->
+    <view class="search flex-center" >
+      <image src="{{search_icon}}" class="icon" confirm-type="search"></image>
+      <input type="text" placeholder="搜索您想要的" placeholder-style="color:#737373;" confirm-type='search' bindconfirm='search' bindinput="input" value='{{search_key}}'/>
+    </view>
+    <!--定位  -->
+    <view class='position flex-center'>
+      <image class='position-image' src='{{positionImg}}'></image>
+      <view class="position-value" bindtap="switchCity" >{{positionValue || '定位中'}}</view>
+    </view>
+  </view>
+  
+  <!--轮播图组件  --> 
+  <template is="imageSwiper" data="{{slider: slider1}}" ></template>
+
+  <!--菜单组件  -->
+  <template is="navTemp"  data="{{nav_3List}}"></template>
+
+  <!--轮播图组件  --> 
+  <template is="imageSwiper" data="{{slider: slider2}}" ></template>
+
+  <!--排序组件  -->
+  <template is="paixuTemplate" data="{{allData}}"></template>
+
+  <!--数据列表  -->
+  <!--子数据组件  -->
+  <template is="dataItemTemp" data="{{dataList}}" ></template>
+
+  <!--nomoreData  -->
+  <template is="noMoreData"></template>
+
+  <view style="width:100%;height:40rpx;"></view>
+
+  <view class='kefu' bindtap='kefu'>客服</view>
+
+</view>
+  </scroll-view>
