@@ -421,7 +421,6 @@ Page({
   // 发送购物车结算请求
   carSubmit: function () {
     var that = this
-    var buy_key = '';
     if (that.data.carData.product_list.length == 0) {
       wx.showModal({
         title: '提醒',
@@ -429,11 +428,12 @@ Page({
       })
       return
     } else {
+      var buy_key = [];
       for (var i in that.data.carData.product_list) {
-        buy_key += that.data.carData.product_list[i].product_id + '_' + that.data.carData.product_list[i].get_num + '|'
+        // 组装buy_key
+        buy_key.push(that.data.carData.product_list[i].product_id + '_' + that.data.carData.product_list[i].get_num)
       }
-      //去掉最后一个'|'
-      buy_key = buy_key.substring(0, buy_key["length"] - 1)
+      buy_key = buy_key.join('|')
       var data = {
         buy_key: buy_key,
         member_id: app.globalData.member_id
