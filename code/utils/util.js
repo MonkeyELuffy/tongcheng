@@ -10,9 +10,9 @@ const formatTime = date => {
 function httpPost(url, data, callBack) {
   wx.request({
     url: url,
-    method: 'POST', 
+    method: 'POST',
     header: { 'content-type': 'application/x-www-form-urlencoded' },
-    data: data, 
+    data: data,
     success: function (res) {
       console.log('请求参数', data)
       callBack(res.data);
@@ -59,7 +59,7 @@ function showTip(title = '提示成功') {
 
 // Promise形式
 function httpPost2(url, data) {
-  return new Promise((resolve, reject) =>{
+  return new Promise((resolve, reject) => {
     wx.request({
       url: url,
       method: 'POST',
@@ -76,6 +76,40 @@ function httpPost2(url, data) {
     })
   })
 }
+// 上传单张图片
+function UpLoadImg(data) {
+  var that = this
+  return new Promise((resolve, reject) => {
+    wx.uploadFile({
+      url: data.url,
+      filePath: data.path,
+      name: 'file',
+      success: function (res) {
+        if (res.statusCode == 200) {
+          console.log('上传图片成功', res)
+          resolve(res.data);
+        }
+      },
+      fail: function (res) {
+        console.log('上传失败', res)
+        reject(res)
+      },
+    })
+  })
+}
+//多张图片上传
+function UpLoadImgs(data) {
+  var uploadImgList = []
+  for (var i in data) {
+    uploadImgList.push(UpLoadImg(data[i]))
+  }
+  return new Promise((resolve, reject) => {
+    Promise.all(uploadImgList)
+      .then(function (res) {
+        resolve(res);
+      })
+  })
+}
 
 module.exports = {
   formatTime: formatTime,
@@ -84,6 +118,8 @@ module.exports = {
   httpGet: httpGet,
   formatNumber: formatNumber,
   loadingshow: loadingshow,
+  UpLoadImg: UpLoadImg,
+  UpLoadImgs: UpLoadImgs,
   showTip: showTip
 }
 

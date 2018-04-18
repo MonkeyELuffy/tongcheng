@@ -39,7 +39,7 @@
     <!--订单管理  -->
     <view class='order'>订单管理</view>
     <!-- 菜单 -->
-    <view class='bottom-nav top-nav flex-all flex-between'>
+    <view class='bottom-nav top-nav flex-all flex'>
       <view class='top-nav-item' wx:for='{{orderNav}}' bindtap="goPage" data-page="{{item.page}}">
         <image class='top-nav-item-img' src='{{item.img}}'></image>
         <view class='top-nav-item-name'>{{item.name}}</view>

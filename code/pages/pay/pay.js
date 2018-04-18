@@ -5,13 +5,13 @@ Page({
   data: {
     tixian: '../../img/tixian.png',
     showSuccess: false,
-    sn:'',
-    money:0,
-    payStyle:[
+    sn: '',
+    money: 0,
+    payStyle: [
       {
-        img:'../../img/weixin.png',
-        name:'微信支付',
-        paytype:'1'
+        img: '../../imgpay/weixin.png',
+        name: '微信支付',
+        paytype: '1'
       }, {
         img: '../../img/yu_e.png',
         name: '账户余额',
@@ -19,9 +19,9 @@ Page({
       },
     ],
     // 倒计时
-    Countdown :3,
+    Countdown: 3,
   },
-  onLoad:function(options){
+  onLoad: function (options) {
     console.log('order_id', options.order_id);
     var data = {
       order_id: options.order_id,
@@ -32,7 +32,7 @@ Page({
   },
   processSubmitPayData: function (res) {
     if (res.suc == 'y') {
-      console.log('提交支付申请成功', res.data); 
+      console.log('提交支付申请成功', res.data);
       this.setData({
         money: res.data.money,
         sn: res.data.sn,
@@ -53,7 +53,7 @@ Page({
       var data = {
         pay_sn: that.data.sn,
         member_id: app.globalData.member_id,
-        type: e.currentTarget.dataset.paytype, 
+        type: e.currentTarget.dataset.paytype,
         body: app.globalData.userInfo.nickname + '支付'
       }
       that.setData({
@@ -70,13 +70,13 @@ Page({
     if (res.suc == 'y') {
       console.log('支付成功', res.data);
       var that = this;
-      if (that.data.payType == '2'){
+      if (that.data.payType == '2') {
         util.showTip('支付成功');
         that.setData({
           showSuccess: true
         })
         that.startCountdown()
-      }else{
+      } else {
         // 微信支付
         that.wxPay(res)
       }
@@ -112,7 +112,7 @@ Page({
       }
     });
   },
-  goOrder:function(){
+  goOrder: function () {
     wx.switchTab({
       url: '../order/order',
     })
@@ -120,21 +120,21 @@ Page({
   // 倒计时
   // 倒计时结束之后会跳到订单页面
   // 如果倒计时未结束，用户手动点击跳转页面，这里的goOrder方法也会触发，只是说，没有意义，不会再跳转
-  startCountdown(){
+  startCountdown() {
     var that = this
     var Countdown = that.data.Countdown
-    var Interval = setInterval(function(){
-      if (Countdown > 1){
+    var Interval = setInterval(function () {
+      if (Countdown > 1) {
         Countdown--
         that.setData({
           Countdown: Countdown
         })
-      }else{
+      } else {
         console.log('倒计时结束')
         clearInterval(Interval)
         that.goOrder()
       }
-    },1000)
+    }, 1000)
   },
   /*==========
   防止快速点击
@@ -157,22 +157,35 @@ Page({
     })
   },
   //如果直接返回上一页面，需要提醒用户是否放弃本次交易，然后跳过提交订单页面，返回至商家页面
-  // onUnload: function () {
-  //   // 页面关闭
-  //   wx.showModal({
-  //     title: '提醒',
-  //     content: '是否放弃此次交易？',
-  //     success: function (res) {
-  //       if (res.confirm) {
-  //         var pages = getCurrentPages()
-  //         var prevPage = pages[pages.length - 1]
-  //         var prevPrevPage = pages[pages.length - 2]
-  //         prevPage.onUnload()
-  //         prevPrevPage.onLoad({ seller_id:7})
-  //       } else if (res.cancel) {
-  //         console.log('用户点击取消')
-  //       }
-  //     }
-  //   })
-  // }
+  onUnload: function () {
+    // 成功支付之后的页面销毁，不调用后续操作
+    if (!this.data.showSuccess) {
+      // 页面关闭
+      wx.showModal({
+        title: '提醒',
+        content: '是否放弃此次交易？在可订单中查询到本次交易。',
+        success: function (res) {
+          var pages = getCurrentPages()
+          var prevPage = pages[pages.length - 1]
+          var prevPrevPage = pages[pages.length - 2]
+          var prevPrevPrevPage = pages[pages.length - 3]
+          console.log('prevPage', prevPage)
+          console.log('prevPrevPage', prevPrevPage)
+          console.log('prevPrevPrevPage', prevPrevPrevPage)
+          // 如果上上一页是商品详情，则需要返回上上上一页
+          if (prevPrevPage.route == "pages/productDetail/productDetail") {
+            wx.navigateBack({
+              delta: 2
+            })
+            prevPrevPrevPage.onLoad({ seller_id: prevPage.data.orderData.goods_item[0].seller_id })
+          } else {
+            wx.navigateBack({
+              delta: 1
+            })
+            prevPrevPage.onLoad({ seller_id: prevPage.data.orderData.goods_item[0].seller_id })
+          }
+        }
+      })
+    }
+  }
 })

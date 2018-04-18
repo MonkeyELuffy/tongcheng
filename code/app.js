@@ -68,7 +68,9 @@ App({
   // 充值
   Charge:'Payment/applyCharge',
   // 单独获取用户信息
-  GetUserInfoByMemberId:'Member/get_list',
+  GetUserInfoByMemberId: 'Member/get_list',
+  // 优惠券
+  CouponList: 'Coupon/index',
 
   onLaunch: function () {
     //获取屏幕高度

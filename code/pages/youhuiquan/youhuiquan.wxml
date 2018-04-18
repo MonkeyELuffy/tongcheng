@@ -1,17 +1,21 @@
 <!--pages/youhuiquan/youhuiquan.wxml-->
+<import src="../noMoreData/noMoreData.wxml"/>
 <view class='contain'>
   <view class='youhuiquan-contain'>
     <view class='item flex-between' wx:for='{{dataList}}' wx:for-index='index'>
       <view class='detail'>
-        <view class='title' style='color:{{item.status === 0 ? "#00bcd5" : "#ccc"}}'>{{item.title}}</view>
+        <view class='title' style='color:{{item.is_get == 0 ? "#00bcd5" : "#ccc"}}'>{{item.name}}</view>
         <view class='value-time flex-none'>
-          <view class='value' style='color:{{item.status === 0 ? "#333" : "#ccc"}}'>￥{{item.value}}</view>
-          <view class='time' style='color:{{item.status === 0 ? "#999" : "#ccc"}}'>有效期至{{item.time}}</view>
+          <view class='value' style='color:{{item.is_get == 0 ? "#333" : "#ccc"}}'>{{item.balance_way == 1 ? '￥'+item.prompt : item.discount+'折'}}</view>
+          <view class='time' style='color:{{item.is_get == 0 ? "#999" : "#ccc"}}'>有效期至{{item.endtime}}</view>
         </view>
-        <view class='discription' style='color:{{item.status === 0 ? "#999" : "#ccc"}}'>{{item.discription}}</view>
+        <view class='discription' style='color:{{item.is_get == 0 ? "#999" : "#ccc"}}'>{{item.content}}</view>
       </view>
       <!--领取按钮  -->
-      <view class='lingqu flex-center' data-index='{{index}}' data-id='{{item.id}}' bindtap="{{item.status === 0 ? 'lingqu' : 'none'}}" style='background:{{item.status === 0 ? "linear-gradient( rgb(120, 233, 250),rgb(19, 191, 222))" : "#ccc"}}'>{{item.status === 0 ? '领取' : '已领取'}}</view>
+      <view class='lingqu flex-center' data-index='{{index}}' data-item='{{item}}' bindtap="{{item.is_get == 0 ? 'lingqu' : 'none'}}" style='background:{{item.is_get == 0 ? "linear-gradient( rgb(120, 233, 250),rgb(19, 191, 222))" : "#ccc"}}'>{{item.is_get == 0 ? '领取' : '已领取'}}</view>
     </view>
+
+    <!--nomoreData  -->
+    <template is="noMoreData" data="{{showNomore}}"></template>
   </view>
 </view>

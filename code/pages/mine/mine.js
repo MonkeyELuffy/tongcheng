@@ -20,36 +20,44 @@ Page({
       name: '红包',
       page: 'hongbao'
       }],
-    orderNav: [{
+    orderNav: [
+      {
       img: '../../img/center/wode_dizhi.png',
       name: '收货地址',
-      page:'address'
-    }, {
-        img: '../../img/center/wode_youhui.png',
-        name: '优惠券',
-        page: 'youhuiquanlingqu'
-      }, {
-        img: '../../img/center/wode_kefu.png',
-        name: '客户服务',
-        page: 'kehufuwu'
-    }, {
-        img: '../../img/center/wode_xiaoxi.png',
-        name: '消息中心',
-        page: 'msgCenter'
-      }, {
-        img: '../../img/center/wode_liulan.png',
-        name: '浏览记录',
-        page: 'liulanjilu'
-    }, {
-        img: '../../img/center/wode_jilu.png',
-      name: '关注记录',
-      page: 'wodeguanzhu'
-      }, {
-        img: '../../img/center/wode_guanyu.png',
-        name: '关于我们',
-        page: 'about'
-    }, {
-        img: '../../img/center/wode_yijian.png',
+      page: 'address'
+    }, 
+    {
+      img: '../../img/center/wode_youhui.png',
+      name: '优惠券',
+      page: 'youhuiquanlingqu'
+    }, 
+    {
+      img: '../../img/center/wode_kefu.png',
+      name: '客户服务',
+      page: 'kehufuwu'
+    }, 
+    {
+      img: '../../img/center/wode_xiaoxi.png',
+      name: '消息中心',
+      page: 'msgCenter'
+    }, 
+    // {
+    //   img: '../../img/center/wode_liulan.png',
+    //   name: '浏览记录',
+    //   page: 'liulanjilu'
+    // }, 
+    // {
+    //   img: '../../img/center/wode_jilu.png',
+    //   name: '关注记录',
+    //   page: 'wodeguanzhu'
+    // }, 
+    {
+      img: '../../img/center/wode_guanyu.png',
+      name: '关于我们',
+      page: 'about'
+    }, 
+    {
+      img: '../../img/center/wode_yijian.png',
       name: '意见反馈',
       page: 'kehufuwu'
     }],
@@ -61,10 +69,15 @@ Page({
     bg: '../../img/user_bg.png',
   },
   onShow: function () {
-    console.log('app.globalData.userInfo',app.globalData.userInfo)
-    this.setData({
-      userInfo: app.globalData.userInfo
-    })
+    util.httpPost(app.globalUrl + app.GetUserInfoByMemberId, { member_id: app.globalData.member_id }, this.processUserlData);
+  },
+  processUserlData: function (res) {
+    if (res.suc == 'y') {
+      console.log('个人信息数据', res.data);
+      this.setData({
+        userInfo: res.data
+      })
+    }
   },
   saoyisao: function () {
     wx.scanCode({

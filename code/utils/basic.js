@@ -14,6 +14,7 @@
  
 */
 
+
 // 页面跳转
 // page: 目标页面字段;
 // that: 调用页面对象;
@@ -93,17 +94,36 @@ function search(e) {
   }
 }
 // 手机号验证
-function checkedPhone(phone){
+function checkedPhone(phone) {
   var reg = /^1[3|5|7|8]\d{9}$/;
   if (!phone || !reg.test(phone)) {
     return false
-  }else{
-    return true
   }
+  return true;
+}
+// 非空验证
+function checkNull(str) {
+  if (str.replace(/(^\s*)|(\s*$)/g, "").length == 0) {
+    return false
+  }
+  return true;
+}
+// 身份证号验证
+function checkCard(str) {
+  //15位数身份证正则表达式
+  var arg1 = /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$/;
+  //18位数身份证正则表达式
+  var arg2 = /^[1-9][1-9][0-9]\d{3}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/;
+  if (str.match(arg1) == null && str.match(arg2) == null) {
+    return false;
+  }
+  return true;
 }
 
 module.exports = {
   goPage: goPage,
   clickTooFast: clickTooFast,
   checkedPhone: checkedPhone,
+  checkNull: checkNull,
+  checkCard: checkCard,
 }

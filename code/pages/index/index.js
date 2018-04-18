@@ -80,35 +80,37 @@ Page({
     // 数据初始化
     this.inteData()
     // 请求商铺数据
-    if (app.globalData.firstLongitude){
+    if (app.globalData.firstLongitude) {
       this.loadStorData()
-    }else{
+    } else {
       app.getFirstLocation().then(this.loadStorDataAndCityName)
     }
     //请求banner数据
     this.loadBannerData();
   },
-  inteData(){
+  inteData() {
     this.setData({
       bindDownLoad: true,
       page_no: 1,
       dataList: [],
-      total_page: 1
+      total_page: 1,
+      showNomore: false
     })
   },
-  loadStorDataAndCityName(res){
+  loadStorDataAndCityName(res) {
     this.getCityName(res)
     this.loadStorData()
   },
-  getCityName(res){
+  getCityName(res) {
     var params = {
       location: res.latitude + ',' + res.longitude,
       key: config.key
     }
     util.httpPost2(app.MAP, params).then(this.processLocation)
   },
-  processLocation(res){
+  processLocation(res) {
     console.log('请求当前位置返回数据', res)
+    app.globalData.firstAddress = res.result.address
     this.setData({
       //此时应该显示的城市名称
       positionValue: res.result.ad_info.district
@@ -124,7 +126,7 @@ Page({
     }
     this.loadListData(params);
   },
-  loadBannerData(){
+  loadBannerData() {
     var params1 = {
       region_id: 3144,  //地区ID搜索
       loca_id: 1
@@ -140,7 +142,7 @@ Page({
   processBannerData: function (res) {
     if (res.suc == 'y') {
       console.log('顶部banner数据', res.data);
-      for(var i in res.data){
+      for (var i in res.data) {
         res.data[i].img_src = app.globalImageUrl + res.data[i].img_src
       }
       this.setData({
@@ -151,7 +153,7 @@ Page({
   // 中间banner
   processBannerCenterData: function (res) {
     if (res.suc == 'y') {
-      console.log('中间banner数据', res.data); 
+      console.log('中间banner数据', res.data);
       for (var i in res.data) {
         res.data[i].img_src = app.globalImageUrl + res.data[i].img_src
       }
@@ -160,14 +162,14 @@ Page({
       })
     }
   },
-  saoyisao:function(){
+  saoyisao: function () {
     wx.scanCode({
       onlyFromCamera: true,
       success: (res) => {
         console.log(res)
       }
     })
-  }, 
+  },
   // switchCity(e){
   //   var that = this
   //   basic.goPage('switchcity', that, e,)
@@ -176,7 +178,7 @@ Page({
   goPage: function (e) {
     var that = this
     var page = e.target.dataset.page
-    basic.goPage(page, that, e,)
+    basic.goPage(page, that, e, )
   },
   // 输入搜索文字
   input: function (e) {
@@ -231,14 +233,19 @@ Page({
     }
     loadListData.loadListData(allParams)
   },
-  processStoreData(res){
+  processStoreData(res) {
     if (res.suc == 'y') {
       var dataList = this.data.dataList
       console.log('获取商铺list成功', res.data);
-      if (app.globalData.hasLogin){
-        wx.hideLoading()
+      if ((res.data.list instanceof Array && res.data.list.length < 15) || (res.data.list == '')) {
+        this.setData({
+          showNomore: true
+        })
       }
-      for (var i in res.data.list){
+      // if (app.globalData.hasLogin){
+      wx.hideLoading()
+      // }
+      for (var i in res.data.list) {
         res.data.list[i].store_img_src = app.globalImageUrl + res.data.list[i].store_img_src
         res.data.list[i].special = res.data.list[i].special.split(",");
       }
@@ -253,7 +260,7 @@ Page({
       console.log('获取商铺list错误', res);
     }
   },
-  kefu(){
+  kefu() {
     wx.makePhoneCall({
       phoneNumber: '13067998666',
     })
@@ -284,6 +291,12 @@ Page({
     var that = this
     bannerTemp.clickBanner(e, that)
   },
+  // 点击顶部大分类菜单
+  clickSuperNav(e) {
+    var that = this
+    var item = e.currentTarget.dataset.item
+    superNavTemp.clickSuperNav(e, that, item)
+  },
   // 点击子菜单
   clickNav: function (e) {
     var that = this
@@ -303,7 +316,7 @@ Page({
       page_no: 1,
       total_page: 1
     })
-    var that = this 
+    var that = this
     var nowPaiXu = paixuTemp.hangyepaixu(e, that)
     this.loadStorDataByOrder(e)
   },
@@ -329,7 +342,9 @@ Page({
     var nowPaiXu = paixuTemp.julipaixu(e, that)
     this.loadStorDataByOrder(e)
   },
-  loadStorDataByOrder(e){
+  // 点击排序重新请求数据，不能先清空dataList，会出现闪动；
+  // 目前先单独处理，之后需要对请求data函数做处理，根据标志位判断当前的请求是加载下一页，还是完全更新数据
+  loadStorDataByOrder(e) {
     var params = {
       order_by: this.data.allData.nowPaiXu,
       page_no: 1,
@@ -339,7 +354,7 @@ Page({
     }
     this.loadListDataByOrder(params);
   },
-  loadListDataByOrder(params){
+  loadListDataByOrder(params) {
     var that = this
     var allParams = {
       that: that,
@@ -350,7 +365,7 @@ Page({
     }
     loadListData.loadListData(allParams)
   },
-  processStoreByOrderData(res){
+  processStoreByOrderData(res) {
     if (res.suc == 'y') {
       var dataList = []
       console.log('获取商铺list成功', res.data);

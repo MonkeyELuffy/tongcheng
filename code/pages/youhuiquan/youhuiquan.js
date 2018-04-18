@@ -1,40 +1,35 @@
 // pages/youhuiquan/youhuiquan.js
+var util = require('../../utils/util.js');
+//获取应用实例
+var app = getApp()
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    dataList: [
-      {
-        id: 0,
-        title: '通用型',
-        value: 50,
-        time: '2017-08-02',
-        discription: '订单总金额高于代金券面值即可使用',
-        status: 0,
-      },
-      {
-        id: 1,
-        title: '通用型',
-        value: 50,
-        time: '2017-08-02',
-        discription: '订单总金额高于代金券面值即可使用',
-        status: 0,
-      },
-      {
-        id: 2,
-        title: '通用型',
-        value: 50,
-        time: '2017-08-02',
-        discription: '订单总金额高于代金券面值即可使用',
-        status: 1,
-      }
-    ]
+    dataList: []
   },
-  lingqu:function(e){
+  onLoad(options) {
+    var params = {
+      member_id: app.globalData.member_id
+    }
+    util.httpPost(app.globalUrl + app.CouponList, params, this.processCouponListData);
+  },
+  processCouponListData(res) {
+    if (res.suc == 'y') {
+      console.log('获取优惠券list成功', res.data);
+      if ((res.data instanceof Array && res.data.length < 15) || (res.data == '')) {
+        this.setData({
+          showNomore: true
+        })
+      }
+      this.setData({
+        dataList: res.data,
+      })
+    } else {
+      console.log('获取优惠券list错误', res);
+    }
+  },
+  lingqu: function (e) {
     console.log('可领取')
-    console.log(e.target.dataset.id)
+    var item = e.target.dataset.item
     var index = e.target.dataset.index
     var dataList = this.data.dataList
     dataList[index].status = 1

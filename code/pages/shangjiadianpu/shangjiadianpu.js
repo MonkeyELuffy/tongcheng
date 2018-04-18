@@ -513,7 +513,7 @@ Page({
         content: '请先选择商品',
       })
       return
-    } else {
+    }else{
       var buy_key = [];
       for (var i in that.data.carData.product_list) {
         // 组装buy_key

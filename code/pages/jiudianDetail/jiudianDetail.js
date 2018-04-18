@@ -47,16 +47,15 @@ Page({
   },
   onLoad(options) {
     var that = this;
-    var scrollHeight = this.data.scrollHeight
-    var rpx = scrollHeight / 555
-    console.log('rpx', rpx)
-    scrollHeight += 46 * rpx
-    this.setData({
-      scrollHeight: scrollHeight
-    })
-    console.log('商家seller_id', JSON.parse(options.seller_id));
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          scrollHeight: res.windowHeight - 100 * res.screenWidth / 750
+        })
+      }
+    });
     var data = {
-      seller_id: JSON.parse(options.seller_id),
+      seller_id: options.seller_id,
       token: app.globalData.userInfo.token
     }
     //请求商家详情
