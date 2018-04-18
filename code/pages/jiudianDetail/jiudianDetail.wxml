@@ -80,67 +80,67 @@
     <!--空余  -->
     <!-- <view class='clear'></view> -->
   </view>
-
-  <!--蒙版背景  -->
-  <view class='mengban' hidden='{{!showOrderDetail}}'></view>
-
-  <!--预定弹窗  -->
-  <view class='toastContain' hidden='{{!showOrderDetail}}'> 
-    <view class='toastInnerContain'>
-      <!--订单详情顶部标题  -->
-      <view class='order-detail-top'>
-        <image src='{{closeImg}}' bindtap='cancelYuDing' class='cancel-img'></image>
-        <view class='toast-title'>{{hotelOrderDetail.goods_name}}</view>
-      </view>
-      <!--订单详情内部滚动框  -->
-      <scroll-view class="data-list" style="max-height:{{scrollHeight-200}}px;" scroll-y="true" >
-        <!--轮播图组件  --> 
-        <template is="imageSwiper" data="{{slider: hotelOrderDetail.img}}" ></template>
-        <view class='toast-labels-contain flex-between'>
-          <view class='labels-item flex-none' wx:for='{{hotelOrderDetail.labels}}'>
-            <view class='labels-name'>{{item.name}}</view>
-            <view class='labels-value'>{{item.value}}</view>
-          </view>
-        </view>
-        <view class='shuoming'>入住说明</view>
-        <view class='msg'>{{hotelOrderDetail.desc}}</view>
-        <!--入住表格数据  -->
-        <view class='table-contain'>
-          <view class='tbody'>
-            <view class='th flex-center'>
-              <view class='table-item'>日期</view>
-              <view class='table-item'>房间数量</view>
-              <view class='table-item'>金额</view>
-            </view>
-            <view class='td flex-center' wx:for='{{hotelOrderDetail.dataList}}'>
-              <view class='table-item'>{{item.time}}</view>
-              <view class='table-item'>{{item.quantity}}</view>
-              <view class='table-item'>￥{{item.price}}</view>
-            </view>
-            <view class='tf flex-center'>
-              <view class='table-item'>合计</view>
-              <view class='table-item'>{{hotelOrderDetail.total}}</view>
-              <view class='table-item'>￥{{hotelOrderDetail.totalPrice}}</view>
-            </view>
-          </view>
-        </view>
-      </scroll-view>
-      <!--订单详情底部按钮  -->
-      <view class='order-detail-bottom'>
-        <view class='btn-contain'>
-          <view class='jiesuan-bottom flex-between'>
-            <view class='total'><span style='color:#fa3f06'>￥{{hotelOrderDetail.totalPrice}}</span></view>
-            <view class='flex-none'>
-              <!-- <view class='cancel-btn' bindtap='cancelYuDing'>取消</view> -->
-              <view class='jiesuan-btn' bindtap='submitYuDing'>预约</view>
-            </view>
-          </view>
-        </view>
-      </view>
-    </view> 
-  </view>
-
 </scroll-view>
+
+
+<!--蒙版背景  -->
+<view class='mengban' hidden='{{!showOrderDetail}}'></view>
+
+<!--预定弹窗  -->
+<view class='toastContain' hidden='{{!showOrderDetail}}'> 
+  <view class='toastInnerContain'>
+    <!--订单详情顶部标题  -->
+    <view class='order-detail-top'>
+      <image src='{{closeImg}}' bindtap='cancelYuDing' class='cancel-img'></image>
+      <view class='toast-title'>{{hotelOrderDetail.goods_name}}</view>
+    </view>
+    <!--订单详情内部滚动框  -->
+    <scroll-view class="data-list" style="max-height:{{scrollHeight-200}}px;" scroll-y="true" >
+      <!--轮播图组件  --> 
+      <template is="imageSwiper" data="{{slider: hotelOrderDetail.img}}" ></template>
+      <view class='toast-labels-contain flex-between'>
+        <view class='labels-item flex-none' wx:for='{{hotelOrderDetail.labels}}'>
+          <view class='labels-name'>{{item.name}}</view>
+          <view class='labels-value'>{{item.value}}</view>
+        </view>
+      </view>
+      <view class='shuoming'>入住说明</view>
+      <view class='msg'>{{hotelOrderDetail.desc}}</view>
+      <!--入住表格数据  -->
+      <view class='table-contain'>
+        <view class='tbody'>
+          <view class='th flex-center'>
+            <view class='table-item'>日期</view>
+            <view class='table-item'>房间数量</view>
+            <view class='table-item'>金额</view>
+          </view>
+          <view class='td flex-center' wx:for='{{hotelOrderDetail.dataList}}'>
+            <view class='table-item'>{{item.time}}</view>
+            <view class='table-item'>{{item.quantity}}</view>
+            <view class='table-item'>￥{{item.price}}</view>
+          </view>
+          <view class='tf flex-center'>
+            <view class='table-item'>合计</view>
+            <view class='table-item'>{{hotelOrderDetail.total}}</view>
+            <view class='table-item'>￥{{hotelOrderDetail.totalPrice}}</view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+    <!--订单详情底部按钮  -->
+    <view class='order-detail-bottom'>
+      <view class='btn-contain'>
+        <view class='jiesuan-bottom flex-between'>
+          <view class='total'><span style='color:#fa3f06'>￥{{hotelOrderDetail.totalPrice}}</span></view>
+          <view class='flex-none'>
+            <!-- <view class='cancel-btn' bindtap='cancelYuDing'>取消</view> -->
+            <view class='jiesuan-btn' bindtap='submitYuDing'>预约</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view> 
+</view>
 
 
     <!--结算  -->

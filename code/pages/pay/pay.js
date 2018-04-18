@@ -9,7 +9,7 @@ Page({
     money: 0,
     payStyle: [
       {
-        img: '../../imgpay/weixin.png',
+        img: '../../img/weixin.png',
         name: '微信支付',
         paytype: '1'
       }, {
