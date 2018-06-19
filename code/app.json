@@ -1,12 +1,13 @@
 {
   "pages":[
+    "pages/qiandaohudenglu/qiandaohudenglu",
+    "pages/index/index",
+    "pages/jingdianmenpiao/jingdianmenpiao",
     "pages/piaowu_pay/piaowu_pay",
     "pages/piaowu_sub/piaowu_sub",
     "pages/youshanwanshui/youshanwanshui",
-    "pages/jingdianmenpiao/jingdianmenpiao",
     "pages/paixuTemplate_2/paixuTemplate_2",
     "pages/gonglve/gonglve",
-    "pages/index/index",
     "pages/index2/index2",
     "pages/tongcheng/tongcheng",
     "pages/xiangdao/xiangdao",
