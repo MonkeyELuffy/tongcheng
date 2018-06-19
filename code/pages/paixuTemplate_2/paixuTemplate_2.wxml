@@ -1,0 +1,21 @@
+  <!--排序  -->
+<template name="paixuTemplate_2">
+  <view class='tab'>
+    <view class='tab-item' bindtap='jingdianpaixu'>
+      <view class='tab-name'>景点</view>
+      <image class='tab-up-down' src='{{allData_2.jingdianpaixu}}'></image>
+    </view>
+    <view class='tab-item' bindtap='xiaoliangpaixu'>
+      <view class='tab-name'>销量</view>
+      <image class='tab-up-down' src='{{allData_2.xiaoliangpaixu}}' ></image>
+    </view>
+    <view class='tab-item' bindtap='jiagepaixu'>
+      <view class='tab-name'>价格</view>
+      <image class='tab-up-down' src='{{allData_2.jiagepaixu}}'></image>
+    </view>
+    <view class='tab-item' bindtap='julipaixu'>
+      <view class='tab-name'>距离</view>
+      <image class='tab-up-down' src='{{allData_2.julipaixu}}'></image>
+    </view>
+  </view>
+</template>

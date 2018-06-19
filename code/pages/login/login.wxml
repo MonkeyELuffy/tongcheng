@@ -1,0 +1,10 @@
+<view>
+  <view wx:if="{{showLogin}}" style="padding: 20rpx; text-algin: center;">
+    <image src="/img/logo.png" class="login-logo" />
+    <view class="brandtitle">Hi~请登录</view>
+    <view class="desc">登录后今日淘房为您更好的服务</view>
+   
+    <button type="primary" wx:if="{{canIUse}}" style="" bindgetuserinfo="bindGetUserInfo" open-type="getUserInfo">微信用户快速登录</button>
+    
+  </view>
+</view>

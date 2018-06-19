@@ -10,7 +10,6 @@ var loadListData = require('../../utils/loadListData.js');
 var app = getApp()
 Page({
   data: {
-    scrollHeight: app.globalData.scrollHeight,
     slider1: [],
     slider2: [],
     nav_3List: [
@@ -77,6 +76,15 @@ Page({
       page_no: 1,
       dataList: []
     })
+    //获取屏幕高度
+    wx.getSystemInfo({
+      success: function (res) {
+        console.info(res.windowHeight);
+        that.setData({
+          scrollHeight: res.windowHeight
+        });
+      }
+    });
     //请求banner数据
     this.loadBannerData();
     // 请求餐饮类别的商铺，关键词type: 1

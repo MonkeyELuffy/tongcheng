@@ -1,0 +1,31 @@
+<import src="../imageSwiper/imageSwiper.wxml"/>
+<import src="../paixuTemplate_2/paixuTemplate_2.wxml"/>
+<import src="../navTemp/navTemp.wxml"/>
+<import src="../dataItemTemp/dataItemTemp.wxml"/>
+<import src="../noMoreData/noMoreData.wxml"/>
+
+  <scroll-view class="data-list" style="max-height:{{scrollHeight}}px;" scroll-y="true" bindscrolltoupper="refresh" bindscrolltolower="bindDownLoad">
+<view class='contain'>
+  
+  <!--轮播图组件  --> 
+  <template is="imageSwiper" data="{{slider: slider1}}" ></template>
+
+  <!--菜单组件  -->
+  <template is="navTemp"  data="{{nav_3List}}"></template>
+
+  <!--排序组件  -->
+  <template is="paixuTemplate_2" data="{{allData_2}}"></template>
+
+  <!--数据列表  -->
+  <!--子数据组件  -->
+  <template is="dataItemTemp" data="{{dataList}}" ></template>
+
+  <!--nomoreData  -->
+  <template is="noMoreData"></template>
+
+  <view style="width:100%;height:40rpx;"></view>
+
+  <view class='kefu' bindtap='kefu'>客服</view>
+
+</view>
+  </scroll-view>

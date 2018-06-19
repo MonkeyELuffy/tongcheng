@@ -1,6 +1,15 @@
 {
   "pages":[
+    "pages/piaowu_pay/piaowu_pay",
+    "pages/piaowu_sub/piaowu_sub",
+    "pages/youshanwanshui/youshanwanshui",
+    "pages/jingdianmenpiao/jingdianmenpiao",
+    "pages/paixuTemplate_2/paixuTemplate_2",
+    "pages/gonglve/gonglve",
     "pages/index/index",
+    "pages/index2/index2",
+    "pages/tongcheng/tongcheng",
+    "pages/xiangdao/xiangdao",
     "pages/liulanjilu/liulanjilu",
     "pages/mine/mine",
     "pages/pingjiaList/pingjiaList",
@@ -54,6 +63,7 @@
     "pages/yaoqinghaoyou/yaoqinghaoyou",
     "pages/woyaozhongchou/woyaozhongchou",
     "pages/shenqingruzhu/shenqingruzhu",
+    "pages/login/login",
     "pages/switchcity/switchcity"
   ],
   "window":{
@@ -64,20 +74,20 @@
   "tabBar": {
     "list": [
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/index2/index2",
         "text": "首页",
         "iconPath": "img/icon_shouye_u.png",
         "selectedIconPath": "img/icon_shouye.png"
       },
       {
-        "pagePath": "pages/jiudian/jiudian",
-        "text": "酒店",
+        "pagePath": "pages/index/index",
+        "text": "同城",
         "iconPath": "img/icon_jiudian_u.png",
         "selectedIconPath": "img/icon_jiudian.png"
       },
       {
-        "pagePath": "pages/canyin/canyin",
-        "text": "餐饮",
+        "pagePath": "pages/gonglve/gonglve",
+        "text": "攻略",
         "iconPath": "img/icon_canying_u.png",
         "selectedIconPath": "img/icon_canying.png"
       },

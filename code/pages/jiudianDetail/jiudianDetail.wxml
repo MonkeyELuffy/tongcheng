@@ -56,14 +56,14 @@
     </view>
 
     <!--评价  -->
-    <view class='pingjia-contain'>
+  <!--   <view class='pingjia-contain'>
       <view class='pingjia-top flex-between' bindtap='seeMore'>
         <view class='pingjia-text'>用户评价</view>
-        <view class='look-more'>更多</view>
+        <view class='lviewook-more'>更多</view>
         <image src='{{more}}' class='more'></image>
-      </view>
+      </view> -->
       <!--评价列表  -->
-      <view class='pingjia-item flex-between' wx:for='{{pingjiaList}}'>
+     <!--  <view class='pingjia-item flex-between' wx:for='{{pingjiaList}}'>
         <image class='user-img' src='{{item.img_url}}'></image>
         <view class='pingjia flex-all'>
           <view class='name-time flex-between'>
@@ -73,7 +73,21 @@
           <view class='pingjia-des'>{{item.content}}</view>
         </view>
       </view>
-    </view>
+    </view> -->
+
+
+   <!--  酒店设施 -->
+    <view class='estab-text tuijian-text'>酒店设施:</view>
+    <view class='estab'> </view>
+
+
+
+   <!--  酒店介绍 -->
+   <view class='introduce-contain'>
+   <view class='tuijian-text'>酒店介绍:</view>
+   <view class='introduce'></view>
+   </view>
+
     <!--推荐  -->
     <!-- <view class='tuijian-text'>为你推荐</view> -->
     <!-- <template is="dataItemTemp" data="{{dataList:tuijianList}}" ></template> -->

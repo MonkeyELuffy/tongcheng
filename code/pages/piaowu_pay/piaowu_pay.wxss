@@ -1,0 +1,160 @@
+/* pages/piaowu_pay/piaowu_pay.wxss */
+.contain{
+  padding-bottom: 120rpx;
+  background-color: #eee;
+}
+.label{
+  font-size: 32rpx;
+  color: #333;
+  padding: 30rpx 40rpx;
+  min-width: 100rpx;
+}
+.date-contain{
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  background-color: #fff;
+  padding: 30rpx 40rpx;
+}
+.date-item{
+  width: 21%;
+  background-color: #ddd;
+  border-radius: 4rpx;
+  color: #666;
+  font-size: 24rpx;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10rpx 0;
+}
+.msg{
+  font-size: 24rpx;
+  color: #666;
+  background-color: #fff;
+  padding:0 0 10rpx 40rpx;
+  border-bottom: 4rpx solid #eee;
+}
+
+.prize,.choose-num{
+  background-color: #fff;
+  padding-right: 40rpx;
+  border-bottom: 4rpx solid #eee;
+}
+.icon,.prize-num{
+  color: #e61c04;
+}
+.icon{
+  font-size: 24rpx;
+}
+.prize-num{
+  font-size: 32rpx;
+  padding-right: 8rpx;
+}
+.zhang{
+  color: #aaa;
+  font-size: 24rpx;
+}
+.sub-add-contain{
+  align-items: center;
+}
+.num{
+  font-size: 24rpx;
+  padding: 0 20rpx;
+}
+image{
+  width: 50rpx;
+  height: 50rpx;
+}
+
+  .choose-youhuiquan{
+    background-color: #fff;
+    padding-right: 30rpx;
+    color: #333;
+    font-size:30rpx; 
+    margin-bottom: 4rpx;
+  }
+  .youhuiquan-img{
+    width: 16rpx;
+    height: 30rpx;
+    margin-left: 16rpx;
+  }
+  .youhuiquan-value{
+    color: #e61c04;
+  }
+  
+.daodian{
+  background-color: #fff;
+  font-size: 30rpx;
+  color: #333;
+}
+.daodian-item{
+  border-bottom: 4rpx solid #eee;
+}
+
+
+.jiage-msg{
+  border-bottom: 4rpx solid #eee;
+  background-color: #fff;
+  padding-right: 60rpx;
+}
+.total-price > .total-name{
+  padding: 20rpx 40rpx;
+}
+.zhekou-name{
+  color: #666;
+  font-size: 30rpx;
+  padding: 0 0 10rpx 40rpx;
+}
+.big-price{
+  font-size: 34rpx;
+}
+.little-price{
+  font-size: 28rpx;
+}
+.value-color{
+  color: #e61c04;
+}
+.shijifukuan,.time-msg{
+  font-size: 30rpx;
+  text-align: right;
+  padding: 10rpx 30rpx 0 0;
+}
+.time-msg{
+  font-size: 24rpx;
+  color: #b2b2b2;
+  border-bottom: 6rpx solid #eee;
+}
+.time-item{
+  padding: 5rpx 0;
+}
+.status{
+		height: 60rpx;
+		line-height: 60rpx;
+    color: #e61c04;
+}
+.time-status {
+  color: #999;
+  font-size: 26rpx;
+  width: 200rpx;
+  margin-left: 40rpx;
+}
+.bottom-msg{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.button {
+  width: 100%;
+  height: 100rpx;
+  position: fixed;
+  bottom: 0;
+  background-color: rgb(246, 127, 121);
+  color: #fff;
+  font-size: 34rpx;
+  line-height: 100rpx;
+  margin: 0 auto;
+  text-align: center;
+}

@@ -1,0 +1,72 @@
+<!--pages/piaowu_pay/piaowu_pay.wxml-->
+<view class='contain'>
+  <view class='title label'>日期选择</view>
+  <view class='date-contain'>
+    <view class='date-item' wx:for="{{dateList}}" style='color:{{item.checked ? "#e61c04" : "#666"}}'>
+      <view class='text'>{{item.text}}</view>
+      <view class='text' wx:if="item.dateText">{{item.dateText}}</view>
+    </view>
+  </view>
+  <view class='msg'>需要在当天8:00前预定</view>
+
+  <view class='prize flex-between'>
+    <view class='label'>单价</view>
+    <view class='prize-info'><span class='icon'>￥</span><span class='prize-num'>{{prizeNum}}</span><span class='zhang'>\ 张</span></view>
+  </view>
+
+  <view class='choose-num flex-between'>
+    <view class='label'>数量</view>
+    <view class='sub-add-contain flex'>
+      <image src='{{subImg}}' bindtap='subNum'></image>
+      <view class='num'>{{num}}</view>
+      <image src='{{addImg}}' bindtap='addNum'></image>
+    </view>
+  </view>
+
+  <view class='daodian'>
+    <!--取货人信息  -->
+    <view class='daodian-item flex-none'>
+      <view class='label'>姓名:</view>
+      <input placeholder='请输入真实姓名' placeholder-style='font-size:22rpx;' bindinput="inputName" maxlength='11' value='{{ship_name}}'></input>
+    </view>
+    <view class='daodian-item flex-none'>
+      <view class='label'>手机号:</view>
+      <input placeholder='请输入您的手机号' placeholder-style='font-size:22rpx;' type='Number' maxlength='11' bindinput="inputPhone" value='{{ship_phone}}'></input>
+    </view>
+  </view>
+
+  <!--选择优惠券  -->
+  <view class='choose-youhuiquan flex-between' bindtap='chooseYouhui'>
+    <view class='youhuiquan-text flex-all label'>优惠券</view>
+    <view class='youhuiquan-value' wx:if='{{youhuiquanValue>0}}'>-￥{{youhuiquanValue}}</view>
+    <image class='youhuiquan-img' src='{{more}}'></image>
+  </view> 
+
+
+  <view class='jiage-msg'>
+    <view class='total-price flex-between'>
+      <view class='total-name label'>商品金额</view>
+      <view class='total-value big-price value-color'>￥{{orderData.confirm_info.final_amount || 0}}</view>
+    </view>
+    <!--有折扣的时候就显示  -->
+    <view class='zhekou-contain'>
+      <view class='zhekou-item flex-between'>
+        <view class='zhekou-name'>优惠券折扣</view>
+        <view class='zhekou-value little-price value-color'>-￥{{orderData.cpns_info.cpns_amount || 0}}</view>
+      </view>
+      <view class='zhekou-item flex-between'>
+        <view class='zhekou-name'>活动折扣</view>
+        <view class='zhekou-value little-price value-color'>-￥{{orderData.confirm_info.sale_amount || 0}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class='jiage-msg zongjia'>
+    <view class='total-price flex-between'>
+      <view class='total-name label'>总计：</view>
+      <view class='total-value big-price value-color'>￥{{orderData.confirm_info.total_amount || 0}}</view>
+    </view>
+  </view>
+
+  <view class="button" bindtap="pay">支付</view>
+</view>

@@ -1,12 +1,12 @@
 //index.js
 const util = require('../../utils/util.js');
 const config = require('../../utils/config.js');
-const paixuTemp = require('../../utils/paixuTemp.js');
+const paixuTemp_2 = require('../../utils/paixuTemp_2.js');
 const bannerTemp = require('../../utils/bannerTemp.js');
 const navTemp = require('../../utils/navTemp.js');
 const dataItemTemp = require('../../utils/dataItemTemp.js');
-const loadListData = require('../../utils/loadListData.js'); 
-const basic = require('../../utils/basic.js'); 
+const loadListData = require('../../utils/loadListData.js');
+const basic = require('../../utils/basic.js');
 const app = getApp()
 Page({
   data: {
@@ -16,65 +16,42 @@ Page({
     positionValue: '',
     slider1: [],
     slider2: [],
-    saomiao:'../../img/saomiao.png',
-    positionImg:'../../img/position.png',
+    saomiao: '../../img/saomiao.png',
+    positionImg: '../../img/position.png',
     search_icon: '../../img/search.png',
     nav_3List: [
       {
         id: 0,
         img: '../../img/jiudian.png',
-        text: '酒店',
-        page: 'jiudian'
+        text: '游山玩水',
+        page: ''
       },
       {
         id: 1,
         img: '../../img/canying.png',
-        text: '餐饮',
-        page:'canyin'
+        text: '考古穿越',
+        page: ''
       },
       {
         id: 2,
         img: '../../img/techan.png',
-        text: '特产',
+        text: '夜游赏曲',
         page: ''
       },
       {
         id: 3,
         img: '../../img/jingdian.png',
-        text: '景点',
+        text: '休闲自助',
         page: ''
-      },
-      {
-        id: 4,
-        img: '../../img/huodong1.png',
-        text: '积分换购',
-        page: 'wodejifen'
-      },
-      {
-        id: 5,
-        img: '../../img/youhuiquan.png',
-        text: '优惠券',
-        page: 'youhuiquan'
-      },
-      {
-        id: 6,
-        img: '../../img/jifen.png',
-        text: '向导',
-        page: 'xiangdao'
-      },
-      {
-        id: 7,
-        img: '../../img/huodong.png',
-        text: '活动专区',
-        page: 'huodong'
       },
     ],
     // 排序组件所需data
     allData: app.globalData.allPaiXuData,
+    allData_2: app.globalData.allPaiXuData_2,
     // 底部数据列表
     dataList: [],
     page_no: 1,
-    total_page:1,
+    total_page: 1,
   },
   onShow() {
     // 数据初始化
@@ -309,7 +286,7 @@ Page({
     var item = e.currentTarget.dataset.item
     dataItemTemp.clickItem(e, that, item)
   },
-  hangyepaixu: function (e) {
+  jingdianpaixu: function (e) {
     // 数据初始化,但暂时不清空dataList
     this.setData({
       bindDownLoad: true,
@@ -317,7 +294,7 @@ Page({
       total_page: 1
     })
     var that = this
-    var nowPaiXu = paixuTemp.hangyepaixu(e, that)
+    var nowPaiXu = paixuTemp_2.jingdianpaixu(e, that)
     this.loadStorDataByOrder(e)
   },
   xiaoliangpaixu: function (e) {
@@ -328,7 +305,18 @@ Page({
       total_page: 1
     })
     var that = this
-    var nowPaiXu = paixuTemp.xiaoliangpaixu(e, that)
+    var nowPaiXu = paixuTemp_2.xiaoliangpaixu(e, that)
+    this.loadStorDataByOrder(e)
+  },
+  jiagepaixu: function (e) {
+    // 数据初始化,但暂时不清空dataList
+    this.setData({
+      bindDownLoad: true,
+      page_no: 1,
+      total_page: 1
+    })
+    var that = this
+    var nowPaiXu = paixuTemp_2.jiagepaixu(e, that)
     this.loadStorDataByOrder(e)
   },
   julipaixu: function (e) {
@@ -339,7 +327,7 @@ Page({
       total_page: 1
     })
     var that = this
-    var nowPaiXu = paixuTemp.julipaixu(e, that)
+    var nowPaiXu = paixuTemp_2.julipaixu(e, that)
     this.loadStorDataByOrder(e)
   },
   // 点击排序重新请求数据，不能先清空dataList，会出现闪动；

@@ -1,0 +1,11 @@
+<!--pages/gonglve/gonglve.wxml-->
+<view class='contain'>
+ <view class='item-contain'>
+   <view class='item' wx:for="{{dataList}}">
+     <view class='title'>{{item.title}}</view>
+     <view class='item-menus-contain'>
+      <view class='item-menus' wx:for="{{item.menusList}}" data-item='{{item}}'>{{item.name}}</view>
+     </view>
+   </view>
+ </view>
+</view>

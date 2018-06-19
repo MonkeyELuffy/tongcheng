@@ -24,10 +24,10 @@ function clickNav(e, that, item) {
   console.log(item)
   var go = function (e) {
     var page = item.page
-    //酒店和餐饮是回到tab页面
+    //酒店和餐饮是回到tab页面(现在不需要了)
     if (page == 'jiudian' || page == 'canyin' ){
       page = '../' + page + '/' + page
-      wx.switchTab({
+      wx.navigateTo({
         url: page
       })
     } else if (page == "jiudianList" || page == 'canyinList' ) {

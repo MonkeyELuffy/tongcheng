@@ -2,8 +2,8 @@
 App({
   // 地图接口，根据经纬度获取用户地址信息
   MAP:'https://apis.map.qq.com/ws/geocoder/v1',
-  globalUrl: 'https://qdh.youmi158.com/index.php/City/',
-  globalImageUrl:'https://qdh.youmi158.com',
+  globalUrl: 'https://www.qiandaohu-trip.com/index.php/City/',
+  globalImageUrl:'https://www.qiandaohu-trip.com',
   BANNER: 'Index/banner_list',
   // 店铺列表
   STORELIST: 'Index/home_store',
@@ -87,7 +87,11 @@ App({
     wx.getSystemInfo({
       success: function (res) {
         console.info(res.windowHeight);
-        that.globalData.scrollHeight =  res.windowHeight
+        that.globalData.scrollHeight = res.windowHeight
+        // mult，乘法系数，用于设置scroll-view的px高度时，裁剪对应的rpx高度的其余标签；
+        // 如在可视高度范围内，有一个底部或者顶部固定高度为100rpx的fixed定位标签；
+        // 则scroll高度为scrollHeight - 100 * mult；
+        that.globalData.mult = res.screenWidth / 750
       }
     });
   },
@@ -117,9 +121,9 @@ App({
   //获取Openid
   getOpenid: function (code) {
     var that = this;
-    wx.showLoading({
-      mask: true
-    })
+    // wx.showLoading({
+    //   mask: true
+    // })
     wx.request({
       url: that.globalUrl + that.Openid,
       header: { 'content-type': 'application/x-www-form-urlencoded' },
@@ -191,6 +195,16 @@ App({
       julipaixu: '../../img/paixu0.png',
       paixuList: ['../../img/paixu0.png', '../../img/paixu1.png', '../../img/paixu2.png'],
       // 排序规则：1、3、5降序，2、4、6升序，0不排序。
+      nowPaiXu: 1,
+    },
+    //排序组件2
+    allPaiXuData_2: {
+      jingdianpaixu: '../../img/paixu1.png',
+      xiaoliangpaixu: '../../img/paixu0.png',
+      jiagepaixu: '../../img/paixu0.png',
+      julipaixu: '../../img/paixu0.png',
+      paixuList: ['../../img/paixu0.png', '../../img/paixu1.png', '../../img/paixu2.png'],
+      // 排序规则：1、3、5、7降序，2、4、6、8升序，0不排序。
       nowPaiXu: 1,
     },
     scrollHeight:0,

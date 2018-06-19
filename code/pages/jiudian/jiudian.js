@@ -17,7 +17,6 @@ Date.prototype.format = function () {
 var app = getApp()
 Page({
   data: {
-    scrollHeight: app.globalData.scrollHeight,
     //入住条件
     fanwei: ['我的附近', '5km以内', '10km以内', '不限'],
     jibie: ['5星级', '4星级', '3星级', '2星级', '1星级'],
@@ -68,6 +67,15 @@ Page({
       total_page: 1,
       dataList: []
     })
+    //获取屏幕高度
+    wx.getSystemInfo({
+      success: function (res) {
+        console.info(res.windowHeight);
+        that.setData({
+          scrollHeight: res.windowHeight
+        });
+      }
+    });
     // 设置日期默认值
     this.setDefineDate()
     //请求banner数据

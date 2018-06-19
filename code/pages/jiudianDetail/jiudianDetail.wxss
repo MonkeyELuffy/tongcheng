@@ -137,6 +137,19 @@
   padding: 20rpx 30rpx;
   margin-top: 10rpx;
 }
+/* 酒店介绍 */
+.introduce-contain{
+  margin-bottom: 10rpx;
+  margin-top: 4rpx;
+  min-height: 20rpx;
+}
+.introduce-text{
+  background-color: #fff;
+  padding: 20rpx 30rpx;
+  margin-top: 10rpx;
+}
+
+
 
 .jiesuan{
   position: fixed;
