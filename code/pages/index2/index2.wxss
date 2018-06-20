@@ -1,1 +1,164 @@
 /* pages/index2/index2.wxss */
+@import "../imageSwiper/imageSwiper.wxss";
+.scroll-view{
+  background-color: #eee;
+}
+.title{
+  padding: 30rpx;
+  color: #333;
+  font-size: 34rpx;
+  font-weight: 600;
+}
+.best-img{
+  width: 100%;
+  height: 220rpx;
+}
+
+.list-1{
+  background-color: #fff;
+  box-sizing: border-box;
+  padding: 20rpx 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 4rpx;
+}
+.more{
+  width: 20rpx;
+  height: 30rpx;
+}
+
+.center-nav-contain{
+  box-sizing: border-box;
+  padding: 20rpx;
+}
+.top-nav{
+  display: flex;
+  justify-content: space-between;
+}
+.top-nav-left{
+  width: 350rpx;
+  height: 320rpx;
+  border-radius: 10rpx;
+  background-color: #fff;
+  position: relative;
+  box-sizing: border-box;
+  padding: 40rpx 0 0 20rpx;
+}
+.top-nav-left-text-name,.top-nav-right-text-name{
+  font-size: 34rpx;
+  padding-bottom: 10rpx;
+  z-index: 11;
+}
+.top-nav-des{
+  font-size: 26rpx;
+  color: #555;
+  z-index: 11;
+}
+.center-nav-bg{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 200rpx;
+  height: 100rpx;
+}
+.top-nav-right{
+  width: 350rpx;
+  height: 320rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.top-nav-right-text-contain{
+  height: 136rpx;
+  border-radius: 10rpx;
+  background-color: #fff;
+  padding: 20rpx 0 0 20rpx;
+  position: relative;
+  overflow: hidden;
+}
+.bottom-nav{
+  margin-top: 14rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.bottom-nav-contain{
+  width: 332rpx;
+}
+
+.ask-answer-contain{
+  background-color: #fff;
+  font-size: 26rpx;
+  line-height: 180%;
+  margin-bottom: 4rpx;
+}
+.ask-contain{
+  display: flex;
+}
+.answer-contain{
+  box-sizing: border-box;
+  padding: 10rpx 30rpx;
+}
+.inline-block{
+  display: inline-block;
+}
+.total{
+  float: right;
+  font-size: 22rpx;
+  padding-right: 30rpx;
+}
+.clear{
+  clear: both;
+}
+.white-bg{
+  background-color: #fff;
+}
+
+.hot-item{
+  display: flex;
+  box-sizing: border-box;
+  padding: 30rpx 30rpx 0 30rpx;
+  background-color: #fff;
+  position: relative;
+}
+.hot-img{
+  width: 200rpx;
+  height: 200rpx;
+  margin-bottom: 20rpx;
+}
+.hot-name{
+  color: #333;
+  font-size: 28rpx;
+  flex: 1 1;
+}
+.hot-info{
+  flex: 1 1;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-bottom: 20rpx;
+  margin-left: 40rpx;
+  border-bottom: 2rpx solid #ccc;
+}
+.hot-today{
+  color: #666;
+  font-size: 26rpx;
+}
+.hot-sale{
+  font-size: 26rpx;
+  color: #999;
+}
+.hot-price{
+  font-size: 28rpx;
+  color: #555;
+  position: absolute;
+  right: 30rpx;
+  bottom: 20rpx;
+}
+
+.bottom{
+  height: 20rpx;
+}

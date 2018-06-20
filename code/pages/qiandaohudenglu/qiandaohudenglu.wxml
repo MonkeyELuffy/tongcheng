@@ -52,13 +52,13 @@
         <view class='list-2-prices-left'>
           <view class='list-2-price-name'>{{item.name}}</view>
           <view class='list-2-price-des'>{{item.des}}</view>
-          <view class='list-2-price-labels' wx:for='{{item.labels}}'>
-            <view class='list-2-price-label-item'>{{item.name}}</view>
+          <view class='list-2-price-labels'>
+            <view class='list-2-price-label-item' wx:for='{{item.labels}}'>{{item.name}}</view>
           </view>
         </view>
         <!--右侧预定按钮  -->
         <view class='price-and-buy'>
-          <view class='price'>{{item.price}}</view>
+          <view class='price'>￥{{item.price}}</view>
           <view class='buy-btn'>预定</view>
         </view>
       </view>
@@ -92,11 +92,12 @@
     </view>
 
     <!--周边景点  -->
+    <view class='title'>周边景点</view>
     <view class='list-4-contain'>
       <view class='list-4-item' wx:for='{{list_4}}'>
         <image class='list-4-img' src='{{item.img}}'></image>
         <view class='list-4-name'>{{item.name}}</view>
-        <view class='price'>{{item.price}}起</view>
+        <view class='price'>￥{{item.price}}起</view>
       </view>
     </view>
 

@@ -5,11 +5,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    redStar: '../../img/red-star',
-    defaultStar:'../../img/default-star',
-    daohang:'../../img/',
-    more:'../../img/more',
-    seeMore:'../../img/seeMore',
+    redStar: '../../img/red-star.png',
+    defaultStar:'../../img/default-star.png',
+    daohang:'../../img/daohang.png',
+    more:'../../img/more.png',
+    seeMore: '../../img/seeMore.png',
     tabList:[
       {
         name:'基础门票',
@@ -54,11 +54,13 @@ Page({
     list_2:[
       {
         name:'梦想一号船票（成人）',
-        price:'360',
+        price: '360',
+        showChild: true,
         priceList: [
           {
             name: '一步旅行网',
             des: '早上9：00点出发\千岛湖中心湖区门票',
+            price:'380',
             labels: [
               {
                 name: '不可退'
@@ -71,6 +73,7 @@ Page({
           {
             name: '一步旅行网',
             des: '早上9：00点出发\千岛湖中心湖区门票',
+            price: '380',
             labels: [
               {
                 name: '不可退'
@@ -81,23 +84,84 @@ Page({
             ]
           }
         ]
+      },
+      {
+        name: '梦想一号船票（成人）',
+        price: '360',
+        showChild:false,
+        // priceList: [
+        //   {
+        //     name: '一步旅行网',
+        //     des: '早上9：00点出发\千岛湖中心湖区门票',
+        //     price: '380',
+        //     labels: [
+        //       {
+        //         name: '不可退'
+        //       },
+        //       {
+        //         name: '可定明日'
+        //       }
+        //     ]
+        //   },
+        //   {
+        //     name: '一步旅行网',
+        //     des: '早上9：00点出发\千岛湖中心湖区门票',
+        //     price: '380',
+        //     labels: [
+        //       {
+        //         name: '不可退'
+        //       },
+        //       {
+        //         name: '可定明日'
+        //       }
+        //     ]
+        //   }
+        // ]
       }
     ],
-    list_3:[
+    list_3: [
       {
-        name:'千岛湖',
-        stars:[1,1,1,1,0],
-        des:'千岛湖位于附近客户端返回接口数据看看大家护肤会计核算的是数据库恢复看机会双方的接口就好好啊啊就看拉萨拉萨的空间发的旅客谨防的',
-        imgs: ['../../img/banner', '../../img/banner', '../../img/banner'],
+        name: '千岛湖',
+        stars: [1, 1, 1, 1, 0],
+        des: '千岛湖位于附近客户端返回接口数据看看大家护肤会计核算的是数据库恢复看机会双方的接口就好好啊啊就看拉萨拉萨的空间发的旅客谨防的',
+        imgs: ['../../img/banner.png', '../../img/banner.png', '../../img/banner.png'],
+        userName: '鱼丸仔',
+        dianzan: 100
+      },
+      {
+        name: '千岛湖',
+        stars: [1, 1, 1, 1, 0],
+        des: '千岛湖位于附近客户端返回接口数据看看大家护肤会计核算的是数据库恢复看机会双方的接口就好好啊啊就看拉萨拉萨的空间发的旅客谨防的',
+        imgs: ['../../img/banner.png', '../../img/banner.png', '../../img/banner.png'],
         userName: '鱼丸仔',
         dianzan: 100
       }
     ],
-    list_4:[
+    list_4: [
       {
-        img:'../../img/banner.png',
-        name:'千岛湖三日自驾游',
-        price:'800'
+        img: '../../img/banner.png',
+        name: '千岛湖三日自驾游',
+        price: '800'
+      },
+      {
+        img: '../../img/banner.png',
+        name: '千岛湖三日自驾游',
+        price: '800'
+      },
+      {
+        img: '../../img/banner.png',
+        name: '千岛湖三日自驾游',
+        price: '800'
+      },
+      {
+        img: '../../img/banner.png',
+        name: '千岛湖三日自驾游',
+        price: '800'
+      },
+      {
+        img: '../../img/banner.png',
+        name: '千岛湖三日自驾游',
+        price: '800'
       }
     ]
   

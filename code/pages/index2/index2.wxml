@@ -1,2 +1,84 @@
 <!--pages/index2/index2.wxml-->
-<text>pages/index2/index2.wxml</text>
+<import src="../imageSwiper/imageSwiper.wxml"/>
+
+<scroll-view class="scroll-view" style="max-height:{{scrollHeight}}px;" scroll-y="true"  bindscrolltolower="bindDownLoad">
+  <view class='contain'>
+    <!--轮播图组件  --> 
+    <template is="imageSwiper" data="{{slider: slider}}" ></template>
+
+    <!--最佳路线  -->
+    <view class='title'>最佳路线</view>
+    <image class='best-img' src='{{bestImg}}'></image>
+
+    <!--最近路线下面的list  -->
+    <view wx:for='{{list_1}}' class='list-1'>
+      <view class='list-1-name'>{{item.name}}</view>
+      <image class='more' src='{{more}}'></image>
+    </view>
+
+    <!--中间菜单  -->
+    <view class='center-nav-contain'>
+      <view class='top-nav'>
+        <view class='top-nav-left'>
+          <view class='top-nav-left-text-contain'>
+            <view class='top-nav-left-text-name'>{{nav_1.name}}</view>
+            <view class='top-nav-des'>{{nav_1.des}}</view>
+            <image class='center-nav-bg' src='{{nav_1.img}}'></image>
+          </view>
+        </view>
+        <view class='top-nav-right'>
+          <view class='top-nav-right-text-contain'>
+            <view class='top-nav-right-text-name'>{{nav_2.name}}</view>
+            <view class='top-nav-des'>{{nav_2.des}}</view>
+            <image class='center-nav-bg' src='{{nav_2.img}}'></image>
+          </view>
+          <view class='top-nav-right-text-contain'>
+            <view class='top-nav-right-text-name'>{{nav_3.name}}</view>
+            <view class='top-nav-des'>{{nav_3.des}}</view>
+            <image class='center-nav-bg' src='{{nav_3.img}}'></image>
+          </view>
+        </view>
+      </view>
+      <view class='bottom-nav'>
+        <view class='top-nav-right-text-contain bottom-nav-contain'>
+          <view class='top-nav-right-text-name'>{{nav_4.name}}</view>
+          <view class='top-nav-des'>{{nav_4.des}}</view>
+          <image class='center-nav-bg' src='{{nav_4.img}}'></image>
+        </view>
+        <view class='top-nav-right-text-contain bottom-nav-contain'>
+          <view class='top-nav-right-text-name'>{{nav_5.name}}</view>
+          <view class='top-nav-des'>{{nav_5.des}}</view>
+          <image class='center-nav-bg' src='{{nav_5.img}}'></image>
+        </view>
+      </view>
+    </view>
+
+    <!--热门问答  -->
+    <view class='title white-bg'>热门问答</view>
+    <view class='ask-answer-contain' wx:for='{{askAnswerList}}'>
+      <view class='answer-contain'>
+        <view class='ask inline-block'>问：</view>
+        <view class='ask-test inline-block'>{{item.askTest}}</view>
+      </view>
+      <view class='answer-contain'>
+        <view class='answer inline-block'>答：</view>
+        <view class='answer-test inline-block'>{{item.answerTest}}</view>
+      </view>
+      <view class='total'>共{{item.total}}个回答</view>
+      <view class='clear'></view>
+    </view>
+
+    <!--热门产品  -->
+    <view class='title white-bg'>热门产品</view>
+    <view class='hot-item' wx:for='{{list_2}}'>
+      <image class='hot-img' src='{{item.img}}'></image>
+      <view class='hot-info'>
+        <view class='hot-name'>{{item.name}}</view>
+        <view class='hot-today'>{{item.today}}</view>
+        <view class='hot-sale'>已售{{item.sale}}</view>
+        <view class='hot-price'>￥{{item.price}}/人</view>
+      </view>
+    </view>
+  </view>
+  <view class='bottom'></view>
+</scroll-view>
