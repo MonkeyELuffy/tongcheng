@@ -24,6 +24,7 @@
   font-size: 28rpx;
   color: #666;
   margin-bottom: 4rpx;
+  position: relative;
 }
 .more{
   width: 20rpx;

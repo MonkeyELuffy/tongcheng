@@ -71,6 +71,12 @@ App({
   GetUserInfoByMemberId: 'Member/get_list',
   // 优惠券
   CouponList: 'Coupon/index',
+  //首页热门产品
+  HotGoods: 'Index/re_goods',
+  //首页活动列表
+  ActiveList: 'Coupon/active',
+  //千岛湖首页数据
+  Index: 'Index/index',
 
   onLaunch: function () {
     //获取屏幕高度

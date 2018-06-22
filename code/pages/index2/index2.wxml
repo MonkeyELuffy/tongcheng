@@ -8,11 +8,11 @@
 
     <!--最佳路线  -->
     <view class='title'>最佳路线</view>
-    <image class='best-img' src='{{bestImg}}'></image>
+    <image class='best-img' wx:for='{{best_list}}' src='{{item.image_src}}'></image>
 
     <!--最近路线下面的list  -->
     <view wx:for='{{list_1}}' class='list-1'>
-      <view class='list-1-name'>{{item.name}}</view>
+      <view class='list-1-name'>{{item.title}}</view>
       <image class='more' src='{{more}}'></image>
     </view>
 
@@ -71,12 +71,12 @@
     <!--热门产品  -->
     <view class='title white-bg'>热门产品</view>
     <view class='hot-item' wx:for='{{list_2}}'>
-      <image class='hot-img' src='{{item.img}}'></image>
+      <image class='hot-img' src='{{item.logo_url}}'></image>
       <view class='hot-info'>
-        <view class='hot-name'>{{item.name}}</view>
+        <view class='hot-name'>{{item.goods_name}}</view>
         <view class='hot-today'>{{item.today}}</view>
         <view class='hot-sale'>已售{{item.sale}}</view>
-        <view class='hot-price'>￥{{item.price}}/人</view>
+        <view class='hot-price'>￥{{item.shop_price}}/人</view>
       </view>
     </view>
   </view>

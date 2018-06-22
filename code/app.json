@@ -1,6 +1,7 @@
 {
-  "pages":[
+  "pages": [
     "pages/index2/index2",
+    "pages/chooseDate/chooseDate",
     "pages/index/index",
     "pages/qiandaohudenglu/qiandaohudenglu",
     "pages/jingdianmenpiao/jingdianmenpiao",
@@ -65,10 +66,11 @@
     "pages/woyaozhongchou/woyaozhongchou",
     "pages/shenqingruzhu/shenqingruzhu",
     "pages/login/login",
-    "pages/switchcity/switchcity"
+    "pages/switchcity/switchcity",
+    "template/datepiker/index"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarTextStyle": "white",
     "navigationBarBackgroundColor": "#00f3e9"
   },

@@ -1,4 +1,9 @@
 // pages/index2/index2.js
+const util = require('../../utils/util.js');
+const config = require('../../utils/config.js');
+const bannerTemp = require('../../utils/bannerTemp.js');
+const basic = require('../../utils/basic.js');
+const app = getApp()
 Page({
 
   /**
@@ -6,26 +11,9 @@ Page({
    */
   data: {
     more: '../../img/more.png',
-    bestImg:'../../img/banner.png',
-    slider: [
-      {
-        img_src: '../../img/banner.png'
-      },
-      {
-        img_src: '../../img/banner.png'
-      },
-      {
-        img_src: '../../img/banner.png'
-      }
-    ],
-    list_1: [
-      {
-        name: '千岛湖休闲二日游'
-      },
-      {
-        name: '千岛湖休闲二日游'
-      }
-    ],
+    best_list:[],
+    slider: [],
+    list_1: [],
     nav_1: {
       name: '千岛湖之夜',
       des: '体验科幻之夜',
@@ -56,22 +44,8 @@ Page({
       color: 'green',
       img: '../../img/banner.png'
     },
-    list_2: [
-      {
-        img: '../../img/banner.png',
-        name: '千岛湖中心湖区门票+梦想一号船票（成人）',
-        today: '今日可定',
-        sale: 23,
-        price: '360'
-      },
-      {
-        img: '../../img/banner.png',
-        name: '千岛湖中心湖区门票+梦想一号船票（成人）',
-        today: '今日可定',
-        sale: 23,
-        price: '360'
-      }
-    ],
+    //热门商品
+    list_2: [],
     askAnswerList: [
       {
         askTest: '请问啊是老大法律解释的卡上的卡号是抠脚大叔',
@@ -100,54 +74,46 @@ Page({
         });
       }
     });
+    this.getIndexData()
+    this.getHotGoods()
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+  // 获取热门产品
+  getHotGoods(){
+    let params = {
+      page_size:10,
+      page_no:1
+    }
+    util.httpPost2(app.globalUrl + app.HotGoods, params).then(this.processHotGoods)
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
+  processHotGoods(res){
+    if (res.suc == 'y' && res.data.list.length > 0){
+      for(let i in res.data.list){
+        res.data.list[i].logo_url = app.globalImageUrl + res.data.list[i].logo_url
+      }
+      this.setData({
+        list_2: res.data.list
+      })
+    }
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
+  // 获取同城首页banner、最佳路线、活动列表数据
+  getIndexData() {
+    util.httpPost2(app.globalUrl + app.Index, {}).then(this.processIndexData)
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
+  processIndexData(res) {
+    if (res.suc == 'y') {
+      // banner
+      for (let i in res.data.banner_list){
+        res.data.banner_list[i].image_src = app.globalImageUrl + res.data.banner_list[i].image_src
+      }
+      //最佳路线
+      for (let i in res.data.best_list) {
+        res.data.best_list[i].image_src = app.globalImageUrl + res.data.best_list[i].image_src
+      }
+      this.setData({
+        slider: res.data.banner_list,
+        best_list: res.data.best_list,
+        list_1: res.data.tour,
+      })
+    }
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })
