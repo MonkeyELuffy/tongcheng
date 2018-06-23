@@ -1,5 +1,7 @@
 /* pages/product_detail/product_detail.wxss */
 @import "../imageSwiper/imageSwiper.wxss";
+@import "../pingjiaItem/pingjiaItem.wxss";
+
 .contain {
   width: 100%;
   position: relative;
@@ -15,6 +17,11 @@
 }
 .detail-contain image{
   width: 90rpx;
+  height: 50rpx;
+}
+.star{
+  float: right;
+  width: 50rpx;
   height: 50rpx;
 }
 .name{
@@ -573,7 +580,6 @@
   font-size: 30rpx;
 }
 
-
 .pingjia-top{
   padding: 20rpx 60rpx 20rpx 30rpx;
   background-color: #fff;
@@ -600,31 +606,4 @@
 .pingjia-item{
   padding: 20rpx 30rpx 0 30rpx;
   background-color: #fff;
-}
-.user-img{
-  width: 66rpx;
-  height: 66rpx;
-  margin-right: 46rpx;
-  align-self: flex-start;
-  border-radius: 50%;
-}
-.pingjia{
-  border-bottom: 2rpx solid #eee;
-}
-.pingjia-name{
-  font-size: 28rpx;
-  color: #333;
-}
-.pingjia-time{
-  font-size: 24rpx;
-  color: #737373;
-}
-.pingjia-des{
-  font-size: 24rpx;
-  color: #737373;
-  background-color: #eee;
-  border-radius: 10rpx;
-  padding: 14rpx 10rpx;
-  margin: 20rpx 0;
-  line-height: 180%;
 }

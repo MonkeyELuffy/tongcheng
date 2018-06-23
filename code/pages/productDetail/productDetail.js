@@ -4,6 +4,8 @@ var app = getApp()
 
 Page({
   data: {
+    guanzhu_0: '../../img/guanzhu0.png',
+    guanzhu_1: '../../img/guanzhu1.png',
     more: '../../img/more.png',
     imgHttp: app.globalImageUrl,
     carIcon: '../../img/car.png',
@@ -73,9 +75,13 @@ Page({
       token: app.globalData.userInfo.token
     }
     //请求商品详情
+    //传递memberid获取是否已关注
     util.httpPost(
-      app.globalUrl + app.GOODSINFO, 
-      { goods_id: params.goods_id }, 
+      app.globalUrl + app.GOODSINFO,
+      {
+        goods_id: params.goods_id,
+        member_id: app.globalData.member_id
+      }, 
       this.processInfoData);
     //请求购物车数据
     util.httpPost(app.globalUrl + app.CARTINFO, data, this.processCartData);
@@ -92,7 +98,8 @@ Page({
       }
       this.setData({
         productDetail: res.data,
-        slider: slider
+        slider: slider,
+        status: res.data.status
       })
       // 请求商品详情成功之后再请求评价列表
       var data2 = {
@@ -421,7 +428,6 @@ Page({
   // 发送购物车结算请求
   carSubmit: function () {
     var that = this
-    var buy_key = '';
     if (that.data.carData.product_list.length == 0) {
       wx.showModal({
         title: '提醒',
@@ -429,14 +435,15 @@ Page({
       })
       return
     } else {
+      var buy_key = [];
       for (var i in that.data.carData.product_list) {
-        buy_key += that.data.carData.product_list[i].product_id + '_' + that.data.carData.product_list[i].get_num + '|'
+        // 组装buy_key
+        buy_key.push(that.data.carData.product_list[i].product_id + '_' + that.data.carData.product_list[i].get_num)
       }
-      //去掉最后一个'|'
-      buy_key = buy_key.substring(0, buy_key["length"] - 1)
+      buy_key = buy_key.join('|')
       var data = {
         buy_key: buy_key,
-        member_id: app.globalData.member_id
+        token: app.globalData.userInfo.token
       }
       util.httpPost(app.globalUrl + app.CARTSUBMIT, data, that.processSubmitData);
     }
@@ -491,10 +498,51 @@ Page({
     // 返回上一页的时候，刷新上一页数据
     var pages = getCurrentPages()
     var prevPage = pages[pages.length - 2]
-    console.log(prevPage.route)
-    var options = {
-      seller_id: this.data.seller_id
+    // 返回商家店铺的时候才刷新上一页数据，因为有可能是从我的关注里面进来的；
+    if (prevPage.route == 'pages/shangjiadianpu/shangjiadianpu'){
+      prevPage.onLoad({seller_id: this.data.seller_id})
     }
-    prevPage.onLoad(options)
-  }
+  },
+  //关注或者取消关注商品
+  payAttention(){
+    var url = ''
+    if (this.data.status == 1){
+      //已关注时点击，则取消关注
+      url = 'CancelPayAttention'
+    }else{
+      url = 'PayAttention'
+    }
+    var data = {
+      type: 2, //类型(1商家，2商品)
+      member_id: app.globalData.member_id,
+      seller_id: this.data.seller_id,
+      goods_id: this.data.goods_id,
+    }
+    util.httpPost(app.globalUrl + app[url], data, this.processPayAttentionData);
+  },
+  processPayAttentionData: function (res) {
+    if (res.suc == 'y') {
+      if (this.data.status == 1){
+        this.setData({
+          status: 0
+        })
+        wx.showToast({
+          title: '取消关注成功',
+        })
+      }else{
+        this.setData({
+          status: 1
+        })
+        wx.showToast({
+          title: '关注成功',
+        })
+      }
+    } else {
+      // console.log('关注错误', res);
+      wx.showModal({
+        title: '提醒',
+        content: res.msg,
+      })
+    }
+  },
 })  

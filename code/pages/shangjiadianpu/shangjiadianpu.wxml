@@ -2,17 +2,23 @@
 <view class="contain" style="height:{{viewHeight}}">
   <!--商铺名称  -->
   <view class="shop-contain">
-    <image src="{{imgHttp + shop.img}}" class="shop-img"></image>
+    <image src="{{imgHttp + shop.store_img_src}}" class="shop-img"></image>
     <view class="shop-info">
-      <view class="shop-name">{{shop.name}}</view>
+      <image class='star' bindtap='payAttention' src="{{status == 1 ? guanzhu_1 : guanzhu_0 }}" style='width:50rpx;height:50rpx;'></image>
+      <view class="shop-name">{{shop.seller_name}}</view>
       <view class="shop-title flex-none">
-        <view class='shop-type' wx-if='{{shop.type}}'>{{shop.type}}</view>
-        <view wx-if='{{shop.goodsNum}}'>{{shop.goodsNum}}件商品</view>
+        <view class='shop-type' wx-if='{{shop.trade_name}}'>{{shop.trade_name}}</view>
+        <view wx-if='{{shop.goods_num}}'>{{shop.goods_num}}件商品</view>
+        <image class='renzheng' wx-if='{{shop.is_open}}' src='{{renzheng}}'></image>
+        <view class='' wx-if='{{shop.is_open}}'>实名认证</view>
       </view>
-      <view class='boss' bindtap='call'>联系方式：{{shop.boss}}</view>
-      <view class='shop-addr'>地址：{{shop.addr}}</view>
+      <view class='boss' bindtap='call'>联系方式：{{shop.phone}}</view>
+      <view class='shop-addr'>地址：{{shop.address}}</view>
     </view>
   </view>
+  <!--优惠买单  -->
+  <view class='youhuimaidan' bindtap='youhuimaidan'>优惠买单</view>
+
   <view class="line"></view>
   <!--购物车和结算按钮  -->
   <view class="bottom-btn">

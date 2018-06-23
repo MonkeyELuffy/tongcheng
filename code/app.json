@@ -2,6 +2,7 @@
   "pages": [
     "pages/index2/index2",
     "pages/yudingpiaowu/yudingpiaowu",
+    "pages/pingjiaItem/pingjiaItem",
     "pages/chooseDate/chooseDate",
     "pages/index/index",
     "pages/qiandaohudenglu/qiandaohudenglu",

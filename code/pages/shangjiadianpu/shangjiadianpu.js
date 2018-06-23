@@ -1,12 +1,17 @@
 //index.js
 //获取应用实例
 var util = require('../../utils/util.js');
+var basic = require('../../utils/basic.js');
+var loadListData = require('../../utils/loadListData.js');
 var app = getApp()
 Page({
   data: {
+    guanzhu_0: '../../img/guanzhu0.png',
+    guanzhu_1: '../../img/guanzhu1.png',
     scrollHeight: app.globalData.scrollHeight,
     imgHttp: app.globalImageUrl,
     carIcon: '../../img/car.png',
+    renzheng: '../../img/renzheng.png',
     addImg: '../../img/add.png',
     subImg: '../../img/sub.png',
     closeImg: '../../img/close.png',
@@ -40,7 +45,7 @@ Page({
     // 购物车数量
     carCount: 0,
     // 当前规格产品的单价
-    nowProductPrice:0,
+    nowProductPrice: 0,
     // 选择单个商品时的总价
     nowProductTotalPrice: 0,
     // 当前选中的商品
@@ -60,18 +65,17 @@ Page({
       ],
       price_sum: 0,
     },
-    allGoodsData:{}
+    allGoodsData: {}
   },
   onLoad: function (options) {
-    var that = this
-    console.log('options', options)
     console.log('商家seller_id', options.seller_id);
     this.setData({
       seller_id: options.seller_id
     })
     var data = {
       seller_id: options.seller_id,
-      token: app.globalData.userInfo.token
+      token: app.globalData.userInfo.token,
+      member_id: app.globalData.member_id
     }
     //请求商家详情
     util.httpPost(app.globalUrl + app.STOREINFO, data, this.processInfoData);
@@ -83,16 +87,9 @@ Page({
   processInfoData: function (res) {
     if (res.suc == 'y') {
       console.log('商家数据成功', res.data);
-      var shop={
-        img: res.data.store_img_src,
-        name: res.data.seller_name,
-        type: res.data.trade_name,
-        boss: res.data.phone,
-        phone: res.data.phone,
-        addr: res.data.address,
-      }
       this.setData({
-        shop: shop
+        shop: res.data,
+        status: res.data.status
       })
 
     } else {
@@ -135,9 +132,16 @@ Page({
       })
     } else {
       console.log('返回购物车错误', res);
+      wx.showModal({
+        title: '提醒',
+        content: res.msg,
+        complete(res) {
+          app.getUserInfo();
+        }
+      })
     }
   },
-  call:function(){
+  call: function () {
     wx.makePhoneCall({
       phoneNumber: this.data.shop.phone,
     })
@@ -156,7 +160,7 @@ Page({
         chooseAll = false
         break;
       }
-    } 
+    }
     that.setData({
       chooseAll: chooseAll,
       carData: carData
@@ -201,8 +205,8 @@ Page({
     if (get_num > 1) {
       get_num -= 1
       carData.get_sum -= 1
-      var data = { 
-        product_id: product_id, 
+      var data = {
+        product_id: product_id,
         set_num: get_num,
         token: app.globalData.userInfo.token
       }
@@ -224,7 +228,7 @@ Page({
     }
   },
   //在购物车页面单独删除某一个商品
-  clearItem:function(e){
+  clearItem: function (e) {
     var that = this
     var product_id = e.currentTarget.dataset.product_id
     wx.showModal({
@@ -268,7 +272,7 @@ Page({
     var that = this
     var index = e.currentTarget.dataset.index
     var product_id = e.currentTarget.dataset.product_id
-    var carData = this.data.carData; 
+    var carData = this.data.carData;
     var get_num = parseInt(carData.product_list[index].get_num)
     if (get_num < 5) {
       get_num += 1
@@ -289,7 +293,7 @@ Page({
   },
   removeAll: function (e) {
     var carData = this.data.carData;
-    if (carData.product_list.length > 0){
+    if (carData.product_list.length > 0) {
       var that = this
       var product_id_list = [];
       wx.showModal({
@@ -324,10 +328,10 @@ Page({
     util.httpPost(app.globalUrl + app.RODUCTLIST, data, this.processProductData);
     e.stopPropagation ? e.stopPropagation() : (e.cancelBubble = true);
     // 当前选中的商品
-    var nowProduct = { name: '', price: 0, typeList: []};
+    var nowProduct = { name: '', price: 0, typeList: [] };
     var dataList = this.data.dataList;
-    for (var i in dataList){
-      if (dataList[i].goods_id == e.currentTarget.dataset.goods_id){
+    for (var i in dataList) {
+      if (dataList[i].goods_id == e.currentTarget.dataset.goods_id) {
         nowProduct.name = dataList[i].goods_name
         nowProduct.price = dataList[i].price
         break;
@@ -344,7 +348,7 @@ Page({
     if (res.suc == 'y') {
       console.log('返回规格数据成功', res.data);
       var nowProduct = this.data.nowProduct;
-      for (var i in res.data){
+      for (var i in res.data) {
         nowProduct.typeList.push({
           name: res.data[i].spec_info,
           price: res.data[i].price,
@@ -369,15 +373,15 @@ Page({
     var nowIndex
     var nowProduct = this.data.nowProduct
     for (let i in nowProduct.typeList) {
-      if (nowProduct.typeList[i].checked){
+      if (nowProduct.typeList[i].checked) {
         nowIndex = i;
         break;
       }
     }
     var index = e.currentTarget.dataset.index
-    if (nowIndex == index){
+    if (nowIndex == index) {
       return
-    }else{
+    } else {
       for (let i in nowProduct.typeList) {
         nowProduct.typeList[i].checked = false
       }
@@ -507,13 +511,13 @@ Page({
   // 发送购物车结算请求
   carSubmit: function () {
     var that = this
-    if (that.data.carData.product_list.length == 0){
+    if (that.data.carData.product_list.length == 0) {
       wx.showModal({
         title: '提醒',
         content: '请先选择商品',
       })
       return
-    }else{
+    } else {
       var buy_key = [];
       for (var i in that.data.carData.product_list) {
         // 组装buy_key
@@ -576,8 +580,13 @@ Page({
       'allData.xiaoliangpaixu': xiaoliangpaixu,
       'allData.jiagepaixu': jiagepaixu,
       'allData.nowPaiXu': nowPaiXu,
+      // 数据初始化,但暂时不清空dataList
+      bindDownLoad: true,
+      page_no: 1,
+      total_page: 1
     })
     console.log(nowPaiXu)
+    that.loadStorDataByOrder(e)
   },
   xiaoliangpaixu: function (e) {
     var that = this
@@ -605,8 +614,13 @@ Page({
       'allData.xiaoliangpaixu': xiaoliangpaixu,
       'allData.jiagepaixu': jiagepaixu,
       'allData.nowPaiXu': nowPaiXu,
+      // 数据初始化,但暂时不清空dataList
+      bindDownLoad: true,
+      page_no: 1,
+      total_page: 1
     })
     console.log(nowPaiXu)
+    that.loadStorDataByOrder(e)
   },
   jiagepaixu: function (e) {
     var that = this
@@ -634,8 +648,88 @@ Page({
       'allData.xiaoliangpaixu': xiaoliangpaixu,
       'allData.jiagepaixu': jiagepaixu,
       'allData.nowPaiXu': nowPaiXu,
+      // 数据初始化,但暂时不清空dataList
+      bindDownLoad: true,
+      page_no: 1,
+      total_page: 1
     })
     console.log(nowPaiXu)
+    that.loadStorDataByOrder(e)
+  },
+  // 点击排序重新请求数据，不能先清空dataList，会出现闪动；
+  // 目前先单独处理，之后需要对请求data函数做处理，根据标志位判断当前的请求是加载下一页，还是完全更新数据
+  loadStorDataByOrder(e) {
+    console.log(this.data.dataList)
+    var dataList = this.data.dataList
+    // var params = {
+    //   order_by: this.data.allData.nowPaiXu,
+    //   page_no: 1,
+    //   page_size: 15,
+    // }
+    // this.loadListDataByOrder(params);
+  },
+  loadListDataByOrder(params) {
+    var that = this
+    var allParams = {
+      that: that,
+      params: params,
+      app: app,
+      processData: that.processStoreByOrderData,
+      API: app.STORELIST
+    }
+    loadListData.loadListData(allParams)
+  },
+  processStoreByOrderData(res) {
+    if (res.suc == 'y') {
+      var dataList = []
+      console.log('获取商品list成功', res.data);
+      // if (app.globalData.hasLogin) {
+      //   wx.hideLoading()
+      // }
+      // for (var i in res.data.list) {
+      //   res.data.list[i].store_img_src = app.globalImageUrl + res.data.list[i].store_img_src
+      //   res.data.list[i].special = res.data.list[i].special.split(",");
+      // }
+      // //获取数据之后需要改变page和totalPage数值，保障上拉加载下一页数据的page值，其余没有需要修改的数据
+      // dataList = dataList.concat(res.data.list)
+      // this.setData({
+      //   page_no: this.data.page_no + 1,
+      //   total_page: res.data.total_page,
+      //   dataList: dataList,
+      // })
+    } else {
+      console.log('获取商品list错误', res);
+    }
+  },
+  youhuimaidan(e) {
+    var that = this
+    this.data.shop.hours = '9:00 - 21:00'
+    var params = {
+      img: this.data.imgHttp + this.data.shop.store_img_src,
+      name: this.data.shop.seller_name,
+      seller_id: this.data.shop.seller_id,
+      list: [
+        {
+          name: '营业时间',
+          value: this.data.shop.hours
+        },
+        {
+          name: '地址',
+          value: this.data.shop.address
+        },
+        {
+          name: '公告',
+          value: this.data.shop.notice
+        },
+      ]
+    }
+    var go = function (e) {
+      wx.navigateTo({
+        url: '/pages/youhuimaidan/youhuimaidan?params=' + JSON.stringify(params),
+      })
+    }
+    var data = { go, e }
+    this.clickTooFast(data)
   },
   /*==========
   防止快速点击
@@ -656,5 +750,46 @@ Page({
     this.setData({
       lastTime: curTime
     })
+  },
+  //关注或者取消关注商品
+  payAttention() {
+    var url = ''
+    if (this.data.status == 1) {
+      //已关注时点击，则取消关注
+      url = 'CancelPayAttention'
+    } else {
+      url = 'PayAttention'
+    }
+    var data = {
+      type: 1, //类型(1商家，2商品)
+      member_id: app.globalData.member_id,
+      seller_id: this.data.seller_id,
+    }
+    util.httpPost(app.globalUrl + app[url], data, this.processPayAttentionData);
+  },
+  processPayAttentionData: function (res) {
+    if (res.suc == 'y') {
+      if (this.data.status == 1) {
+        this.setData({
+          status: 0
+        })
+        wx.showToast({
+          title: '取消关注成功',
+        })
+      } else {
+        this.setData({
+          status: 1
+        })
+        wx.showToast({
+          title: '关注成功',
+        })
+      }
+    } else {
+      // console.log('关注错误', res);
+      wx.showModal({
+        title: '提醒',
+        content: res.msg,
+      })
+    }
   },
 })

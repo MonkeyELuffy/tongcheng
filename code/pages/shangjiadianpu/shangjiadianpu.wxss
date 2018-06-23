@@ -40,6 +40,11 @@
   margin-right: 30rpx;
   border-radius: 6rpx;
 }
+.star{
+  float: right;
+  width: 50rpx;
+  height: 50rpx;
+}
 .shop-name{
   color: #333;
   font-size: 30rpx;
@@ -757,4 +762,19 @@
 .shop-addr{
   font-size: 24rpx;
   color: #b2b2b2;
+}
+
+.youhuimaidan{
+  background-color: #fff;
+  font-size: 32rpx;
+  color: #00bcd5;
+  text-align: center;
+  height: 90rpx;
+  line-height: 90rpx;
+  margin: 10rpx 0;
+}
+.shop-title .renzheng{
+  width: 36rpx;
+  height: 36rpx;
+  margin:0 10rpx 0 30rpx;
 }

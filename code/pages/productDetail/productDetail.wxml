@@ -1,11 +1,14 @@
 <!--pages/product_detail/product_detail.wxml-->
 <import src="../imageSwiper/imageSwiper.wxml"/>
+<import src="../pingjiaItem/pingjiaItem.wxml"/>
+
 <!--轮播图组件  --> 
 <template is="imageSwiper" data="{{slider}}" ></template>  
 
  <view class="contain">
    <!--商品信息  -->
   <view class="detail-contain">
+    <image class='star' bindtap='payAttention' src="{{status == 1 ? guanzhu_1 : guanzhu_0 }}" style='width:50rpx;height:50rpx;'></image>
     <view class="name">{{productDetail.goods_name}}</view>
     <view class="sale">售出：{{productDetail.inventory || 0}}</view>
     <view class="price-contain">
@@ -33,14 +36,8 @@
       <image src='{{more}}' class='more'></image>
     </view>
     <view class='pingjia-item flex-between' wx:for='{{pingjiaList}}'>
-      <image class='user-img' src='{{item.img_url}}'></image>
-      <view class='pingjia flex-all'>
-        <view class='name-time flex-between'>
-          <view class='pingjia-name'>{{item.nickname}}</view>
-          <view class='pingjia-time'>{{item.ctime_str}}</view>
-        </view>
-        <view class='pingjia-des'>{{item.content}}</view>
-      </view>
+      <!--评价组件  --> 
+      <template is="pingjiaItem" data="{{item}}" ></template>  
     </view>
   </view>
 

@@ -1,0 +1,11 @@
+<!--pages/pingjiaItem/pingjiaItem.wxml-->
+<template name="pingjiaItem">
+  <image class='user-img' src='{{item.img_url}}'></image>
+  <view class='pingjia flex-all'>
+    <view class='name-time flex-between'>
+      <view class='pingjia-name'>{{item.nickname}}</view>
+      <view class='pingjia-time'>{{item.ctime_str}}</view>
+    </view>
+    <view class='pingjia-des'>{{item.content}}</view>
+  </view>
+</template>

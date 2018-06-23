@@ -106,12 +106,14 @@ Page({
         title: '取消关注成功',
       })
       this.quxiao();
-      var params = {
-        page_no: 1,
-        page_size: 15,
-        member_id: app.globalData.member_id
-      }
-      this.loadData(params)
+      this.onShow()
+      // var params = {
+      //   type: this.data.attentionType,  //类型(1商家，2商品)
+      //   page_no: 1,
+      //   page_size: 15,
+      //   member_id: app.globalData.member_id
+      // }
+      // this.loadData(params)
     } else {
       // console.log('关注错误', res);
       wx.showModal({
