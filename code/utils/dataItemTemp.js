@@ -28,6 +28,9 @@ function clickItem(e, that, item) {
   if (item.type == '2') {
     page = '../jiudianDetail/jiudianDetail?seller_id=' + item.seller_id
   }
+  if (item.type == '3') {
+    page = '../qiandaohudenglu/qiandaohudenglu?seller_id=' + item.seller_id
+  }
   var go = function (e) {
     wx.navigateTo({
       url: page

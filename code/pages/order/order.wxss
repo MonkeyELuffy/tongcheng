@@ -11,13 +11,11 @@ image {
 /*横向排列的菜单*/
 .nav-title {
   position: fixed;
-  top:82rpx;
   width: 100%;
   height: 80rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  margin-bottom: 40rpx;
   background-color: #fff;
   color: #666;
   font-size: 32rpx;
@@ -31,8 +29,7 @@ image {
 }
 /*菜单定位*/
 .nav-title-clear {
-  width: 100%;
-  height: 162rpx;
+  height: 80rpx;
 }
 
 /*订单*/

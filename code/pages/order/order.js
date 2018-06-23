@@ -1,35 +1,35 @@
 // pages/oder/oder.js
 
-var util = require('../../utils/util.js'); 
-var loadListData = require('../../utils/loadListData.js'); 
+var util = require('../../utils/util.js');
+var loadListData = require('../../utils/loadListData.js');
 var app = getApp()
 Page({
   data: {
     scrollHeight: app.globalData.scrollHeight,
-    nowType:1,
+    nowType: 1,
     imgHttp: app.globalImageUrl,
-    shopImg:'../../img/shangjia.png',
+    shopImg: '../../img/shangjia.png',
     orderTypeList: [
       {
         name: '酒店订单',
         order: 'jiudian',
-        checked: true
+        checked: false
       },
       {
         name: '餐饮订单',
         order: 'canyin',
-        checked: false
+        checked: true
       }
     ],
     //当前订单类型
-    nowOrderType:'jiudian',
+    nowOrderType: 'jiudian',
     default_image: '../../img/default-image.png',
-    index:0,
-    differ:1,
+    index: 0,
+    differ: 1,
     page_no: 1,
     //返回分页数据的总页数
     total_page: 1,
-    orders:[],
+    orders: [],
     btns: [],    //按钮组
     status: '',  //订单分组
     order: [],
@@ -37,35 +37,37 @@ Page({
       {
         name: '待付款',
         type: 1,
-        checked: true
-      },
-      {
+        checked: false
+      }, {
+        name: '待收货',
+        type: 2,
+        checked: false
+      }, {
         name: '待评价',
         type: 3,
         checked: false
-      },
-      {
+      }, {
         name: '已完成',
         type: 4,
         checked: false
       }
-    ]
+    ],
+    showNomore: false
   },
-  onLoad(){
-    var percent = this.data.scrollHeight / 555
+  onLoad() {
     this.setData({
-      scrollHeight: this.data.scrollHeight - 72 * percent
+      scrollHeight: this.data.scrollHeight - 80 * app.globalData.mult
     })
   },
   onShow() {
-    var nowType = parseInt(this.data.nowType)
+    var nowType = wx.getStorageSync('nowOrderType') || 1
     var btns;
     switch (nowType) {
       case 1:
         btns = ['付款'];
         break;
       case 2:
-        btns = ['联系商家','确认收货'];
+        btns = ['联系商家', '确认收货'];
         break;
       case 3:
         btns = ['评价'];
@@ -74,12 +76,19 @@ Page({
         btns = [];
         break;
     }
+    var navItems = this.data.navItems
+    for (var i in navItems) {
+      navItems[i].checked = false
+    }
+    navItems[nowType - 1].checked = true
     this.setData({
       bindDownLoad: true,
       page_no: 1,
       total_page: 1,
       btns: btns,
-      orders:[]
+      navItems: navItems,
+      orders: [],
+      showNomore: false
     })
     var differ = this.data.orderTypeList[1].checked ? 1 : 2
     var params = {
@@ -87,7 +96,7 @@ Page({
       type: nowType,
       differ: differ,
       page_no: 1,
-      pagenum: 15,
+      page_size: 15,
     }
     this.loadListData(params)
   },
@@ -146,7 +155,7 @@ Page({
         type: 1,
         differ: 2,
         page_no: 1,
-        pagenum: 15,
+        page_size: 15,
       }
       this.loadListData(params)
     }
@@ -185,12 +194,12 @@ Page({
         type: 1,
         differ: 1,
         page_no: 1,
-        pagenum: 15,
+        page_size: 15,
       }
       this.loadListData(params)
     }
   },
-// 刷新页面数据
+  // 刷新页面数据
   // refreshData(e){
   //   //与加载下一页数据唯一的区别是，清空orders
   //   // index代表订单类型1到5
@@ -205,7 +214,7 @@ Page({
   //     type: index,
   //     differ: differ,
   //     page_no: 1,
-  //     pagenum: 15,
+  //     page_size: 15,
   //   }
   //   this.loadListData(params)
   // },
@@ -220,7 +229,7 @@ Page({
       type: nowType,
       differ: differ,
       page_no: this.data.page_no,
-      pagenum: 15,
+      page_size: 15,
     }
     this.loadListData(params)
   },
@@ -229,9 +238,14 @@ Page({
       var orders = this.data.orders
       // datalist为空字符串时表示没有此类订单数据
       console.log('获取订单list成功', res.data);
+      if ((res.data.datalist instanceof Array && res.data.datalist.length < 15) || (res.data.datalist == '')) {
+        this.setData({
+          showNomore: true
+        })
+      }
       wx.hideLoading()
       //获取数据之后需要改变page和total_page数值，保障上拉加载下一页数据的page值，其余没有需要修改的数据
-      if (res.data.datalist == ''){
+      if (res.data.datalist == '') {
         this.setData({
           page_no: this.data.page_no + 1,
           total_page: res.data.total_page,
@@ -264,8 +278,8 @@ Page({
             showText = '完成';
             showTimeVal = 'confirm_time';
             break
-          }
-        for (var i in res.data.datalist){
+        }
+        for (var i in res.data.datalist) {
           res.data.datalist[i].showTime = res.data.datalist[i][showTimeVal]
           res.data.datalist[i].showText = showText
         }
@@ -288,7 +302,7 @@ Page({
       that: that,
       params: params,
       app: app,
-      processData: that.processOrderData, 
+      processData: that.processOrderData,
       API: app.getOrderListByMemberId
     }
     loadListData.loadListData(allParams)
@@ -298,9 +312,9 @@ Page({
     var that = this
     var index = e.target.dataset.index;
     var item = e.target.dataset.item;
-    if(index === that.data.index){
+    if (index === that.data.index) {
       return
-    }else{
+    } else {
       // 标题
       var navItems = that.data.navItems
       // 取消所有title的选中
@@ -311,32 +325,33 @@ Page({
       navItems[index]['checked'] = true
       //按钮组需要根据订单类型转换
       var btns = [];
-          switch (item.type) {
-            case 1:
-              btns = ['付款'];
-              break;
-            case 2:
-              btns = ['联系商家', '确认收货'];
-              break;
-            case 3:
-              btns = ['评价'];
-              break;
-            case 4:
-              btns = [];
-              break;
-            case 5:
-              btns = [];
-              break;
-          }
+      switch (item.type) {
+        case 1:
+          btns = ['付款'];
+          break;
+        case 2:
+          btns = ['联系商家', '确认收货'];
+          break;
+        case 3:
+          btns = ['评价'];
+          break;
+        case 4:
+          btns = [];
+          break;
+        case 5:
+          btns = [];
+          break;
+      }
       that.setData({
         orders: [],
         page_no: 1,
         bindDownLoad: true,
-        index: index, 
+        index: index,
         nowType: item.type,
         navItems: navItems,
         btns: btns
       })
+      wx.setStorageSync('nowOrderType', item.type)
       //切换顶部菜单时，初始化数据
       var differ = that.data.orderTypeList[1].checked ? 1 : 2
       var params = {
@@ -344,7 +359,7 @@ Page({
         type: item.type,
         differ: differ,
         page_no: 1,
-        pagenum: 15,
+        page_size: 15,
       }
       that.loadListData(params);
     }
@@ -363,7 +378,7 @@ Page({
   //点击各个button的事件
   clickBtn: function (e) {
     var that = this
-    var go = function(e) {
+    var go = function (e) {
       if (e.target.dataset.page === '查看详情') {
         var now_ordersn = e.target.dataset.ordersn
         var now_all_price = e.target.dataset.now_all_price
@@ -410,7 +425,7 @@ Page({
 
   },
   //统一展示订单操作的回调，确认收货、取消订单、删除订单、申请退款
-  processOrder(res){
+  processOrder(res) {
     var that = this
     if (res.suc == 'y') {
       console.log('操作订单成功', res.data);
@@ -418,14 +433,14 @@ Page({
       var differ = that.data.orderTypeList[1].checked ? 1 : 2
       var nowType = that.data.nowType
       that.setData({
-        orders:[]
+        orders: []
       })
       var params = {
         member_id: app.globalData.member_id,
-        type: nowType ,
+        type: nowType,
         differ: differ,
         page_no: 1,
-        pagenum: 15,
+        page_size: 15,
       }
       that.loadListData(params);
     } else {
@@ -452,7 +467,7 @@ Page({
               title: '支付成功',
               icon: 'success',
               duration: 2000,
-              mask:true
+              mask: true
             })
           },
           fail: function () {

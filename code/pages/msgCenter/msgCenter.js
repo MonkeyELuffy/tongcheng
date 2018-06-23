@@ -1,40 +1,16 @@
+// pages/cashOutDetail/cashOutDetail.js
+var util = require('../../utils/util.js');
 var app = getApp()
 Page({
   data: {
-    page: 0,
-    //问题列表
-    dataList: [
-      {
-        img: '../../img/test.png',
-        name: '深圳市三九胃泰有限公司',
-        text:'消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容',
-        id:0,
-        time:'星期五 18:09'
-      },
-      {
-        img: '../../img/test.png',
-        name: '深圳市三九胃泰有限公司',
-        text: '消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容',
-        id: 1,
-        time: '星期五 18:09'
-      },
-      {
-        img: '../../img/test.png',
-        name: '深圳市三九胃泰有限公司',
-        text: '消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容',
-        id: 2,
-        time: '星期五 18:09'
-      }],
-    //返回分页数据的总页数
-    total_page:1
+    // 明细
+    dataList: [],
+    page_no: 1,
+    total_page: 1,
+    bindDownLoad: true,
   },
   onLoad: function () {
     var that = this;
-    //数据初始化
-    that.setData({
-      bindDownLoad: true,
-      page: 0,
-    })
     //获取屏幕高度
     wx.getSystemInfo({
       success: function (res) {
@@ -44,35 +20,31 @@ Page({
         });
       }
     });
-    //加载文章列表数据
-    // that.loadData()
-  },
-  //进入详情
-  goDetail: function (e) {
-    var go = function (e) {
-      var id = e.currentTarget.dataset.id
-      console.log(id)
-      // var params = { title: title, id: id, time: time, author: author }
-      // params = JSON.stringify(params)
-      // wx.navigateTo({
-      //   url: '/pages/articleDetail/articleDetail?params=' + params,
-      // })
+    //加载数据
+    var params = {
+      page_no: 1,
+      page_size: 15,
+      member_id: app.globalData.member_id
     }
-    var data = { go, e }
-    this.clickTooFast(data)
+    this.loadData(params);
   },
-  // 下拉加载更多购物车数据
+  // 下拉加载
   bindDownLoad: function (e) {
-    this.loadData()
+    var params = {
+      page_no: this.data.page_no,
+      page_size: 15,
+      member_id: app.globalData.member_id
+    }
+    this.loadData(params)
   },
   /*===========
   加载数据
   ===========*/
-  loadData: function (e) {
+  loadData: function (params) {
     var that = this
-    var index = that.data.index
-    var name = that.data.name
-    if (that.data.bindDownLoad && parseInt(that.data.page) < parseInt(that.data.total_page)) {
+    console.log(params)
+    console.log(that.data.page_no, '??', that.data.total_page)
+    if (that.data.bindDownLoad && parseInt(that.data.page_no) <= parseInt(that.data.total_page)) {
       that.setData({
         bindDownLoad: false
       })
@@ -83,29 +55,7 @@ Page({
       setTimeout(function () {
         wx.hideLoading()
       }, 600)
-      wx.request({
-        url: app.globalUrl + app.GET_youhuiquan_list,
-        data: {
-          data:{
-            curPage: that.data.page+1,
-            data: name
-          }
-        },
-        method: 'POST',
-        success: function (res) {
-          var youhuiquan_list = that.data.youhuiquan_list || []
-          for (var i in res.data.data.data) {
-            youhuiquan_list.push({})
-            youhuiquan_list[youhuiquan_list.length - 1] = res.data.data.data[i]
-            youhuiquan_list[youhuiquan_list.length - 1].time = that.getLocalTime(youhuiquan_list[youhuiquan_list.length - 1].time, "yyyy-M-d")
-          }
-          that.setData({
-            youhuiquan_list: youhuiquan_list,
-            page: res.data.data.curPage,
-            total_page: res.data.data.pageCount
-          })
-        }
-      })
+      util.httpPost(app.globalUrl + app.NewsList, params, that.processData);
     }
     //1000ms之后才可以继续加载，防止加载请求过多
     setTimeout(function () {
@@ -114,42 +64,29 @@ Page({
       })
     }, 1000)
   },
-  /*==========
-  防止快速点击
-  ===========*/
-  clickTooFast: function (data) {
-    var lastTime = this.data.lastTime
-    var curTime = data.e.timeStamp
-    if (lastTime > 0) {
-      if (curTime - lastTime < 500) {
-        console.log('点击太快了')
-        return
-      } else {
-        data.go(data.e)
+  processData(res) {
+    if (res.suc == 'y') {
+      var dataList = this.data.dataList
+      console.log('获取消息列表成功', res.data);
+      if ((res.data.list instanceof Array && res.data.list.length < 15) || (res.data.list == '')) {
+        this.setData({
+          showNomore: true
+        })
       }
+      for (var i in res.data.list) {
+        // res.data.list[i].img_src = app.globalImageUrl + res.data.list[i].img_src
+        res.data.list[i].img_src = '../../img/center/wode_liulan.png'
+      }
+      //获取数据之后需要改变page和totalPage数值，保障上拉加载下一页数据的page值，其余没有需要修改的数据
+      dataList = dataList.concat(res.data.list)
+      this.setData({
+        page_no: this.data.page_no + 1,
+        total_page: res.data.total_page,
+        dataList: dataList,
+        total_amount: res.data.total_amount
+      })
     } else {
-      data.go(data.e)
+      console.log('消息列表错误', res);
     }
-    this.setData({
-      lastTime: curTime
-    })
   },
-  getLocalTime: function (a, fmt) {
-    var nowDate = new Date(a)
-    var o = {
-      "M+": nowDate.getMonth() + 1, //月份
-      "d+": nowDate.getDate(), //日
-      "h+": nowDate.getHours(), //小时
-      "m+": nowDate.getMinutes(), //分
-      "s+": nowDate.getSeconds(), //秒
-      "q+": Math.floor((nowDate.getMonth() + 3) / 3), //季度
-      "S": nowDate.getMilliseconds() //毫秒
-    };
-    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (nowDate.getFullYear() + "").substr(4 - RegExp.$1.length));
-    for (var k in o)
-      if (new RegExp("(" + k + ")").test(fmt))
-        fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-    return fmt;
-  },
-
 })

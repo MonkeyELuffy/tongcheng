@@ -109,10 +109,15 @@ Page({
       for (let i in res.data.best_list) {
         res.data.best_list[i].image_src = app.globalImageUrl + res.data.best_list[i].image_src
       }
+      //五个菜单，按照左到右，上到下1-5顺序给与数据
+      for (let i in res.data.five_list) {
+        res.data.five_list[i].image_src = app.globalImageUrl + res.data.five_list[i].image_src
+      }
       this.setData({
         slider: res.data.banner_list,
         best_list: res.data.best_list,
         list_1: res.data.tour,
+        nav_1: res.data.five_list[0]
       })
     }
   },

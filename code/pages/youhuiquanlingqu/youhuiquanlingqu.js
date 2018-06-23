@@ -1,81 +1,115 @@
+var util = require('../../utils/util.js');
 var app = getApp()
 Page({
   data: {
-    usedImg:'../../img/used.png',
+    usedImg: '../../img/used.png',
     page: 0,
     //顶部菜单类型
-    index:0,
+    index: 0,
     navItems: [
       {
-        name:'未使用(2)',
-        id:0,
-        checked:true,
+        name: '未使用',
+        coupon_type: 1,
+        checked: true,
       },
       {
-        name: '已使用(2)',
-        id: 1,
+        name: '已使用',
+        coupon_type: 2,
         checked: false,
       },
       {
-        name: '已过期(2)',
-        id: 2,
+        name: '已过期',
+        coupon_type: 3,
         checked: false,
       }],
-    youhuiquan_list: [{ title: '通用型', value: 50, disc: '订单总金额高于代金券即可使用', time: '2018-09-09', form: '活动赠送', used: false, cpns_id: 2 }, { title: '通用型', value: 150, disc: '订单总金额高于代金券即可使用', time: '2018-09-09', form: '活动赠送', used: false, cpns_id:3}],
+    dataList: [],
+    coupon_type: 1,
     //返回分页数据的总页数
-    total_page:1
   },
-  onLoad: function () {
-    var that = this;
-    //数据初始化
-    that.setData({
-      bindDownLoad: true,
-      page: 0,
-    })
-    //获取屏幕高度
-    wx.getSystemInfo({
-      success: function (res) {
-        console.info(res.windowHeight);
-        that.setData({
-          scrollHeight: res.windowHeight
-        });
+  onLoad(options) {
+    var params = {
+      member_id: app.globalData.member_id,
+      type: 1
+    }
+    util.httpPost(app.globalUrl + app.CouponList, params, this.processCouponListData);
+  },
+  processCouponListData(res) {
+    if (res.suc == 'y') {
+      console.log('获取优惠券list成功', res.data);
+      if ((res.data instanceof Array && res.data.length < 15) || (res.data == '')) {
+        this.setData({
+          showNomore: true
+        })
       }
-    });
-    //加载文章列表数据
-    // that.loadData()
+      this.setData({
+        dataList: res.data,
+      })
+    } else {
+      console.log('获取优惠券list错误', res);
+    }
   },
-  //进入详情
-  goDetail: function (e) {
+  // 点击优惠券
+  clickCoupen: function (e) {
     var that = this
+    var pages = getCurrentPages()
+    var prevPage = pages[pages.length - 2]
     var go = function (e) {
-      var cpns_id = e.currentTarget.dataset.cpns_id
-      wx.setStorageSync('cpns_id', cpns_id);
-      wx.navigateBack();
+      // 如果是从个人中心进来的,或者点击的是已使用和已过期的优惠券，则点击优惠券没有任何效果
+      if (prevPage.route == 'pages/mine/mine' || that.data.coupon_type != 1) {
+        return
+      } else {
+        var params = {
+          cpns_id: e.currentTarget.dataset.item.balanceid,
+          token: app.globalData.userInfo.token,
+          buy_key: app.globalData.orderData.buy_key,
+          address_id: app.globalData.orderData.address.address_id,
+          ship_type: app.globalData.orderData.ship_type,
+        }
+        util.httpPost(app.globalUrl + app.CONFIRMINFO, params, that.processSubmitData);
+      }
     }
     var data = { go, e }
     this.clickTooFast(data)
   },
+  processSubmitData: function (res) {
+    if (res.suc == 'y') {
+      console.log('获取最新订单数据成功', res.data);
+      this.goPayPage(res.data)
+    } else {
+      console.log('获取最新订单数据错误', res);
+      wx.showModal({
+        title: '提醒',
+        content: res.msg,
+      })
+    }
+  },
+  //返回结算页面
+  goPayPage: function (orderData) {
+    app.globalData.orderData = orderData
+    wx.navigateBack()
+  },
   /* ===选择顶部菜单 */
   checked: function (e) {
     var that = this
-    var article_type = e.target.dataset.id;
+    var coupon_type = e.target.dataset.coupon_type;
     //点击已选中的菜单时，直接返回
-    if (article_type === that.data.article_type) {
+    if (coupon_type === that.data.coupon_type) {
       return
     } else {
       var index = e.target.dataset.index;
       var name = e.target.dataset.name;
       that.setData({
-        article_type: article_type,
-        page: 0,
-        // youhuiquan_list: [],
+        coupon_type: coupon_type,
         bindDownLoad: true,
-        total_page: 1,
         index: index,
         name: name
       })
-      // that.loadData(index)
       that.changeStyle(index)
+      var params = {
+        member_id: app.globalData.member_id,
+        type: coupon_type
+      }
+      util.httpPost(app.globalUrl + app.CouponList, params, this.processCouponListData);
     }
 
   },
@@ -115,8 +149,8 @@ Page({
       wx.request({
         url: app.globalUrl + app.GET_youhuiquan_list,
         data: {
-          data:{
-            curPage: that.data.page+1,
+          data: {
+            curPage: that.data.page + 1,
             data: name
           }
         },

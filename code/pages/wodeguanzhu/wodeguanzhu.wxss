@@ -65,14 +65,25 @@ page {
   flex-direction: column;
 }
 .item{
-  padding:20rpx 0 0 20rpx;
+  padding:20rpx;
   background-color: #fff;
 }
-.item-image{
+
+
+.img-contain{
   width: 184rpx;
   height: 184rpx;
+  margin-right: 34rpx;
   box-sizing: border-box;
-  margin-right: 30rpx;
+  align-self: flex-start;
+  overflow: hidden;
+}
+.item-image{
+  width: 100%;
+  max-height: 100%;
+  box-sizing: border-box;
+  border: 2rpx;
+  padding: 2rpx;
 }
 .detail-name{
   font-size: 32rpx;

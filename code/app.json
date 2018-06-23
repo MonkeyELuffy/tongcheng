@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index2/index2",
+    "pages/yudingpiaowu/yudingpiaowu",
     "pages/chooseDate/chooseDate",
     "pages/index/index",
     "pages/qiandaohudenglu/qiandaohudenglu",

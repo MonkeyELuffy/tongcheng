@@ -1,20 +1,21 @@
 <!--pages/cashOutDetail/cashOutDetail.wxml-->
+<import src="../noMoreData/noMoreData.wxml"/>
+
 <view class="contain">
   <view class="fenlei-contianer">
     <scroll-view class="fenlei-ul" style="height:{{scrollHeight}}px;" scroll-y="true" bindscrolltoupper="refresh" bindscrolltolower="bindDownLoad">
       <!--子数据  -->
       <view class='item' wx:for='{{dataList}}' bindtap="goDetail" data-id="{{item.id}}" for:index='index' data-index='{{index}}'>
         <view class='detail flex-between'>
-          <view class='detail-name'>{{item.name}}</view>
-          <view class='value'>+{{item.value}}</view>
+          <view class='detail-name'>{{item.type_info}}</view>
+          <view class='value'>{{(item.state == 1 ? '+' : '-') +item.money}}</view>
         </view>
-        <view class='time flex-between'>
-          <view>{{item.time}}</view>
-          <view>{{item.state}}</view>
+        <view class='time'>
+          <view>{{item.ctime_str}}</view>
         </view>
       </view>
-      <!-- <view class="no-more">没有更多的数据了</view>  -->
-      <view style="width:100%;height:100rpx;"></view>
+      <!--nomoreData  -->
+      <template is="noMoreData" data="{{showNomore}}"></template>
     </scroll-view>
   </view> 
 

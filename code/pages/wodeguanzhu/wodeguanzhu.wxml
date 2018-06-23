@@ -1,4 +1,4 @@
-
+<import src="../noMoreData/noMoreData.wxml"/>
 <!--顶部菜单-->
 <view class="nav-title flex-center" style="width: 100%">
     <view class="nav-item flex-all" wx:for="{{navItems}}" style="color: {{item.checked ? '#f67f79' : '#737373' }};" bindtap="checked" wx:for-index="index" data-id="{{item.id}}" data-index="{{index}}" data-name="{{item.name}}">
@@ -9,30 +9,32 @@
 <view class="fenlei-contianer">
   <scroll-view class="fenlei-ul" style="height:{{scrollHeight}}px;" scroll-y="true" bindscrolltoupper="refresh" bindscrolltolower="bindDownLoad">
     <!--子数据  -->
-    <view class='item  flex-none' wx:for='{{dataList}}' bindtap="goDetail" data-id="{{item.id}}" for:index='index' data-index='{{index}}'>
+    <view class='item  flex-none' wx:for='{{dataList}}' bindtap="goDetail" data-item="{{item}}" for:index='index' data-index='{{index}}'>
       <!--编辑的时候显示  -->
       <image wx:if='{{showDel}}' class='choose-img' src="{{item.checked ? checkedImg : unCheckedImg}}"></image>
 
-      <image class='item-image' src='{{item.img}}'></image>
+    <view class='img-contain'>
+      <image class='item-image' src='{{item.logo_url}}'></image>
+    </view>
+
       <view class='detail flex-all'>
-        <view class='detail-name'>{{item.name}}</view>
+        <view class='detail-name'>{{item.goods_name || item.seller_name}}</view>
         <view class='label-and-haoping-contain flex-none'>
           <!--标签  -->
           <view class='label-contain flex-center'>
             <view class='label-item' wx:for='{{item.labels}}' style='color:{{item.bgColor === "#f68076" ? "#fff" : "#f68076"}};background-color:{{item.bgColor}};'>{{item.name}}</view>
           </view>
-          <!--好评  -->
-          <view class='haoping'>好评{{item.haoping}}%</view>
+        
         </view>
         <!--销量和距离  -->
         <view class='sale-and-juli flex-between'>
-          <view class='sale'>销量({{item.sale}})</view>
-          <view class='juli'>距离：{{item.dic}}km</view>
+          <view class="sale" wx-if='{{item.inventory}}'>销量：{{item.inventory || 0}}</view>
+          <!-- <view class='juli'>距离：{{item.dic}}km</view> -->
         </view>
       </view>
     </view>
-    <!-- <view class="no-more">没有更多的数据了</view>  -->
-    <view style="width:100%;height:100rpx;"></view>
+    <!--nomoreData  -->
+    <template is="noMoreData" data="{{showNomore}}"></template>
   </scroll-view>
   <view class='bottom-btn flex-end'>
     <view wx:if='{{showDel}}' class='choose-all flex-between' bindtap='chooseAll'>

@@ -77,6 +77,38 @@ App({
   ActiveList: 'Coupon/active',
   //千岛湖首页数据
   Index: 'Index/index',
+  //景点介绍
+  TicketIntroduce: 'Ticket/introduce',
+  //票务详情
+  TicketIndex: 'Ticket/ticket_index',
+  //票务规格
+  TicketProductIndex: 'Ticket/product_list',
+  //预定门票
+  TicketBook: 'Ticket/book',
+  //票务订单确认
+  TicketConfirmInfo: 'Ticket/confirm_info',
+  //票务提交订单
+  TicketOrderSubmit: 'Ticket/order_submit',
+  // 获取浏览记录
+  GlanceList: 'Other/glance',
+  // 删除浏览记录
+  DelGlance: 'Other/delete',
+  // 消息列表
+  NewsList: 'other/news_list',
+  // 红包获取记录
+  MoneyGetPack: 'Money/getPack',
+  // 活动列表
+  ActiveList: 'Coupon/active',
+  // 获取记录列表
+  PointList: 'Other/point',
+  // 获取关注记录
+  PayAttentionList: 'Other/through',
+  // 关注店铺或商品
+  PayAttention: 'Other/attention',
+  // 取消关注店铺或商品
+  CancelPayAttention: 'Other/delete_through',
+  // 账单明细
+  MoneyDetail: 'Money/money_detail',
 
   onLaunch: function () {
     //获取屏幕高度

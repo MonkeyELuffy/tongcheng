@@ -16,8 +16,11 @@
   width: 100%;
   max-height: 100%;
   box-sizing: border-box;
-  border: 2rpx solid #aaa;
-  padding: 6rpx;
+  border: 2rpx;
+  padding: 2rpx;
+}
+.detail{
+  min-height: 184rpx;
 }
 .detail-name{
   font-size: 30rpx;

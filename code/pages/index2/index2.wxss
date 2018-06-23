@@ -46,7 +46,6 @@
   background-color: #fff;
   position: relative;
   box-sizing: border-box;
-  padding: 40rpx 0 0 20rpx;
 }
 .top-nav-left-text-name,.top-nav-right-text-name{
   font-size: 34rpx;
@@ -73,10 +72,9 @@
   justify-content: space-between;
 }
 .top-nav-right-text-contain{
-  height: 136rpx;
+  height: 150rpx;
   border-radius: 10rpx;
   background-color: #fff;
-  padding: 20rpx 0 0 20rpx;
   position: relative;
   overflow: hidden;
 }
@@ -86,7 +84,7 @@
   justify-content: space-between;
 }
 .bottom-nav-contain{
-  width: 332rpx;
+  width: 350rpx;
 }
 
 .ask-answer-contain{

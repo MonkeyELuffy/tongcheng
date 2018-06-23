@@ -56,12 +56,8 @@ Page({
   onShow() {
     // 数据初始化
     this.inteData()
-    // 请求商铺数据
-    if (app.globalData.firstLongitude) {
-      this.loadStorData()
-    } else {
-      app.getFirstLocation().then(this.loadStorDataAndCityName)
-    }
+    // 请求景点数据
+    this.loadStorData()
     //请求banner数据
     this.loadBannerData();
   },
@@ -74,31 +70,12 @@ Page({
       showNomore: false
     })
   },
-  loadStorDataAndCityName(res) {
-    this.getCityName(res)
-    this.loadStorData()
-  },
-  getCityName(res) {
-    var params = {
-      location: res.latitude + ',' + res.longitude,
-      key: config.key
-    }
-    util.httpPost2(app.MAP, params).then(this.processLocation)
-  },
-  processLocation(res) {
-    console.log('请求当前位置返回数据', res)
-    app.globalData.firstAddress = res.result.address
-    this.setData({
-      //此时应该显示的城市名称
-      positionValue: res.result.ad_info.district
-    })
-  },
   loadStorData() {
     var params = {
       order_by: this.data.allData.nowPaiXu,
       page_no: 1,
       page_size: 15,
-      is_top: 2,
+      type: 3,
       cur_fixed: app.globalData.firstLongitude + ',' + app.globalData.firstLatitude
     }
     this.loadListData(params);
@@ -108,34 +85,16 @@ Page({
       region_id: 3144,  //地区ID搜索
       loca_id: 1
     }
-    var params2 = {
-      region_id: 3144,  //地区ID搜索
-      loca_id: 2
-    }
     util.httpPost2(app.globalUrl + app.BANNER, params1).then(this.processBannerData)
-    util.httpPost2(app.globalUrl + app.BANNER, params2).then(this.processBannerCenterData)
   },
   // 顶部banner
   processBannerData: function (res) {
     if (res.suc == 'y') {
-      console.log('顶部banner数据', res.data);
       for (var i in res.data) {
         res.data[i].img_src = app.globalImageUrl + res.data[i].img_src
       }
       this.setData({
         slider1: res.data
-      })
-    }
-  },
-  // 中间banner
-  processBannerCenterData: function (res) {
-    if (res.suc == 'y') {
-      console.log('中间banner数据', res.data);
-      for (var i in res.data) {
-        res.data[i].img_src = app.globalImageUrl + res.data[i].img_src
-      }
-      this.setData({
-        slider2: res.data
       })
     }
   },
@@ -147,45 +106,11 @@ Page({
       }
     })
   },
-  // switchCity(e){
-  //   var that = this
-  //   basic.goPage('switchcity', that, e,)
-  // },
   //页面跳转
   goPage: function (e) {
     var that = this
     var page = e.target.dataset.page
     basic.goPage(page, that, e, )
-  },
-  // 输入搜索文字
-  input: function (e) {
-    var search_key = e.detail.value
-    this.setData({
-      search_key: search_key
-    })
-  },
-  // 确认搜索
-  search: function (e) {
-    var that = this
-    var search_key = this.data.search_key
-    if (search_key.replace(/(^\s*)|(\s*$)/g, "").length == 0) {
-      wx.showToast({
-        title: '请输入您要搜索的商品',
-        duration: 1000
-      })
-    } else {
-      var go = function (e) {
-        that.setData({
-          search_key: ''
-        })
-        search_key = JSON.stringify(search_key)
-        wx.navigateTo({
-          url: '../search/search?search_key=' + search_key
-        })
-      }
-      var data = { go, e }
-      that.clickTooFast(data)
-    }
   },
   // 下拉加载更多购物车数据
   bindDownLoad: function (e) {
@@ -193,7 +118,7 @@ Page({
       order_by: this.data.allData.nowPaiXu,
       page_no: this.data.page_no,
       page_size: 15,
-      is_top: 2,
+      type: 3,
       cur_fixed: app.globalData.firstLongitude + ',' + app.globalData.firstLatitude
     }
     this.loadListData(params)
@@ -213,7 +138,7 @@ Page({
   processStoreData(res) {
     if (res.suc == 'y') {
       var dataList = this.data.dataList
-      console.log('获取商铺list成功', res.data);
+      console.log('获取景点list成功', res.data);
       if ((res.data.list instanceof Array && res.data.list.length < 15) || (res.data.list == '')) {
         this.setData({
           showNomore: true
@@ -234,7 +159,7 @@ Page({
         dataList: dataList,
       })
     } else {
-      console.log('获取商铺list错误', res);
+      console.log('获取景点list错误', res);
     }
   },
   kefu() {
@@ -337,7 +262,7 @@ Page({
       order_by: this.data.allData.nowPaiXu,
       page_no: 1,
       page_size: 15,
-      is_top: 2,
+      type: 3,
       cur_fixed: app.globalData.firstLongitude + ',' + app.globalData.firstLatitude
     }
     this.loadListDataByOrder(params);
@@ -356,7 +281,7 @@ Page({
   processStoreByOrderData(res) {
     if (res.suc == 'y') {
       var dataList = []
-      console.log('获取商铺list成功', res.data);
+      console.log('获取景点list成功', res.data);
       if (app.globalData.hasLogin) {
         wx.hideLoading()
       }
@@ -372,7 +297,7 @@ Page({
         dataList: dataList,
       })
     } else {
-      console.log('获取商铺list错误', res);
+      console.log('获取景点list错误', res);
     }
   }
 })

@@ -28,13 +28,28 @@ Page({
     }
   },
   lingqu: function (e) {
-    console.log('可领取')
-    var item = e.target.dataset.item
+    var that = this
     var index = e.target.dataset.index
-    var dataList = this.data.dataList
-    dataList[index].status = 1
-    this.setData({
-      dataList: dataList
-    })
+    var params = {
+      member_id: app.globalData.member_id,
+      balance_id: e.target.dataset.item.balanceid
+    }
+    // 领取优惠券
+    util.httpPost2(app.globalUrl + app.GetCoupon, params)
+      .then(function (res) { that.processGetCouponData(res, index) });
+  },
+  processGetCouponData(res, index) {
+    if (res.suc == 'y') {
+      console.log('领取优惠券成功', res.data);
+      var dataList = this.data.dataList
+      console.log(index)
+      dataList[index].is_get = 1
+      this.setData({
+        dataList: dataList
+      })
+      console.log(dataList)
+    } else {
+      console.log('领取优惠券错误', res);
+    }
   },
 })

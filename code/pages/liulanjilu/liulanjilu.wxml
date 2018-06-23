@@ -1,36 +1,34 @@
+<import src="../noMoreData/noMoreData.wxml"/>
+
 <view class="fenlei-contianer">
   <scroll-view class="fenlei-ul" style="height:{{scrollHeight}}px;" scroll-y="true" bindscrolltoupper="refresh" bindscrolltolower="bindDownLoad">
-    <!--子数据  -->
-    <view class='item-with-time' wx:for='{{allDataList}}' wx:for-item='allDataListItem'>
-      <!--浏览日期  -->
-      <view class='time'>{{allDataListItem.time}}</view>
-      <view class='item  flex-none' wx:for='{{allDataListItem.dataList}}' bindtap="goDetail" data-id="{{item.id}}" for:index='index' data-index='{{index}}' data-fatherindex='{{allDataListItem.fatherindex}}'>
-        <!--编辑的时候显示  -->
-        <image wx:if='{{showDel}}' class='choose-img' src="{{item.checked ? checkedImg : unCheckedImg}}"></image>
-
-        <image class='item-image' src='{{item.img}}'></image>
-        <view class='detail flex-all'>
-          <view class='detail-name'>{{item.name}}</view>
-          <view class='label-and-haoping-contain flex-none'>
-            <!--标签  -->
-            <view class='label-contain flex-center'>
-              <view class='label-item' wx:for='{{item.labels}}' style='color:{{item.bgColor === "#f68076" ? "#fff" : "#f68076"}};background-color:{{item.bgColor}};'>{{item.name}}</view>
-            </view>
-            <!--好评  -->
-            <view class='haoping'>好评{{item.haoping}}%</view>
+    <!--子数据组件  -->
+    <view class='item  flex-none' wx:for='{{dataList}}' bindtap="clickItem" data-seller_id="{{item.seller_id}}" data-item="{{item}}"  for:index='index' data-index='{{index}}'>
+      <!--编辑的时候显示  -->
+      <image wx:if='{{showDel}}' class='choose-img' src="{{item.checked ? checkedImg : unCheckedImg}}"></image>
+      <view class='img-contain'>
+        <image class='item-image' src='{{item.store_img_src}}'></image>
+      </view>
+      <view class='detail flex-all'>
+        <view class='detail-name'>{{item.seller_name}}</view>
+        <view class='label-and-haoping-contain flex-none'>
+          <!--标签  -->
+          <view class='label-contain flex-center'>
+            <view class='label-item' wx:for='{{item.special}}' >{{item == 1 ? '满减' : (item == 2 ? '折扣' : (item == 3 ? '品牌' : '星级'))}}</view>
           </view>
-          <!--销量和距离  -->
-          <view class='sale-and-juli flex-between'>
-            <view class='sale'>销量({{item.sale}})</view>
-            <view class='juli'>距离：{{item.dic}}km</view>
-          </view>
+          <!--好评  -->
+          <view class='haoping'>{{item.number}}次浏览</view>
+        </view>
+        <view class='des'>{{item.desc}}</view>
+        <!--销量和距离  -->
+        <view class='sale-and-juli flex-between'>
+          <view class='sale'>销量({{item.inventory || 0}})</view>
+          <view class='juli' hidden='{{!item.cur_space}}'>距离：{{item.cur_space}}</view>
         </view>
       </view>
-
     </view>
-    
-    <!-- <view class="no-more">没有更多的数据了</view>  -->
-    <view style="width:100%;height:100rpx;"></view>
+    <!--nomoreData  -->
+    <template is="noMoreData" data="{{showNomore}}"></template>
   </scroll-view>
   <view class='bottom-btn flex-end'>
     <view wx:if='{{showDel}}' class='choose-all flex-between' bindtap='chooseAll'>

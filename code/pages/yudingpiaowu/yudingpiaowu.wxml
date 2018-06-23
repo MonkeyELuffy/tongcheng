@@ -1,0 +1,2 @@
+<!--pages/yudingpiaowu/yudingpiaowu.wxml-->
+<view bindtap='submitOrder'>合计提交</view>

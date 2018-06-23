@@ -42,7 +42,7 @@ Page({
         id: 3,
         img: '../../img/jingdian.png',
         text: '景点',
-        page: ''
+        page: 'jingdianmenpiao'
       },
       {
         id: 4,
@@ -60,7 +60,7 @@ Page({
         id: 6,
         img: '../../img/jifen.png',
         text: '向导',
-        page: 'xiangdao'
+        // page: 'xiangdao'
       },
       {
         id: 7,
@@ -177,7 +177,7 @@ Page({
   //页面跳转
   goPage: function (e) {
     var that = this
-    var page = e.target.dataset.page
+    var page = e.currentTarget.dataset.page
     basic.goPage(page, that, e, )
   },
   // 输入搜索文字

@@ -8,8 +8,8 @@
 
     <!--顶部信息  -->
     <view class='top-info'>
-      <view class='info-name'>{{topInfo.name}}</view>
-      <view class='info-des'>{{topInfo.des}}</view>
+      <view class='info-name'>{{detail.seller_name}}</view>
+      <view class='info-des'>{{detail.address}}</view>
       <view class='daohang-contain'>
         <image class='daohang-contain-img' src='{{daohang}}'></image>
         <view>导航</view>
@@ -41,25 +41,25 @@
       <view class='tab' wx:for="{{tabList}}" data-item='{{item}}' style='color:{{item.checked ? "rgb(22,243,234)" : "#999"}}'>{{item.name}}</view>
     </view>
     <!--tab菜单下面的项目  -->
-    <view class='list-2-item' wx:for="{{list_2}}">
-      <view class='list-2-info'>
-        <view class='list-2-name'>{{item.name}}</view>
-        <view class='price'>￥{{item.price}}<span class='qi'>起</span></view>
+    <view class='list-2-item' wx:for="{{detail.goods_item.list}}">
+      <view class='list-2-info' bindtap='chooseType' data-item='{{item}}'>
+        <view class='list-2-name'>{{item.goods_name}}{{item.goods_body}}</view>
+        <view class='price'>￥{{item.shop_price}}<span class='qi'>起</span></view>
       </view>
       <!--各个价格规格  -->
-      <view class='list-2-prices' wx:for='{{item.priceList}}'>
+      <view class='list-2-prices'  wx:for='{{proudctList}}'>
         <!--左侧信息  -->
-        <view class='list-2-prices-left'>
-          <view class='list-2-price-name'>{{item.name}}</view>
-          <view class='list-2-price-des'>{{item.des}}</view>
+        <view class='list-2-prices-left' >
+          <view class='list-2-price-name'>{{item.spec_info}}</view>
+          <!-- <view class='list-2-price-des'>{{item.des}}</view>
           <view class='list-2-price-labels'>
             <view class='list-2-price-label-item' wx:for='{{item.labels}}'>{{item.name}}</view>
-          </view>
+          </view> -->
         </view>
         <!--右侧预定按钮  -->
         <view class='price-and-buy'>
           <view class='price'>￥{{item.price}}</view>
-          <view class='buy-btn'>预定</view>
+          <view class='buy-btn' bindtap='yuding' data-item='{{item}}'>预定</view>
         </view>
       </view>
     </view>

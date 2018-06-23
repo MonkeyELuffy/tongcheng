@@ -1,15 +1,20 @@
 // pages/qiandaohudenglu/qiandaohudenglu.js
+let util = require('../../utils/util.js');
+let bannerTemp = require('../../utils/bannerTemp.js');
+let dataItemTemp = require('../../utils/dataItemTemp.js'); 
+let basic = require('../../utils/basic.js'); 
+let app = getApp(); 
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     redStar: '../../img/red-star.png',
     defaultStar:'../../img/default-star.png',
     daohang:'../../img/daohang.png',
     more:'../../img/more.png',
     seeMore: '../../img/seeMore.png',
+    slider: [],
+    detail:{},
+    // 基础门票的规格数据
+    proudctList:[],
     tabList:[
       {
         name:'基础门票',
@@ -18,17 +23,6 @@ Page({
       {
         name:'必看推荐',
         chceked: false
-      }
-    ],
-    slider: [
-      {
-        img_src: '../../img/banner.png'
-      },
-      {
-        img_src: '../../img/banner.png'
-      },
-      {
-        img_src: '../../img/banner.png'
       }
     ],
     topInfo:{
@@ -180,54 +174,73 @@ Page({
         });
       }
     });
+    let data = {
+      seller_id: options.seller_id,
+      token: app.globalData.userInfo.token
+    }
+    //请求景点介绍
+    util.httpPost(app.globalUrl + app.TicketIntroduce, data, this.processInfoData);
+    //请求票务
+    util.httpPost(app.globalUrl + app.TicketIndex, data, this.processTicketIndexData);
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+  processInfoData(res) {
+    if (res.suc == 'y') {
+      console.log('景点介绍成功', res.data);
+    } else {
+      console.log('返回景点介绍错误', res);
+    }
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
+  processTicketIndexData(res) {
+    if (res.suc == 'y') {
+      console.log('景点票务成功', res.data);
+      let slider = []
+      //图片地址加前缀
+      for (let i in res.data.banner_src) {
+        slider.push({
+          img_src: app.globalImageUrl + res.data.banner_src[i]
+        })
+      }
+      this.setData({
+        detail: res.data,
+        slider: slider,
+      })
+    } else {
+      console.log('返回景点票务错误', res);
+    }
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
+  // 请求票务的规格
+  chooseType(e){
+    let goods_id = e.currentTarget.dataset.item.goods_id
+    util.httpPost(app.globalUrl + app.TicketProductIndex, { goods_id: goods_id}, this.processTicketProductIndexData);
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
+  processTicketProductIndexData(res){
+    if (res.suc == 'y') {
+      console.log('票务的规格成功', res.data);
+      this.setData({
+        proudctList: res.data
+      })
+    } else {
+      console.log('返回票务的规格错误', res);
+    }
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
+  //页面跳转
+  goPage: function (e) {
+    var that = this
+    var page = 'yudingpiaowu'
+    let params = { 
+      product_id: e.currentTarget.dataset.item.product_id,
+      goods_id: e.currentTarget.dataset.item.goods_id
+      }
+    basic.goPage(page, that, e, params)
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
+  //预定门票
+  yuding(e) {
+    var that = this
+    var page = 'yudingpiaowu'
+    let params = {
+      product_id: e.currentTarget.dataset.item.product_id,
+      goods_id: e.currentTarget.dataset.item.goods_id
+    }
+    basic.goPage(page, that, e, params)
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

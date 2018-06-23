@@ -1,30 +1,32 @@
 
+<import src="../noMoreData/noMoreData.wxml"/>
 <!--顶部菜单-->
 <view class="nav-title flex-between" style="width: 100%">
-    <view class="nav-item" wx:for="{{navItems}}" style="color: {{item.checked ? '#f67f79' : '#737373' }};" bindtap="checked" wx:for-index="index" data-id="{{item.id}}" data-index="{{index}}" data-name="{{item.name}}">
+    <view class="nav-item" wx:for="{{navItems}}" style="color: {{item.checked ? '#f67f79' : '#737373' }};" bindtap="checked" wx:for-index="index" data-coupon_type="{{item.coupon_type}}" data-index="{{index}}" data-name="{{item.name}}">
       {{item.name}}
     </view>
   </view>
 
 <view class="fenlei-contianer">
-  <scroll-view class="fenlei-ul" style="height:{{scrollHeight}}px;" scroll-y="true" bindscrolltoupper="refresh" bindscrolltolower="bindDownLoad">
-    <view class="fenlei-list" wx:for="{{youhuiquan_list}}" >
-      <view class='top-nav flex-between' data-cpns_id="{{item.cpns_id}}" bindtap='goDetail'>
+  <view class="fenlei-ul">
+    <view class="fenlei-list" wx:for="{{dataList}}" >
+      <view class='top-nav flex-between' data-item="{{item}}" bindtap='clickCoupen'>
         <!--已使用优惠券显示  -->
-        <image class='used-img' src='{{usedImg}}' wx:if='{{item.used}}'></image>
+        <!-- <image class='used-img' src='{{usedImg}}' wx:if='{{item.used}}'></image> -->
         <view class='top-left'>
-          <view class='type'>{{item.title}}</view>
-          <view class='value'>￥{{item.value}}</view>
+          <view class='type'>{{item.name}}</view>
+          <view class='value'>{{item.balance_way == 1 ? '￥'+item.prompt : item.discount+'折'}}</view>
         </view>
         <view class='top-right'>
-          <view class='form'>来源：{{item.form}}</view>
+          <view class='form'>来源：{{item.source}}</view>
           <view class='line'></view>
-          <view class='time'>有效期至{{item.time}}</view>
+          <view class='time'>有效期至{{item.endtime}}</view>
         </view>
       </view>
-      <view class='disc'>{{item.disc}}</view>
+      <view class='disc'>{{item.content}}</view>
     </view>
-    <!-- <view class="no-more">没有更多的数据了</view>  -->
+    <!--nomoreData  -->
+    <template is="noMoreData" data="{{showNomore}}"></template>
     <view style="width:100%;height:100rpx;"></view>
-  </scroll-view>
+  </view>
 </view> 

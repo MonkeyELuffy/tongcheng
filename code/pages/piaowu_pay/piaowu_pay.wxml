@@ -18,7 +18,7 @@
     <view class='label'>数量</view>
     <view class='sub-add-contain flex'>
       <image src='{{subImg}}' bindtap='subNum'></image>
-      <view class='num'>{{num}}</view>
+       <view class='num'>{{num}}</view>
       <image src='{{addImg}}' bindtap='addNum'></image>
     </view>
   </view>

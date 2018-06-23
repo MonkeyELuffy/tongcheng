@@ -1,3 +1,5 @@
+
+var util = require('../../utils/util.js');
 var app = getApp()
 Page({
   data: {
@@ -9,7 +11,7 @@ Page({
     showDel:false,
     // 全选
     chooseAll: false,
-    page: 0,
+    page_no: 0,
     //顶部菜单类型
     index:0,
     navItems: [
@@ -19,80 +21,103 @@ Page({
         checked:true,
       },
       {
-        name: '商店',
+        name: '商品',
         id: 1,
         checked: false,
       }],
-    dataList: [
-      {
-        img: '../../img/test.png',
-        name: '深圳市三九胃泰有限公司',
-        labels: [{ name: '铝制品', bgColor: '#fff' }, { name: '满减', bgColor: '#f68076' }],
-        haoping: '98',
-        sale: 1234,
-        dic: 12.3,
-        checked:false,
-        id:0
-      },
-      {
-        img: '../../img/test.png',
-        name: '深圳市三九胃泰有限公司',
-        labels: [{ name: '铝制品', bgColor: '#fff' }, { name: '满减', bgColor: '#f68076' }],
-        haoping: '98',
-        sale: 1234,
-        dic: 12.3,
-        checked: false,
-        id: 1
-      },
-      {
-        img: '../../img/test.png',
-        name: '深圳市三九胃泰有限公司',
-        labels: [{ name: '铝制品', bgColor: '#fff' }, { name: '满减', bgColor: '#f68076' }],
-        haoping: '98',
-        sale: 1234,
-        dic: 12.3,
-        checked: false,
-        id: 2
-      }],
+    dataList: [],
+    attentionType:1,
     //返回分页数据的总页数
     total_page:1
   },
-  onLoad: function () {
+  onShow: function () {
     var that = this;
     //数据初始化
     that.setData({
       bindDownLoad: true,
-      page: 0,
+      page_no: 0,
+      dataList: [],
     })
     //获取屏幕高度
     wx.getSystemInfo({
       success: function (res) {
-        console.info(res.windowHeight);
         that.setData({
-          scrollHeight: res.windowHeight
+          scrollHeight: res.windowHeight - 70 * res.screenWidth / 750
         });
       }
     });
-    //加载文章列表数据
-    // that.loadData()
+    //获取关注记录
+    var params = {
+      type: this.data.attentionType,  //类型(1商家，2商品)
+      page_no: 1,
+      page_size: 15,
+      member_id: app.globalData.member_id
+    }
+    this.loadData(params);
   },
   // 管理
   guanli:function(e){
     var bottomBtn = this.data.bottomBtn
-    if (bottomBtn === '管理'){
-      this.setData({
-        showDel: true,
-        bottomBtn: '删除'
-      })
-    }else{
-      var dataList = this.data.dataList;
-      var delList = [];
-      for(var i in dataList){
-        if(dataList[i].checked){
-          delList.push(dataList[i])
+    if(this.data.dataList.length){
+      if (bottomBtn === '管理') {
+        this.setData({
+          showDel: true,
+          bottomBtn: '删除'
+        })
+      } else {
+        var dataList = this.data.dataList;
+        var delList = [];
+        var nowType = 1;
+        if (this.data.navItems[0].checked){
+          for (var i in dataList) {
+            if (dataList[i].checked) {
+              delList.push(dataList[i].th_id)
+            }
+          } 
+          nowType = 1
+        }else{
+          for (var i in dataList) {
+            if (dataList[i].checked) {
+              delList.push(dataList[i].th_id)
+            }
+          }
+          nowType = 2
         }
+        var ids = delList.join(',')
+        this.cancelAttention(ids, nowType)
       }
-      console.log(delList);
+    }
+  },
+  //批量取消关注
+  cancelAttention(ids, nowType) {
+    var params = {
+      ids: ids,
+      type: nowType,
+      member_id: app.globalData.member_id
+    }
+    util.httpPost(app.globalUrl + app.CancelPayAttention, params, this.processCancelData);
+  },
+  processCancelData(res) {
+    if (res.suc == 'y') {
+      this.setData({
+        status: 0
+      })
+      wx.showToast({
+        title: '取消关注成功',
+      })
+      this.quxiao();
+      var params = {
+        page_no: 1,
+        page_size: 15,
+        member_id: app.globalData.member_id
+      }
+      this.loadData(params)
+    } else {
+      // console.log('关注错误', res);
+      wx.showModal({
+        title: '提醒',
+        content: res.msg,
+      })
     }
   },
   //取消
@@ -133,13 +158,21 @@ Page({
     var that = this;
     if (that.data.bottomBtn === '管理'){
       var go = function (e) {
-        var id = e.currentTarget.dataset.id
-          // var params = { title: title, id: id, time: time, author: author }
-          // params = JSON.stringify(params)
-          // wx.navigateTo({
-          //   url: '/pages/articleDetail/articleDetail?params=' + params,
-          // })
-          console.log(id)
+        var item = e.currentTarget.dataset.item
+        //有goods_id就进去商品详情
+        if (item.goods_id) {
+          var params = { seller_id: item.seller_id, goods_id: item.goods_id }
+          params = JSON.stringify(params)
+          wx.navigateTo({
+            url: '/pages/productDetail/productDetail?params=' + params,
+          })
+        } else {
+          var seller_id = item.seller_id
+          wx.navigateTo({
+            url: '/pages/shangjiadianpu/shangjiadianpu?seller_id=' + seller_id,
+          })
+        }
+        console.log(item)
       }
       var data = { go, e }
       that.clickTooFast(data)
@@ -182,14 +215,22 @@ Page({
       var name = e.target.dataset.name;
       that.setData({
         article_type: article_type,
-        page: 0,
+        page_no: 0,
         youhuiquan_list: [],
         bindDownLoad: true,
         total_page: 1,
         index: index,
-        name: name
+        attentionType: index + 1, //	类型(1商家，2商品)
+        name: name,
+        dataList: []
       })
-      that.loadData(index)
+      var params = {
+        type: that.data.attentionType,  //类型(1商家，2商品)
+        page_no: 1,
+        page_size: 15,
+        member_id: app.globalData.member_id
+      }
+      that.loadData(params);
       that.changeStyle(index)
     }
 
@@ -207,16 +248,21 @@ Page({
   },
   // 下拉加载更多购物车数据
   bindDownLoad: function (e) {
-    this.loadData()
+    var params = {
+      page_no: this.data.page_no,
+      page_size: 15,
+      member_id: app.globalData.member_id
+    }
+    this.loadData(params)
   },
   /*===========
   加载数据
   ===========*/
-  loadData: function (e) {
+  loadData: function (params) {
     var that = this
-    var index = that.data.index
-    var name = that.data.name
-    if (that.data.bindDownLoad && parseInt(that.data.page) < parseInt(that.data.total_page)) {
+    console.log(params)
+    console.log(that.data.page_no, '??', that.data.total_page)
+    if (that.data.bindDownLoad && parseInt(that.data.page_no) <= parseInt(that.data.total_page)) {
       that.setData({
         bindDownLoad: false
       })
@@ -227,29 +273,7 @@ Page({
       setTimeout(function () {
         wx.hideLoading()
       }, 600)
-      wx.request({
-        url: app.globalUrl + app.GET_youhuiquan_list,
-        data: {
-          data:{
-            curPage: that.data.page+1,
-            data: name
-          }
-        },
-        method: 'POST',
-        success: function (res) {
-          var youhuiquan_list = that.data.youhuiquan_list || []
-          for (var i in res.data.data.data) {
-            youhuiquan_list.push({})
-            youhuiquan_list[youhuiquan_list.length - 1] = res.data.data.data[i]
-            youhuiquan_list[youhuiquan_list.length - 1].time = that.getLocalTime(youhuiquan_list[youhuiquan_list.length - 1].time, "yyyy-M-d")
-          }
-          that.setData({
-            youhuiquan_list: youhuiquan_list,
-            page: res.data.data.curPage,
-            total_page: res.data.data.pageCount
-          })
-        }
-      })
+      util.httpPost(app.globalUrl + app.PayAttentionList, params, that.processData);
     }
     //1000ms之后才可以继续加载，防止加载请求过多
     setTimeout(function () {
@@ -257,6 +281,37 @@ Page({
         bindDownLoad: true
       })
     }, 1000)
+  },
+  processData(res) {
+    if (res.suc == 'y') {
+      var dataList = this.data.dataList
+      console.log('获取PayAttentionList成功', res.data);
+      if ((res.data.list instanceof Array && res.data.list.length < 15) || (res.data.list == '')) {
+        this.setData({
+          showNomore: true
+        })
+      }
+      for (var i in res.data.list) {
+        if (res.data.list[i].store_img_src){
+          res.data.list[i].logo_url = app.globalImageUrl + res.data.list[i].store_img_src
+        }else{
+          res.data.list[i].logo_url = app.globalImageUrl + res.data.list[i].logo_url
+        }
+        if (res.data.list[i].special){
+          res.data.list[i].special = res.data.list[i].special.split(',')
+        }
+        res.data.list[i].checked = false
+      }
+      //获取数据之后需要改变page和totalPage数值，保障上拉加载下一页数据的page值，其余没有需要修改的数据
+      dataList = dataList.concat(res.data.list)
+      this.setData({
+        page_no: this.data.page_no + 1,
+        total_page: res.data.total_page,
+        dataList: dataList,
+      })
+    } else {
+      console.log('获取PayAttentionList错误', res);
+    }
   },
   /*==========
   防止快速点击

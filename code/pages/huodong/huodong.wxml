@@ -1,9 +1,12 @@
 <!--pages/huodong/huodong.wxml-->
+<import src="../noMoreData/noMoreData.wxml"/>
 <view class='contain'>
   <view class='huodong'>
-    <view class='huodong-item' wx:for='{{huodongList}}' data-id='{{item.id}}'>
-      <image class='img' src='{{item.img}}'></image>
-      <view class='name'>{{item.name}}</view>
+    <view class='huodong-item' bindtap='clickItem' wx:for='{{dataList}}' data-item='{{item}}'>
+      <image class='img' src='{{item.img_url}}'></image>
+      <view class='name'>{{item.title}}</view>
     </view>
   </view>
 </view>
+<!--nomoreData  -->
+<template is="noMoreData" data="{{showNomore}}"></template>
