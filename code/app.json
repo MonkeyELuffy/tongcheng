@@ -1,13 +1,13 @@
 {
   "pages": [
     "pages/index2/index2",
+    "pages/piaowu_pay/piaowu_pay",
     "pages/yudingpiaowu/yudingpiaowu",
     "pages/pingjiaItem/pingjiaItem",
     "pages/chooseDate/chooseDate",
     "pages/index/index",
     "pages/qiandaohudenglu/qiandaohudenglu",
     "pages/jingdianmenpiao/jingdianmenpiao",
-    "pages/piaowu_pay/piaowu_pay",
     "pages/piaowu_sub/piaowu_sub",
     "pages/youshanwanshui/youshanwanshui",
     "pages/paixuTemplate_2/paixuTemplate_2",

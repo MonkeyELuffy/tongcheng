@@ -1,2 +1,23 @@
 <!--pages/yudingpiaowu/yudingpiaowu.wxml-->
-<view bindtap='submitOrder'>合计提交</view>
+<import src="../../wxParse/wxParse.wxml"/> 
+<view class='contain'>
+  <view class='top-contain'>
+    <view class='title'>{{orderDes.goods_name}}</view>
+    <!--labels  -->
+    <!-- <view></view> -->
+  </view>
+  <view class='tips-item' wx:for='{{orderDes.list}}' wx:for-index="index">
+    <view class='title'>{{item.explain_title}}</view>
+    <!-- <rich-text class='content'>{{item.explain_content}}</rich-text>  -->
+    <template class='content' is="wxParse" data="{{wxParseData:item.article.nodes}}"/> 
+  </view>
+
+  <view class='bottom-contain'>
+    <view class='total'>合计：<span class='price'>￥{{orderDes.price}}</span></view>
+    <view class='shoucang' bindtap='payAttention'>
+      <image class='shoucang-img' src='{{orderDes.status ? guanzhu_1 : guanzhu_0}}'></image>
+      <view class='shoucang-text'>收藏</view>
+    </view>
+    <view class='submit' bindtap='submitOrder'>合计提交</view>
+  </view>
+</view>

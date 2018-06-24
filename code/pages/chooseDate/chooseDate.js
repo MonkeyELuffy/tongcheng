@@ -252,8 +252,8 @@ Page({
     this.setData({
       dateList: dateList
     });
-    // setTimeout(function () {
-    //   wx.navigateBack()
-    // }, 1000)
+    setTimeout(function () {
+      wx.navigateBack()
+    }, 300)
   }
 })

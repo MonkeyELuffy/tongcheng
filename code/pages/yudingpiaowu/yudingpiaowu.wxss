@@ -1,1 +1,60 @@
 /* pages/yudingpiaowu/yudingpiaowu.wxss */
+.title{
+  font-size: 34rpx;
+  color: #333;
+}
+.contain{
+  padding-bottom: 120rpx;
+}
+.top-contain,.tips-item{
+  background-color: #fff;
+  border-bottom: 4rpx solid #eee;
+  box-sizing: border-box;
+  padding: 30rpx 40rpx;
+}
+.wxParse-p{
+  font-size: 28rpx;
+  color: #999;
+  line-height: 180%;
+}
+
+.bottom-contain{
+  width: 100%;
+  height: 100rpx;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding-left: 50rpx;
+  background-color: #fff;
+}
+.total{
+  font-size: 34rpx;
+  color: #333;
+}
+.price{
+  color: rgb(250, 63, 6);
+}
+.shoucang{
+  text-align: center;
+}
+.shoucang-img{
+  width: 40rpx;
+  height: 40rpx;
+}
+.shoucang-text{
+  font-size: 30rpx;
+  color: #333;
+}
+.submit{
+  width: 200rpx;
+  height: 100rpx;
+  text-align: center;
+  line-height: 100rpx;
+  color: #fff;
+  font-size: 34rpx;
+  background-color: rgb(240, 127, 121);
+}
