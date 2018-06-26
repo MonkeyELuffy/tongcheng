@@ -4,7 +4,7 @@
     <swiper circular="true" class="swiper" indicator-dots="true">  
       <block wx:for="{{slider}}" wx:key="unique">  
         <swiper-item>  
-          <image src="{{item.img_src}}" class="img" data-skip='{{item.skip}}' data-id="{{item.seller_id}}" data-url='{{item.h5_url}}' bindtap='clickBanner'></image> 
+          <image src="{{item.img_src || item.image_src}}" class="img" data-skip='{{item.skip}}' data-id="{{item.seller_id}}" data-url='{{item.h5_url}}' bindtap='clickBanner'></image> 
         </swiper-item>  
       </block>  
     </swiper>  
