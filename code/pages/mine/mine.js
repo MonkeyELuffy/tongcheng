@@ -41,6 +41,11 @@ Page({
         img: '../../img/center/wode_jilu.png',
         name: '关注记录',
         page: 'wodeguanzhu'
+      },
+      {
+        img: '../../img/center/wode_jilu.png',
+        name: '我的积分',
+        page: 'wodeguanzhu'
       }, 
       {
         img: '../../img/center/wode_guanyu.png',

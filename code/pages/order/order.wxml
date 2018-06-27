@@ -19,7 +19,7 @@
         <image class='shop-img' src='{{shopImg}}'></image>
         <view class='shop-name'>{{item.seller_name}}</view>
       </view>
-      <view class="status">{{item.order_type == '1' ? '当面交易' : '同城交易'}}</view>
+      <view class="status">{{item.differ == '1' ? '餐饮类' : (item.differ == '2' ? '酒店类' : '票务类')}}</view>
     </view>
 
     <!--订单详情-->

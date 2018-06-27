@@ -3,6 +3,8 @@ var DATE_LIST = [];
 var DATE_YEAR = new Date().getFullYear();
 var DATE_MONTH = new Date().getMonth() + 1;
 var DATE_DAY = new Date().getDate();
+var app = getApp()
+var util = require('../../utils/util.js');
 Page({
   data: {
     maxMonth: 7, //最多渲染月数
@@ -11,6 +13,8 @@ Page({
     weekStr: ['日', '一', '二', '三', '四', '五', '六'],
     checkInDate: Moment(new Date()).format('YYYY-MM-DD'),
     markcheckInDate: false, //标记开始时间是否已经选择
+    // 价格列表
+    priceListData:[],
     sFtv: [
       {
         month: 1,
@@ -110,19 +114,30 @@ Page({
     ]
   },
   onLoad(options) {
-    // 页面初始化 options为页面跳转所带来的参数
     this.createDateListData();
     var _this = this;
     // 页面初始化 options为页面跳转所带来的参数
-    var checkInDate = options.checkInDate ? options.checkInDate : Moment(new Date()).format('YYYY-MM-DD');
+    var checkInDate = Moment(new Date()).format('YYYY-MM-DD');
     wx.getSystemInfo({
       success: function (res) {
         _this.setData({ systemInfo: res, checkInDate: checkInDate});
       }
     })
+    //根据日期获取价格列表
+    this.getPriceList(options.product_id)
   },
-  onShow() {
-    this.addPrice();
+  getPriceList(product_id){
+    util.httpPost(app.globalUrl + app.DatePriceList, { product_id: product_id }, this.processPriceListData);
+  },
+  processPriceListData(res){
+    if(res.suc == 'y'){
+      this.setData({
+        priceListData: res.data
+      })
+      this.addPrice(res.data);
+    } else {
+      console.log('根据日期获取价格列表错误', res);
+    }
   },
   createDateListData() {
     var dateList = [];
@@ -155,12 +170,12 @@ Page({
           clazz = 'unavailable ' + clazz;
         else
           clazz = '' + clazz
-        days.push({ day: j, class: clazz })
+        days.push({ day: j < 10 ? '0' + j : j, class: clazz })
       }
       var dateItem = {
         id: year + '-' + month,
         year: year,
-        month: month,
+        month: month < 10 ? '0' + month : month,
         days: days
       }
       dateList.push(dateItem);
@@ -199,12 +214,17 @@ Page({
     return d.getDay();
   },
   // 添加每日价格
-  addPrice() {
+  addPrice(priceListData) {
     var dateList = this.data.dateList
     for (let i = 0; i < dateList.length; i++) {
       let days = dateList[i].days;
       for (let j = 0; j < days.length; j++) {
-        days[j].text = '￥350'
+        for (let k in priceListData){
+          if (priceListData[k].date == dateList[i].year + '-' + dateList[i].month + '-' + days[j].day) {
+            days[j].text = '￥' + priceListData[k].price
+            break
+          }
+        }
       }
     }
     this.setData({

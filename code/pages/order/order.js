@@ -58,8 +58,9 @@ Page({
     this.setData({
       scrollHeight: this.data.scrollHeight - 80 * app.globalData.mult
     })
+    this.refreshData()
   },
-  onShow() {
+  refreshData(){
     var nowType = wx.getStorageSync('nowOrderType') || 1
     var btns;
     switch (nowType) {
@@ -100,6 +101,47 @@ Page({
     }
     this.loadListData(params)
   },
+  // onShow() {
+  //   var nowType = wx.getStorageSync('nowOrderType') || 1
+  //   var btns;
+  //   switch (nowType) {
+  //     case 1:
+  //       btns = ['付款'];
+  //       break;
+  //     case 2:
+  //       btns = ['联系商家', '确认收货'];
+  //       break;
+  //     case 3:
+  //       btns = ['评价'];
+  //       break;
+  //     case 4:
+  //       btns = [];
+  //       break;
+  //   }
+  //   var navItems = this.data.navItems
+  //   for (var i in navItems) {
+  //     navItems[i].checked = false
+  //   }
+  //   navItems[nowType - 1].checked = true
+  //   this.setData({
+  //     bindDownLoad: true,
+  //     page_no: 1,
+  //     total_page: 1,
+  //     btns: btns,
+  //     navItems: navItems,
+  //     orders: [],
+  //     showNomore: false
+  //   })
+  //   var differ = this.data.orderTypeList[1].checked ? 1 : 2
+  //   var params = {
+  //     member_id: app.globalData.member_id,
+  //     type: nowType,
+  //     differ: differ,
+  //     page_no: 1,
+  //     page_size: 15,
+  //   }
+  //   this.loadListData(params)
+  // },
   // 进入详情页面之前获取详情数据，然后以res名传递到详情页，详情页直接使用之前的请求回调函数处理得到的res
   goOrderDetail(e) {
     var that = this

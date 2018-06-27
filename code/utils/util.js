@@ -67,6 +67,7 @@ function httpPost2(url, data) {
       data: data,
       success: function (res) {
         console.log('请求参数', data)
+        console.log('响应数据', res)
         resolve(res.data);
       },
       fail: function (error) {

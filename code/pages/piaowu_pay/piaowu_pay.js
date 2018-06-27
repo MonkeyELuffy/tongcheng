@@ -134,7 +134,7 @@ Page({
     let item = e.currentTarget.dataset.item
     if (item.text == '其他'){
       wx.navigateTo({
-        url: '../../pages/chooseDate/chooseDate',
+        url: '../../pages/chooseDate/chooseDate?product_id=' + this.data.orderInfo.goods_item[0].product_id,
       })
     }else{
       let dateList = this.data.dateList

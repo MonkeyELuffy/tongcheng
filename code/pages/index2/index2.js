@@ -83,24 +83,34 @@ Page({
       page_size:10,
       page_no:1
     }
+    wx.showLoading({
+      mask: true
+    })
     util.httpPost2(app.globalUrl + app.HotGoods, params).then(this.processHotGoods)
   },
   processHotGoods(res){
     if (res.suc == 'y' && res.data.list.length > 0){
-      for(let i in res.data.list){
+      for (let i in res.data.list) {
+        wx.hideLoading()
         res.data.list[i].logo_url = app.globalImageUrl + res.data.list[i].logo_url
       }
       this.setData({
         list_2: res.data.list
       })
+    }else{
+      wx.hideLoading()
     }
   },
   // 获取同城首页banner、最佳路线、活动列表数据
   getIndexData() {
+    wx.showLoading({
+      mask: true
+    })
     util.httpPost2(app.globalUrl + app.Index, {}).then(this.processIndexData)
   },
   processIndexData(res) {
     if (res.suc == 'y') {
+      wx.hideLoading()
       // banner
       for (let i in res.data.banner_list){
         res.data.banner_list[i].image_src = app.globalImageUrl + res.data.banner_list[i].image_src
@@ -119,6 +129,8 @@ Page({
         list_1: res.data.tour,
         nav_1: res.data.five_list[0]
       })
+    } else {
+      wx.hideLoading()
     }
   },
 })

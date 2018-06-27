@@ -109,6 +109,8 @@ App({
   CancelPayAttention: 'Other/delete_through',
   // 账单明细
   MoneyDetail: 'Money/money_detail',
+  // 根据日期获取价格列表
+  DatePriceList: 'Ticket/date_price',
 
   onLaunch: function () {
     //获取屏幕高度
@@ -159,9 +161,9 @@ App({
   //获取Openid
   getOpenid: function (code) {
     var that = this;
-    // wx.showLoading({
-    //   mask: true
-    // })
+    wx.showLoading({
+      mask: true
+    })
     wx.request({
       url: that.globalUrl + that.Openid,
       header: { 'content-type': 'application/x-www-form-urlencoded' },
