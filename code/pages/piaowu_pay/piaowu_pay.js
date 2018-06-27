@@ -46,19 +46,56 @@ Page({
     orderDes:{},
     ship_name: '',
     ship_phone:'',
-    time:'2018-06-25',
+    time:'',
   },
   onLoad: function (options) {
     let params = JSON.parse(options.params)
     console.log(params)
     this.setData({
-      orderDes: params.orderDes
+      orderDes: params.orderDes,
+      time: this.getEnterAndLeaveDate_2(0)
     })
     // 确认订单数据
     this.getOrderInfo(params.orderDes)
+    this.getNowDate()
   },
   onShow() {
     
+  },
+  getNowDate(){
+    let day_1 = this.getEnterAndLeaveDate(0)
+    let time_1 = this.getEnterAndLeaveDate_2(0)
+    let day_2 = this.getEnterAndLeaveDate(1)
+    let time_2 = this.getEnterAndLeaveDate_2(1)
+    let day_3 = this.getEnterAndLeaveDate(2)
+    let time_3 = this.getEnterAndLeaveDate_2(2)
+    let dateList = this.data.dateList
+    dateList[0].dateText = day_1
+    dateList[0].time = time_1
+    dateList[1].dateText = day_2
+    dateList[1].time = time_2
+    dateList[2].dateText = day_3
+    dateList[2].time = time_3
+    this.setData({
+      dateList: dateList
+    })
+  },
+  getEnterAndLeaveDate(AddDayCount) {
+    let dd = new Date();
+    dd.setDate(dd.getDate() + AddDayCount);//获取AddDayCount天后的日期
+    let y = dd.getFullYear();
+    let m = dd.getMonth() + 1;//获取当前月份的日期
+    let d = dd.getDate();
+    return m + "月" + d + '日';
+  },
+  getEnterAndLeaveDate_2(AddDayCount) {
+    let dd = new Date();
+    dd.setDate(dd.getDate() + AddDayCount);//获取AddDayCount天后的日期
+    let y = dd.getFullYear();
+    let m = dd.getMonth() + 1;//获取当前月份的日期
+    m = m > 10 ? m : '0' + m
+    let d = dd.getDate();
+    return y + "-" + m + "-" + d;
   },
   getOrderInfo(params){
     let data = {
@@ -80,12 +117,23 @@ Page({
     }
   },
   //支付
-  pay(e){
-
+  pay(e) {
+    if (!basic.checkedPhone(this.data.ship_phone)) {
+      wx.showToast({
+        title: '请输入正确的手机号',
+      })
+      return
+    }
+    if (!basic.checkNull(this.data.ship_name)) {
+      wx.showToast({
+        title: '请输入姓名',
+      })
+      return
+    }
     let data = {
       buy_key: this.data.orderInfo.goods_item[0].product_id + '_' + this.data.orderInfo.goods_item[0].quantity,
       member_id: app.globalData.member_id,
-      time: '2018-06-25',
+      time: this.data.time,
       cpns_id: this.data.orderInfo.cpns_info.cpns_id,
       ship_name: this.data.ship_name,
       ship_phone: this.data.ship_phone,
@@ -132,20 +180,25 @@ Page({
   //选择日期
   chooseDate(e){
     let item = e.currentTarget.dataset.item
-    if (item.text == '其他'){
+    let dateList = this.data.dateList
+    for (let i in dateList) {
+      dateList[i].checked = false
+    }
+    dateList[item.index].checked = true
+    if (item.text == '其他') {
       wx.navigateTo({
         url: '../../pages/chooseDate/chooseDate?product_id=' + this.data.orderInfo.goods_item[0].product_id,
       })
     }else{
-      let dateList = this.data.dateList
-      for (let i in dateList){
-        dateList[i].checked = false
-      }
-      dateList[item.index].checked = true
       this.setData({
-        dateList: dateList
+        time: dateList[item.index].time
       })
+      //重新获取订单数据
+      this.getOrderInfo(this.data.orderDes)
     }
+    this.setData({
+      dateList: dateList
+    })
   },
   //减少数量
   subNum(e) {

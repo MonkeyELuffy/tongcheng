@@ -14,7 +14,7 @@
       wx:key="{{index}}">
       <view class='item-days'>
         <text style='font-size:28rpx;'>{{item.day>0?(item.daytext?item.daytext:item.day):''}}</text>
-        <view style='font-size:30rpx;color:rgb(250,64,7)'>{{item.day>0?item.text:''}}</view>
+        <view style='font-size:20rpx;color:rgb(250,64,7)'>{{item.day>0?item.text:''}}</view>
       </view>
     </view>
   </view>
