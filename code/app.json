@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index2/index2",
+    "pages/chooseDateForJiuDian/chooseDateForJiuDian",
     "pages/piaowu_pay/piaowu_pay",
     "pages/yudingpiaowu/yudingpiaowu",
     "pages/pingjiaItem/pingjiaItem",

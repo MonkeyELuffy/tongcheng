@@ -9,18 +9,6 @@ Page({
     nowType: 1,
     imgHttp: app.globalImageUrl,
     shopImg: '../../img/shangjia.png',
-    orderTypeList: [
-      {
-        name: '酒店订单',
-        order: 'jiudian',
-        checked: false
-      },
-      {
-        name: '餐饮订单',
-        order: 'canyin',
-        checked: true
-      }
-    ],
     //当前订单类型
     nowOrderType: 'jiudian',
     default_image: '../../img/default-image.png',
@@ -58,9 +46,9 @@ Page({
     this.setData({
       scrollHeight: this.data.scrollHeight - 80 * app.globalData.mult
     })
-    this.refreshData()
+    // this.onShow()
   },
-  refreshData(){
+  onShow(){
     var nowType = wx.getStorageSync('nowOrderType') || 1
     var btns;
     switch (nowType) {
@@ -91,57 +79,14 @@ Page({
       orders: [],
       showNomore: false
     })
-    var differ = this.data.orderTypeList[1].checked ? 1 : 2
     var params = {
       member_id: app.globalData.member_id,
       type: nowType,
-      differ: differ,
       page_no: 1,
       page_size: 15,
     }
     this.loadListData(params)
   },
-  // onShow() {
-  //   var nowType = wx.getStorageSync('nowOrderType') || 1
-  //   var btns;
-  //   switch (nowType) {
-  //     case 1:
-  //       btns = ['付款'];
-  //       break;
-  //     case 2:
-  //       btns = ['联系商家', '确认收货'];
-  //       break;
-  //     case 3:
-  //       btns = ['评价'];
-  //       break;
-  //     case 4:
-  //       btns = [];
-  //       break;
-  //   }
-  //   var navItems = this.data.navItems
-  //   for (var i in navItems) {
-  //     navItems[i].checked = false
-  //   }
-  //   navItems[nowType - 1].checked = true
-  //   this.setData({
-  //     bindDownLoad: true,
-  //     page_no: 1,
-  //     total_page: 1,
-  //     btns: btns,
-  //     navItems: navItems,
-  //     orders: [],
-  //     showNomore: false
-  //   })
-  //   var differ = this.data.orderTypeList[1].checked ? 1 : 2
-  //   var params = {
-  //     member_id: app.globalData.member_id,
-  //     type: nowType,
-  //     differ: differ,
-  //     page_no: 1,
-  //     page_size: 15,
-  //   }
-  //   this.loadListData(params)
-  // },
   // 进入详情页面之前获取详情数据，然后以res名传递到详情页，详情页直接使用之前的请求回调函数处理得到的res
   goOrderDetail(e) {
     var that = this
@@ -158,118 +103,13 @@ Page({
       console.log('获取订单详情错误', res);
     }
   },
-  //选择订单类型
-  chooseOrderType: function (e) {
-    var nowOrderType = e.currentTarget.dataset.order;
-    var orderTypeList = this.data.orderTypeList;
-    var navItems
-    //重复点击已选中的顶部菜单无事件发生；
-    if (nowOrderType == 'jiudian' && !orderTypeList[0].checked) {
-      orderTypeList[0].checked = true
-      orderTypeList[1].checked = false
-      navItems = [{
-        name: '待付款',
-        type: 1,
-        checked: true
-      }, {
-        name: '待评价',
-        type: 3,
-        checked: false
-      }, {
-        name: '已完成',
-        type: 4,
-        checked: false
-      }]
-      this.setData({
-        orders: []
-      })
-      this.setData({
-        orderTypeList: orderTypeList,
-        navItems: navItems,
-        index: 0,
-        bindDownLoad: true,
-        page_no: 1,
-        btns: ['付款'],
-        orders: []
-      })
-      var params = {
-        member_id: app.globalData.member_id,
-        type: 1,
-        differ: 2,
-        page_no: 1,
-        page_size: 15,
-      }
-      this.loadListData(params)
-    }
-    if (nowOrderType == 'canyin' && !orderTypeList[1].checked) {
-      orderTypeList[1].checked = true
-      orderTypeList[0].checked = false
-      navItems = [{
-        name: '待付款',
-        type: 1,
-        checked: true
-      }, {
-        name: '待收货',
-        type: 2,
-        checked: false
-      }, {
-        name: '待评价',
-        type: 3,
-        checked: false
-      }, {
-        name: '已完成',
-        type: 4,
-        checked: false
-      }
-      ]
-      this.setData({
-        orderTypeList: orderTypeList,
-        navItems: navItems,
-        index: 0,
-        bindDownLoad: true,
-        page_no: 1,
-        btns: ['付款'],
-        orders: []
-      })
-      var params = {
-        member_id: app.globalData.member_id,
-        type: 1,
-        differ: 1,
-        page_no: 1,
-        page_size: 15,
-      }
-      this.loadListData(params)
-    }
-  },
-  // 刷新页面数据
-  // refreshData(e){
-  //   //与加载下一页数据唯一的区别是，清空orders
-  //   // index代表订单类型1到5
-  //   // differ代表订单分类酒店（2）和餐饮（1）
-  //   var index = this.data.index + 1
-  //   var differ = this.data.orderTypeList[1].checked ? 1 : 2
-  //   this.setData({
-  //     orders:[]
-  //   })
-  //   var params = {
-  //     member_id: app.globalData.member_id,
-  //     type: index,
-  //     differ: differ,
-  //     page_no: 1,
-  //     page_size: 15,
-  //   }
-  //   this.loadListData(params)
-  // },
   // 下拉加载更多数据
   bindDownLoad: function (e) {
     // index代表订单类型1到5
-    // differ代表订单分类酒店（2）和餐饮（1）
     var nowType = this.data.nowType
-    var differ = this.data.orderTypeList[1].checked ? 1 : 2
     var params = {
       member_id: app.globalData.member_id,
       type: nowType,
-      differ: differ,
       page_no: this.data.page_no,
       page_size: 15,
     }
@@ -295,28 +135,28 @@ Page({
         })
       } else {
         // 处理datalist里面的订单时间和订单状态文字
-        var differ = this.data.orderTypeList[1].checked ? 1 : 2
         var nowType = this.data.nowType
         //showTextMom的值决定showText和showTime的值
         var showText, showTimeVal
-        var showTextMom = differ + '' + nowType
+        var showTextMom = '' + nowType
         switch (showTextMom) {
-          case '11':
-          case '21':
+          case '1':
             showText = '下单';
             showTimeVal = 'addtime';
             break
-          case '12':
+          case '2':
             showText = '付款';
             showTimeVal = 'paytime';
             break
-          case '13':
-          case '23':
+          case '3':
             showText = '确认';
             showTimeVal = 'confirm_time';
             break
-          case '14':
-          case '25':
+          case '4':
+            showText = '完成';
+            showTimeVal = 'confirm_time';
+            break
+          case '5':
             showText = '完成';
             showTimeVal = 'confirm_time';
             break
@@ -395,11 +235,9 @@ Page({
       })
       wx.setStorageSync('nowOrderType', item.type)
       //切换顶部菜单时，初始化数据
-      var differ = that.data.orderTypeList[1].checked ? 1 : 2
       var params = {
         member_id: app.globalData.member_id,
         type: item.type,
-        differ: differ,
         page_no: 1,
         page_size: 15,
       }
@@ -472,7 +310,6 @@ Page({
     if (res.suc == 'y') {
       console.log('操作订单成功', res.data);
       // 成功之后需要清空订单，然后重新请求最新订单数据
-      var differ = that.data.orderTypeList[1].checked ? 1 : 2
       var nowType = that.data.nowType
       that.setData({
         orders: []
@@ -480,7 +317,6 @@ Page({
       var params = {
         member_id: app.globalData.member_id,
         type: nowType,
-        differ: differ,
         page_no: 1,
         page_size: 15,
       }

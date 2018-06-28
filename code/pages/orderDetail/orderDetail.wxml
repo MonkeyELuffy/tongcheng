@@ -3,8 +3,8 @@
 
 <view class="contain">
   <!--收货方式  -->
-  <view class='type'>{{orderDetail.ship_type == '1' ? '到店取货-取货地址' : '送货上门-收货地址'}}</view>
-  <view class="address" bindtap="dizhi">
+  <view class='type' wx:if='{{orderDetail.differ != "3"}}'>{{orderDetail.ship_type == '1' ? '到店取货-取货地址' : '送货上门-收货地址'}}</view>
+  <view class="address" bindtap="dizhi" wx:if='{{orderDetail.differ != "3"}}'>
     <view class="address-message">
       <view class="now-address">
         <!--取货地址或者寄送地址  -->
@@ -16,7 +16,7 @@
     </view>
   </view>
   <!--到店取货时显示  -->
-  <view class='daodian' wx:if='{{orderDetail.ship_type == "1"}}'>
+  <view class='daodian' wx:if='{{orderDetail.ship_type == "1" && orderDetail.differ != "3"}}'>
     <!--取货人信息  -->
     <view class='daodian-item'>取货人姓名:<span style='padding:6px;font-size:24rpx;'></span>{{orderDetail.ship_name}}</view>
     <view class='daodian-item'>取货人手机号:<span style='padding:6px;font-size:24rpx;'></span>{{orderDetail.ship_phone}}</view>
@@ -28,7 +28,8 @@
    <view class='good-contain'>
     <!--list item订单-->
     <block wx:for="{{orderDetail.items_list}}">
-      <view class="goods">
+      <!--酒店或者餐饮订单  -->
+      <view class="goods" wx:if='{{orderDetail.differ != "3"}}'>
         <!--产品左侧图片-->
         <view>
           <image src='{{httpUrl + item.logo_url}}' class="good-img" />
@@ -71,6 +72,8 @@
         </view>
       </view>
     </view>
+    <!--景点类订单  -->
+
 
     <!--备注  -->
     <view class='beizhu'><span style='color:#333;font-size:28rpx;'>备注：</span>{{orderDetail.remark}}</view>

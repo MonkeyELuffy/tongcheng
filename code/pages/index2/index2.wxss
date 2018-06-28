@@ -13,6 +13,22 @@
   width: 100%;
   height: 220rpx;
 }
+/*客服  */
+.kefu{
+  position: fixed;
+  right: 40rpx;
+  width: 100rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: 700;
+  font-size: 32rpx;
+  text-align: center;
+  box-sizing: border-box;
+  bottom: 40rpx;
+  background:linear-gradient(to left,rgb(19, 191, 222), rgb(120, 233, 250));
+}
 
 .list-1{
   background-color: #fff;

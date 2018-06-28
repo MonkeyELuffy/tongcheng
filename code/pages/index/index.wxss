@@ -83,7 +83,7 @@
 }
 
 /*客服  */
-.kefu,.ruzhu{
+.kefu{
   position: fixed;
   right: 40rpx;
   width: 100rpx;
@@ -95,8 +95,6 @@
   font-size: 32rpx;
   text-align: center;
   box-sizing: border-box;
-}
-.kefu{
   bottom: 40rpx;
   background:linear-gradient(to left,rgb(19, 191, 222), rgb(120, 233, 250));
 }

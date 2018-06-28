@@ -111,6 +111,8 @@ App({
   MoneyDetail: 'Money/money_detail',
   // 根据日期获取价格列表
   DatePriceList: 'Ticket/date_price',
+  // 游玩攻略
+  GongLve: 'Article/index',
 
   onLaunch: function () {
     //获取屏幕高度

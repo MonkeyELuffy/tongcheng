@@ -2,9 +2,6 @@
 <import src="../noMoreData/noMoreData.wxml"/>
 <view class="contain">
   <!--我的订单  -->
-  <!-- <view class='my-order flex-between'>
-    <view wx:for='{{orderTypeList}}' style="color: {{item.checked ? '#e61c04' : '#737373' }}; " class='text' bindtap='chooseOrderType' data-order='{{item.order}}'>{{item.name}}</view>
-  </view> -->
   <view class="nav-title">
     <view class="nav-item" wx:for="{{navItems}}" style="color: {{item.checked ? '#e61c04' : '#737373' }}; " bindtap="checked" wx:for-index="index" data-index="{{index}}" data-item='{{item}}'>
       {{item.name}}

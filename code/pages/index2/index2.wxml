@@ -19,31 +19,16 @@
     <!--中间菜单  -->
     <view class='center-nav-contain'>
       <view class='top-nav'>
-        <image class='top-nav-left' src='{{nav_1.image_src}}'></image>
+        <image class='top-nav-left' src='{{nav_0.image_src}}'></image>
         <view class='top-nav-right'>
-          <image class='top-nav-right-text-contain' src='{{nav_2.img}}'></image>
-          <image class='top-nav-right-text-contain' src='{{nav_3.img}}'></image>
+          <image class='top-nav-right-text-contain' src='{{nav_1.image_src}}'></image>
+          <image class='top-nav-right-text-contain' src='{{nav_2.image_src}}'></image>
         </view>
       </view>
       <view class='bottom-nav'>
-        <image class='top-nav-right-text-contain bottom-nav-contain' src='{{nav_4.img}}'></image>
-        <image class='top-nav-right-text-contain bottom-nav-contain' src='{{nav_5.img}}'></image>
+        <image class='top-nav-right-text-contain bottom-nav-contain' src='{{nav_3.image_src}}'></image>
+        <image class='top-nav-right-text-contain bottom-nav-contain' src='{{nav_4.image_src}}'></image>
       </view>
-    </view>
-
-    <!--热门问答  -->
-    <view class='title white-bg'>热门问答</view>
-    <view class='ask-answer-contain' wx:for='{{askAnswerList}}'>
-      <view class='answer-contain'>
-        <view class='ask inline-block'>问：</view>
-        <view class='ask-test inline-block'>{{item.askTest}}</view>
-      </view>
-      <view class='answer-contain'>
-        <view class='answer inline-block'>答：</view>
-        <view class='answer-test inline-block'>{{item.answerTest}}</view>
-      </view>
-      <view class='total'>共{{item.total}}个回答</view>
-      <view class='clear'></view>
     </view>
 
     <!--热门产品  -->
@@ -58,5 +43,6 @@
       </view>
     </view>
   </view>
+  <view class='kefu' bindtap='kefu'>客服</view>
   <view class='bottom'></view>
 </scroll-view>

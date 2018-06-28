@@ -16,8 +16,6 @@
       <view class='shop-addr'>地址：{{shop.address}}</view>
     </view>
   </view>
-  <!--优惠买单  -->
-  <view class='youhuimaidan' bindtap='youhuimaidan'>优惠买单</view>
 
   <view class="line"></view>
   <!--购物车和结算按钮  -->

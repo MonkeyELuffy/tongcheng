@@ -4,7 +4,7 @@
    <view class='item' wx:for="{{dataList}}">
      <view class='title'>{{item.title}}</view>
      <view class='item-menus-contain'>
-      <view class='item-menus' wx:for="{{item.menusList}}" data-item='{{item}}'>{{item.name}}</view>
+      <view class='item-menus' wx:for="{{item.menusList}}" data-item='{{item}}' bindtap='chooseType'>{{item.cat_name}}</view>
      </view>
    </view>
  </view>

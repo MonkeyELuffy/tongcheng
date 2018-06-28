@@ -1,8 +1,14 @@
 // pages/jiudianDetail/jiudianDetail.js
 var util = require('../../utils/util.js');
+var basic = require('../../utils/basic.js');
 var bannerTemp = require('../../utils/bannerTemp.js');
 var dataItemTemp = require('../../utils/dataItemTemp.js');
 var app = getApp(); 
+var Moment = require("../../utils/moment.js");
+var DATE_LIST = [];
+var DATE_YEAR = new Date().getFullYear()
+var DATE_MONTH = new Date().getMonth() + 1
+var DATE_DAY = new Date().getDate()
 Date.prototype.format = function () {
   var s = '';
   var mouth = (this.getMonth() + 1) >= 10 ? (this.getMonth() + 1) : ('0' + (this.getMonth() + 1));
@@ -42,7 +48,9 @@ Page({
       total:'1',
       totalPrice:'100.00',
       img:'../../img/test.png',
-      title:'豪华大房'
+      title: '豪华大房',
+      checkInDate: "",
+      checkOutDate: ""
     }
   },
   onLoad(options) {
@@ -54,6 +62,14 @@ Page({
         })
       }
     });
+    //设缓存缓存起来的日期
+    wx.setStorage({
+      key: 'ROOM_SOURCE_DATE',
+      data: {
+        checkInDate: Moment(new Date()).format('YYYY-MM-DD'),
+        checkOutDate: Moment(new Date()).add(1, 'day').format('YYYY-MM-DD')
+      }
+    });
     var data = {
       seller_id: options.seller_id,
       token: app.globalData.userInfo.token
@@ -61,7 +77,12 @@ Page({
     //请求商家详情
     util.httpPost(app.globalUrl + app.HOTELINFO, data, this.processInfoData);
   },
-  onShow(){
+  onShow() {
+    let getDate = wx.getStorageSync("ROOM_SOURCE_DATE");
+    this.setData({
+      checkInDate: getDate.checkInDate,
+      checkOutDate: getDate.checkOutDate
+    })
     // 设置日期默认值
     this.setDefineDate()
   },
@@ -79,6 +100,11 @@ Page({
       ruzhuTimeText: nowDateArr[1] + '月' + nowDateArr[2] + '日',
       lidianTimeText: nextDateArr[1] + '月' + nextDateArr[2] + '日',
     })
+  },
+  //选择酒店时间
+  chooseJiuDianDate(e){
+    let that = this
+    basic.goPage('chooseDateForJiuDian', that, e)
   },
   //导航去酒店
   daohang(){

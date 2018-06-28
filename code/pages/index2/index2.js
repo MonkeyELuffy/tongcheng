@@ -14,51 +14,23 @@ Page({
     best_list:[],
     slider: [],
     list_1: [],
+    nav_0: {
+      image_src: '../../img/nav_0_default.png'
+    },
     nav_1: {
-      name: '千岛湖之夜',
-      des: '体验科幻之夜',
-      color: 'red',
-      img: '../../img/banner.png'
+      image_src: '../../img/nav_1_default.png'
     },
     nav_2: {
-      name: '千岛湖之夜',
-      des: '体验科幻之夜',
-      color: 'blue',
-      img: '../../img/banner.png'
+      image_src: '../../img/nav_2_default.png'
     },
     nav_3: {
-      name: '千岛湖之夜',
-      des: '体验科幻之夜',
-      color: 'green',
-      img: '../../img/banner.png'
+      image_src: '../../img/nav_3_default.png'
     },
     nav_4: {
-      name: '千岛湖之夜',
-      des: '体验科幻之夜',
-      color: 'red',
-      img: '../../img/banner.png'
-    },
-    nav_5: {
-      name: '千岛湖之夜',
-      des: '体验科幻之夜',
-      color: 'green',
-      img: '../../img/banner.png'
+      image_src: '../../img/nav_4_default.png'
     },
     //热门商品
-    list_2: [],
-    askAnswerList: [
-      {
-        askTest: '请问啊是老大法律解释的卡上的卡号是抠脚大叔',
-        answerTest: '请问啊是老大法律解释的卡上的卡号是抠脚大叔',
-        total: 6
-      },
-      {
-        askTest: '请问啊是老大法律解释的卡上的卡号是抠脚大叔',
-        answerTest: '请问啊是老大法律解释的卡上的卡号是抠脚大叔',
-        total: 6
-      }
-    ]
-  
+    list_2: [],  
   },
 
   /**
@@ -122,15 +94,25 @@ Page({
       //五个菜单，按照左到右，上到下1-5顺序给与数据
       for (let i in res.data.five_list) {
         res.data.five_list[i].image_src = app.globalImageUrl + res.data.five_list[i].image_src
+        this.data['nav_' + i] = res.data.five_list[i]
       }
       this.setData({
         slider: res.data.banner_list,
         best_list: res.data.best_list,
         list_1: res.data.tour,
-        nav_1: res.data.five_list[0]
+        nav_0: this.data.nav_0,
+        nav_1: this.data.nav_1,
+        nav_2: this.data.nav_2,
+        nav_3: this.data.nav_3,
+        nav_4: this.data.nav_4,
       })
     } else {
       wx.hideLoading()
     }
+  },
+  kefu() {
+    wx.makePhoneCall({
+      phoneNumber: '13067998666',
+    })
   },
 })

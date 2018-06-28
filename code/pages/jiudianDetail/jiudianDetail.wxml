@@ -22,24 +22,24 @@
       </view>
     </view>
     <!--选择时间  -->
-    <view class='time-contain flex-center'>
+    <view class='time-contain flex-center' bindtap='chooseJiuDianDate'>
       <!--入住  -->
       <view class='ruzhu-time'>
         <view class='time-title'>入住时间</view>
-        <picker mode="date" value="{{ruzhuTime}}" start="{{nowTime}}" bindchange="ruzhu">
+        <!-- <picker mode="date" value="{{ruzhuTime}}" start="{{nowTime}}" bindchange="ruzhu"> -->
           <view class="picker">
             {{ruzhuTimeText}}
           </view>
-        </picker>
+        <!-- </picker> -->
       </view>
       <!--离店  -->
       <view class='ruzhu-time'>
         <view class='time-title'>离店时间</view>
-        <picker mode="date" value="{{lidianTime}}" start="{{lidianStarTime}}" bindchange="lidian">
+        <!-- <picker mode="date" value="{{lidianTime}}" start="{{lidianStarTime}}" bindchange="lidian"> -->
           <view class="picker">
             {{lidianTimeText}}
           </view>
-        </picker>
+        <!-- </picker> -->
       </view>
     </view>
     <!--目前酒店房间状态  -->

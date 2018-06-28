@@ -22,25 +22,25 @@ Page({
     nav_3List: [
       {
         id: 0,
-        img: '../../img/jiudian.png',
+        img: '../../img/youshan.png',
         text: '游山玩水',
         page: ''
       },
       {
         id: 1,
-        img: '../../img/canying.png',
+        img: '../../img/kaogu.png',
         text: '考古穿越',
         page: ''
       },
       {
         id: 2,
-        img: '../../img/techan.png',
+        img: '../../img/shangqu.png',
         text: '夜游赏曲',
         page: ''
       },
       {
         id: 3,
-        img: '../../img/jingdian.png',
+        img: '../../img/zizhu.png',
         text: '休闲自助',
         page: ''
       },
