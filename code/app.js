@@ -99,7 +99,7 @@ App({
   MoneyGetPack: 'Money/getPack',
   // 活动列表
   ActiveList: 'Coupon/active',
-  // 获取记录列表
+  // 获取积分列表
   PointList: 'Other/point',
   // 获取关注记录
   PayAttentionList: 'Other/through',
@@ -226,6 +226,8 @@ App({
     });
   },
   globalData: {
+    // 客服电话
+    phoneNumber:'13067998666',
     hasLogin: false,
     userInfo: {},
     openid: null,

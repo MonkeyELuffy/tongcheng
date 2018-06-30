@@ -112,7 +112,7 @@ Page({
   },
   kefu() {
     wx.makePhoneCall({
-      phoneNumber: '13067998666',
+      phoneNumber: app.globalData.phoneNumber,
     })
   },
 })

@@ -238,14 +238,13 @@ Page({
     var { year, month, day } = e.currentTarget.dataset;
     //当前选择的日期为同一个月并小于今天，或者点击了空白处（即day<0），不执行
     if ((day < DATE_DAY && month == DATE_MONTH) || day <= 0) return;
-    var tempMonth = month;
-    var tempDay = day;
 
-    if (month < 10) tempMonth = '0' + month
-    if (day < 10) tempDay = '0' + day
-
-    var date = year + '-' + tempMonth + '-' + tempDay;
+    var date = year + '-' + month + '-' + day;
+    var dateText = (month > 9 ? month : month[1]) + '月' + (day > 9 ? day : day[1])  + '日';
     console.log('选中', date)
+    wx.setStorageSync('chooseDate', date)
+    wx.setStorageSync('chooseDateText', dateText)
+    wx.setStorageSync('changeData', true)
     this.renderPressStyle(year, month, day);
   },
   renderPressStyle(year, month, day) {

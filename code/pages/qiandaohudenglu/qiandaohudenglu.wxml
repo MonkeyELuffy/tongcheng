@@ -17,7 +17,7 @@
     </view>
 
     <!--景点介绍  -->
-    <view class='jingdian-des'>景点介绍 <image class='more' src='{{more}}'></image></view>
+    <view class='jingdian-des' bindtap='introduce'>景点介绍 <image class='more' src='{{more}}'></image></view>
 
     <!--必看推荐  -->
     <view class='title'>必看推荐</view>

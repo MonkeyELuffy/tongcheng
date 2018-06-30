@@ -1,0 +1,39 @@
+/* pages/yudingpiaowu/yudingpiaowu.wxss */
+.title{
+  font-size: 34rpx;
+  color: #333;
+}
+.contain{
+  padding-bottom: 120rpx;
+}
+.top-contain,.tips-item{
+  background-color: #fff;
+  border-bottom: 4rpx solid #eee;
+  box-sizing: border-box;
+  padding: 30rpx 40rpx;
+}
+.wxParse-p{
+  font-size: 28rpx;
+  color: #999;
+  line-height: 180%;
+}
+
+/*横向排列的菜单*/
+.nav-title {
+  position: fixed;
+  width: 100%;
+  height: 80rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: #fff;
+  color: #666;
+  font-size: 32rpx;
+  z-index: 1000;
+}
+.nav-item {
+  height: 80rpx;
+  text-align: center;
+  line-height: 80rpx;
+  padding: 0 20rpx;
+}

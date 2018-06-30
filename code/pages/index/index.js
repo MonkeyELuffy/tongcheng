@@ -76,7 +76,7 @@ Page({
     page_no: 1,
     total_page:1,
   },
-  onShow() {
+  onLoad() {
     // 数据初始化
     this.inteData()
     // 请求商铺数据
@@ -262,7 +262,7 @@ Page({
   },
   kefu() {
     wx.makePhoneCall({
-      phoneNumber: '13067998666',
+      phoneNumber: app.globalData.phoneNumber,
     })
   },
   /*==========

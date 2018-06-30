@@ -48,9 +48,10 @@
   background-color: #fff;
   margin-top: 2rpx;
   box-sizing: border-box;
-  padding: 30rpx;
+  padding: 20rpx 30rpx;
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 /*必看推荐  */
@@ -191,7 +192,7 @@
 }
 .see-more-img{
   width: 30rpx;
-  height: 30rpx;
+  height: 20rpx;
   margin-left: 10rpx;
 }
 

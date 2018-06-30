@@ -22,7 +22,14 @@
     <view class='daodian-item'>取货人手机号:<span style='padding:6px;font-size:24rpx;'></span>{{orderDetail.ship_phone}}</view>
   </view>
   <!--订单号  -->
-  <view class="wenzi1">订单号：{{orderDetail.order_bn}}</view>
+  <view class="order-bn" wx:if='{{orderDetail.differ != "3"}}'>订单号：{{orderDetail.order_bn}}</view>
+
+  <view class="order-title" wx:if='{{orderDetail.differ != "3"}}'>
+    <view class='shop-name-img p-10'>
+      <image class='shop-img' src='{{shopImg}}'></image>
+      <view class='shop-name'>{{orderDetail.seller_name}}</view>
+    </view>
+  </view>
 
   <view class="cartList">
    <view class='good-contain'>
@@ -72,12 +79,35 @@
         </view>
       </view>
     </view>
-    <!--景点类订单  -->
-
 
     <!--备注  -->
-    <view class='beizhu'><span style='color:#333;font-size:28rpx;'>备注：</span>{{orderDetail.remark}}</view>
+    <view class='beizhu' wx:if='{{orderDetail.differ != "3"}}'><span style='color:#333;font-size:28rpx;'>备注：</span>{{orderDetail.remark}}</view>
    </view>
+   
+    <!--景点类订单  -->
+    <view class='jingdian-order' wx:if='{{orderDetail.differ == "3"}}' >
+      <!--订单数量  -->
+      <view class='order-name-contain' wx:for='{{orderDetail.items_list}}'>
+        <view class='order-name p-10'>{{item.goods_name}}</view>
+        <view class='order-price p-10'>{{item.goods_price}}<span class='order-num'>x{{item.goods_number}}</span></view>
+      </view>
+      <!--订单介绍  -->
+      <view class='order-des order-detail-key p-10 '><span class='order-title'>入园凭证：</span>{{orderDetail.tradeimg1 || defaultText}}</view>
+      <view class='order-time p-10'>{{orderDetail.day}}<span class='now-date' wx:if='{{orderDetail.day == nowDate}}'>当日</span></view>
+      <view class='order-title p-10' bindtap='mustKnow'>入园须知 <image class='more' src='{{more}}'></image></view>
+      <view class='order-detail'>
+        <view class='order-title p-10'>游客信息</view>
+        <view class='order-detail-key'>姓名：{{orderDetail.ship_name}}</view>
+        <view class='order-detail-key'>手机号：{{orderDetail.ship_phone}}</view>
+      </view>
+      <view class='order-detail'>
+        <view class='order-title p-10'>订单信息</view>
+        <view class='order-detail-key'>订单号：{{orderDetail.order_bn}}</view>
+        <view class='order-detail-key'>下单时间：{{orderDetail.addtime}}</view>
+      </view>
+      <view class='order-title p-10 kefu' bindtap='call'>联系客服 <image class='kefu-img' src='{{kefu}}'></image></view>
+      <view class='line'></view>
+    </view>
     
     <view class='jiage-msg'>
       <view class='total-price flex-between'>
@@ -92,7 +122,7 @@
         <view class='total-name wenzi1'>优惠券</view>
         <view class='total-value big-price'>￥{{orderDetail.cpns_amount || 0}}</view>
       </view>
-      <view class='yunfei flex-between' hidden='{{orderDetail.differ == "2"}}'>
+      <view class='yunfei flex-between' wx:if='{{orderDetail.differ != "3"}}' hidden='{{orderDetail.differ == "2"}}'>
         <view class='yunfei-name wenzi1'>运费</view>
         <view class='yunfei-value little-price'>￥{{orderDetail.cost_amount || 0}}</view>
       </view>
@@ -113,8 +143,12 @@
         <view class='time'>{{orderDetail.stateText2}}</view>
       </view>
       <view class='button-group  flex-all'>
+        <view class='remain-time' wx:if='{{showRemainTime && orderDetail.type == 1}}'>
+          <span>付款剩余时间 </span>
+           <view>{{remainTime}}</view>  
+        </view> 
         <!--根据订单状态展示不同的按钮组件  -->
-        <button wx:for="{{btns}}" bindtap="clickBtn" style='background-color:{{item.bgColor}}' data-order_id='{{orderDetail.order_id}}'  data-page='{{item.name}}' data-item='{{orderDetail}}'>{{item.name}}</button>
+        <button wx:for="{{btns}}" bindtap="clickBtn" style='background-color:{{item.bgColor}};color:{{item.color}};border-color:{{item.color}}' data-order_id='{{orderDetail.order_id}}'  data-page='{{item.name}}' data-item='{{orderDetail}}'>{{item.name}}</button>
       </view>
     </view>
 

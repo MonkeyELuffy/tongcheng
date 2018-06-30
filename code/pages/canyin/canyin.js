@@ -69,7 +69,7 @@ Page({
     page_no: 1,
     total_page: 1
   },
-  onShow: function () {
+  onLoad: function () {
     var that = this
     that.setData({
       bindDownLoad: true,

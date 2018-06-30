@@ -1,0 +1,27 @@
+<!--pages/dingdanxiangqing/dingdanxiangqing.wxml-->
+
+
+<view class="contain">
+    <view class='jingdian-order' wx:if='{{orderDetail.differ == "3"}}' >
+      <!--订单数量  -->
+      <view class='order-name-contain' wx:for='{{orderDetail.items_list}}'>
+        <view class='order-name p-10'>{{item.goods_name}}</view>
+        <view class='order-price p-10'>{{item.goods_price}}<span class='order-num'>x{{item.goods_number}}</span></view>
+      </view>
+      <view class='tiquma-contain'>
+        <view class='tiquma'>
+            <view>提取码</view>
+            <view class='take-code'>{{orderDetail.take_code}}</view>
+        </view>
+      </view>
+      <view class='order-detail'>
+        <view class='order-title p-10 kefu'>明细<span class='order-num'>{{orderDetail.day}} <span class='now-date' wx:if='{{orderDetail.day == nowDate}}'> 当日</span></span></view>
+        <view class='order-detail-key' wx:for='{{orderDetail.items_list}}'>{{item.goods_name}}<span class='order-num'>x{{item.goods_number}}</span></view>
+      </view>
+      <view class='order-title p-10 kefu'>联系客服 <image class='kefu-img' src='{{kefu}}'></image></view>
+      <view class='order-title p-10'>
+        <view>{{orderDetail.seller_name}}:</view>
+        <view style='font-weight:500;'>{{orderDetail.take_address}}</view>
+      </view>
+    </view>
+</view>

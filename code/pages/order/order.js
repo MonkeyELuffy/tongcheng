@@ -76,6 +76,7 @@ Page({
       total_page: 1,
       btns: btns,
       navItems: navItems,
+      nowType: nowType,
       orders: [],
       showNomore: false
     })
@@ -105,7 +106,6 @@ Page({
   },
   // 下拉加载更多数据
   bindDownLoad: function (e) {
-    // index代表订单类型1到5
     var nowType = this.data.nowType
     var params = {
       member_id: app.globalData.member_id,
@@ -194,7 +194,7 @@ Page({
     var that = this
     var index = e.target.dataset.index;
     var item = e.target.dataset.item;
-    if (index === that.data.index) {
+    if (index + 1 == that.data.nowType) {
       return
     } else {
       // 标题

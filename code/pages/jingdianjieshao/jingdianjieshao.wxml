@@ -1,0 +1,16 @@
+<!--pages/yudingpiaowu/yudingpiaowu.wxml-->
+<import src="../../wxParse/wxParse.wxml"/> 
+<view class='contain'>
+  <view class="nav-title">
+    <view class="nav-item" wx:for="{{navList}}" style="color: {{item.checked ? '#e61c04' : '#737373' }}; " bindtap="checked" wx:for-index="index" data-index="{{index}}" data-item='{{item}}'>
+      {{item.name}}
+    </view>
+  </view>
+  <view class='top-contain'>
+    <view class='title'>{{orderDes.goods_name}}</view>
+  </view>
+  <view class='tips-item' wx:for-index="index">
+    <view class='title'>{{item.explain_title}}</view>
+    <template class='content' is="wxParse" data="{{wxParseData:nowIntroduce.article.nodes}}"/> 
+  </view>
+</view>

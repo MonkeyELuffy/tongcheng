@@ -178,17 +178,14 @@ Page({
       seller_id: options.seller_id,
       token: app.globalData.userInfo.token
     }
-    //请求景点介绍
-    util.httpPost(app.globalUrl + app.TicketIntroduce, data, this.processInfoData);
     //请求票务
     util.httpPost(app.globalUrl + app.TicketIndex, data, this.processTicketIndexData);
   },
-  processInfoData(res) {
-    if (res.suc == 'y') {
-      console.log('景点介绍成功', res.data);
-    } else {
-      console.log('返回景点介绍错误', res);
-    }
+  //景点介绍
+  introduce(){
+    wx.navigateTo({
+      url: '../jingdianjieshao/jingdianjieshao?seller_id=' + this.data.detail.seller_id,
+    })
   },
   processTicketIndexData(res) {
     if (res.suc == 'y') {

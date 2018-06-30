@@ -15,19 +15,19 @@ Page({
     dateList: [
       {
         text: '今天',
-        dateText: '2月22号',
+        dateText: '',
         checked:true,
         index:0
       },
       {
         text: '明天',
-        dateText: '2月23号',
+        dateText: '',
         checked: false,
         index: 1
       },
       {
         text: '后天',
-        dateText: '2月24号',
+        dateText: '',
         checked: false,
         index: 2
       },
@@ -60,7 +60,54 @@ Page({
     this.getNowDate()
   },
   onShow() {
-    
+    //获取选择的预定时间
+    let chooseDate = wx.getStorageSync('chooseDate') || ''
+    let chooseDateText = wx.getStorageSync('chooseDateText') || ''
+    let changeData = wx.getStorageSync('changeData') || false
+    if (changeData){
+      // 判断是否是其他日期
+      let showDate = false
+      let idnex = 0
+      for (let i in this.data.dateList){
+        if (chooseDateText == this.data.dateList[i].dateText){
+          showDate = false
+          idnex = i
+          break
+        }
+        showDate = true
+      }
+      if (showDate){
+        this.data.dateList[3].dateText = chooseDateText
+        this.data.dateList[3].time = chooseDate
+      }else{
+        this.data.dateList[3].dateText = ""
+        this.data.dateList[3].time = ""
+        for (let i in this.data.dateList) {
+          this.data.dateList[i].checked = false
+        }
+        this.data.dateList[idnex].checked = true
+      }
+      this.setData({
+        time: chooseDate,
+        dateList: this.data.dateList
+      })
+      wx.setStorageSync('changeData', false)
+      this.getOrderInfo(this.data.orderDes)
+    }else{
+      // 没有改变预定时间说明是直接返回本页
+      // 不需要重新请求数据，但是顶部的日期样式要变回来
+      for (let i in this.data.dateList) {
+        if (this.data.time == this.data.dateList[i].time) {
+          this.data.dateList[i].checked = true
+        }else{
+          this.data.dateList[i].checked = false
+        }
+      }
+      console.log('??')
+      this.setData({
+        dateList: this.data.dateList
+      })
+    }
   },
   getNowDate(){
     let day_1 = this.getEnterAndLeaveDate(0)
@@ -95,6 +142,7 @@ Page({
     let m = dd.getMonth() + 1;//获取当前月份的日期
     m = m > 10 ? m : '0' + m
     let d = dd.getDate();
+    d = d > 10 ? d : '0' + d
     return y + "-" + m + "-" + d;
   },
   getOrderInfo(params){
@@ -118,15 +166,15 @@ Page({
   },
   //支付
   pay(e) {
-    if (!basic.checkedPhone(this.data.ship_phone)) {
-      wx.showToast({
-        title: '请输入正确的手机号',
-      })
-      return
-    }
     if (!basic.checkNull(this.data.ship_name)) {
       wx.showToast({
         title: '请输入姓名',
+      })
+      return
+    }
+    if (!basic.checkedPhone(this.data.ship_phone)) {
+      wx.showToast({
+        title: '请输入正确的手机号',
       })
       return
     }
@@ -190,8 +238,11 @@ Page({
         url: '../../pages/chooseDate/chooseDate?product_id=' + this.data.orderInfo.goods_item[0].product_id,
       })
     }else{
+      dateList[3].dateText = ''
+      dateList[3].time = ""
       this.setData({
-        time: dateList[item.index].time
+        time: dateList[item.index].time,
+        dateList: dateList,
       })
       //重新获取订单数据
       this.getOrderInfo(this.data.orderDes)

@@ -4,17 +4,20 @@ var network = require("../../utils/network.js")
 var util = require('../../utils/util.js');
 const app = getApp()
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
+    defaultText:'请注意查收入园短信，如有问题，请联系供应商或客服',
+    kefu:'../../img/tel.png',
+    remainTime: '24小时00分钟',
+    shopImg: '../../img/shangjia.png',
+    more:'../../img/more.png',
+    showRemainTime:true,
     httpUrl: app.globalImageUrl,
-    btns_1: [{ name: '取消订单', bgColor: '#d8d8d8' }, { name: '付款', bgColor: 'rgb(246,127,121)' }],
-    btns_2: [{ name: '联系商家', bgColor: 'rgb(246,127,121)' },{ name: '确认收货', bgColor: 'rgb(246,127,121)' }],
-    btns_3: [{ name: '评价', bgColor: 'rgb(246,127,121)' }],
+    btns_1: [{ name: '取消订单', bgColor: 'rgb(246,127,121)', color: '#fff' }, { name: '付款', bgColor: 'rgb(246,127,121)', color: '#fff' }],
+    btns_2: [{ name: '联系商家', bgColor: 'rgb(246,127,121)', color: '#fff' }, { name: '确认收货', bgColor: 'rgb(246,127,121)', color: '#fff' }],
+    btns_3: [{ name: '评价', bgColor: 'rgb(246,127,121)', color: '#fff'  }],
     btns_4: [],
     btns: [],
+    tiqumaBtn: { name: '查看提取码', bgColor: '#fff', color: 'rgb(246,127,121)'  }
   },
   onLoad: function (options) {
     var that = this
@@ -41,9 +44,15 @@ Page({
           break;
         case '3':
           btns = this.data.btns_3;
+          if (res.data.differ == '3') {
+            btns.unshift(this.data.tiqumaBtn)
+          }
           break;
         case '4':
           btns = this.data.btns_4;
+          if (res.data.differ == '3') {
+            btns.unshift(this.data.tiqumaBtn)
+          }
           break;
       }
       // 计算房间数和总价
@@ -112,6 +121,11 @@ Page({
       })
     }
   },
+  mustKnow(e){
+    wx.navigateTo({
+      url: '../jingdianjieshao/jingdianjieshao?seller_id=' + this.data.orderDetail.seller_id,
+    })
+  },
   processReceiptOrder(res) {
     var that = this
     if (res.suc == 'y') {
@@ -169,10 +183,21 @@ Page({
           url: "../pingjia/pingjia?item=" + item
         });
       }
+      if (e.target.dataset.page === '查看提取码') {
+        var orderDetail = JSON.stringify(e.target.dataset.item)
+        wx.navigateTo({
+          url: "../tiquma/tiquma?orderDetail=" + orderDetail
+        });
+      }
     }
     var data = { go, e }
     this.clickTooFast(data)
 
+  },
+  call(){
+    wx.makePhoneCall({
+      phoneNumber: app.globalData.phoneNumber,
+    })
   },
   /*==========
   防止快速点击
