@@ -310,12 +310,13 @@
     height: 50rpx;
   }
   .toastContain{
-    position: absolute;
-    top: 100rpx;
+    position: fixed;
     width: 100%;
     z-index: 1111;
+    bottom: -756rpx;
     box-sizing: border-box;
-    padding: 0 80rpx;
+    transition: all .4s;
+    height: 1018rpx;
   }
   .toastInnerContain{
     position: relative;

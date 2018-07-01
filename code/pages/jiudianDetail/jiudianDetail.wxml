@@ -101,7 +101,7 @@
 <view class='mengban' hidden='{{!showOrderDetail}}'></view>
 
 <!--预定弹窗  -->
-<view class='toastContain' hidden='{{!showOrderDetail}}'> 
+<view class='toastContain'  style="bottom:{{showOrderDetail ? '0rpx;':'-1018rpx'}}" > 
   <view class='toastInnerContain'>
     <!--订单详情顶部标题  -->
     <view class='order-detail-top'>
