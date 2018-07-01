@@ -3,6 +3,7 @@ var util = require('../../utils/util.js');
 var basic = require('../../utils/basic.js');
 var bannerTemp = require('../../utils/bannerTemp.js');
 var dataItemTemp = require('../../utils/dataItemTemp.js');
+var WxParse = require('../../wxParse/wxParse.js');
 var app = getApp(); 
 var Moment = require("../../utils/moment.js");
 var DATE_LIST = [];
@@ -100,6 +101,7 @@ Page({
     wx.openLocation({ latitude: latitude, longitude: longitude})
   },
   processInfoData(res) {
+    let that = this
     if (res.suc == 'y') {
       console.log('酒店数据成功', res.data);
       var slider = []
@@ -109,6 +111,7 @@ Page({
           img_src: app.globalImageUrl + res.data.banner_src[i]
         })
       }
+      WxParse.wxParse('introduce', 'html', res.data.introduce, that, 5);
       this.setData({
         detail: res.data,
         slider: slider

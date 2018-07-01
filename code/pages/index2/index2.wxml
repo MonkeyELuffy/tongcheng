@@ -33,12 +33,12 @@
 
     <!--热门产品  -->
     <view class='title white-bg'>热门产品</view>
-    <view class='hot-item' wx:for='{{list_2}}'>
+    <view class='hot-item' wx:for='{{list_2}}' bindtap='goDetail' data-item='{{item}}'>
       <image class='hot-img' src='{{item.logo_url}}'></image>
       <view class='hot-info'>
-        <view class='hot-name'>{{item.goods_name}} {{item.goods_body}}</view>
-        <view class='hot-today'>{{item.today}}</view>
-        <view class='hot-sale'>已售{{item.sale || 0}}</view>
+        <view class='hot-name'>{{item.goods_name}}</view>
+        <view class='hot-today'>{{item.goods_body}}</view>
+        <view class='hot-sale'>已售{{item.inventory || 0}}</view>
         <view class='hot-price'>￥{{item.shop_price}}/人</view>
       </view>
     </view>

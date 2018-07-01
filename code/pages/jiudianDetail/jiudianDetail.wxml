@@ -2,6 +2,7 @@
 <import src="../imageSwiper/imageSwiper.wxml"/>
 <import src="../dataItemTemp/dataItemTemp.wxml"/>
 <import src="../noMoreData/noMoreData.wxml"/>
+<import src="../../wxParse/wxParse.wxml"/> 
 <!--页面最外层防放置滚动  -->
 <scroll-view style="height:{{scrollHeight}}px;" scroll-y="{{scrollY}}" >
   <view class='contain'>
@@ -78,14 +79,16 @@
 
    <!--  酒店设施 -->
     <view class='estab-text tuijian-text'>酒店设施:</view>
-    <view class='estab'> </view>
+    <view class='estab'>
+      <view class='estab-item' wx:for='{{detail.attr_array}}'><view class='iconfont {{item.font}}'></view>{{item.label_name}}</view>
+    </view>
 
 
 
    <!--  酒店介绍 -->
    <view class='introduce-contain'>
    <view class='tuijian-text'>酒店介绍:</view>
-   <view class='introduce'></view>
+   <template class='content' is="wxParse" data="{{wxParseData:introduce.nodes}}"/>   
    </view>
 
     <!--推荐  -->

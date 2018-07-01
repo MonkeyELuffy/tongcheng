@@ -26,4 +26,9 @@ Page({
       nowDate: nowDate,
     })
   },
+  kefu(){
+    wx.makePhoneCall({
+      phoneNumber: app.globalData.phoneNumber,
+    })
+  }
 })

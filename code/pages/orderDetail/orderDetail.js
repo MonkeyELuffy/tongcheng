@@ -62,6 +62,8 @@ Page({
         dataTotalPrice += parseFloat(res.data.items_list[i].goods_price) * parseInt(res.data.items_list[i].goods_number)
         dataTotalQuantity += parseInt(res.data.items_list[i].goods_number)
       }
+      //计算付款剩余时间
+      
       this.setData({
         orderDetail: res.data,
         dataTotalQuantity: dataTotalQuantity,

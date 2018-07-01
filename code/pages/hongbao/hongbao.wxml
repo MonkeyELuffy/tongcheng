@@ -3,9 +3,9 @@
 <view class="contain">
   <view class="fenlei-contianer">
     <scroll-view class="fenlei-ul" style="height:{{scrollHeight}}px;" scroll-y="true" bindscrolltoupper="refresh" bindscrolltolower="bindDownLoad">
-      <view class="recharge-money">{{total_amount}}</view>
+      <view class="recharge-money">{{total_amount || 0}}</view>
       <!--子数据  -->
-      <view class='item' wx:for='{{dataList}}' bindtap="goDetail" data-id="{{item.id}}" for:index='index' data-index='{{index}}'>
+      <view class='item' wx:for='{{dataList}}'>
         <view class='detail flex-between'>
           <view class='detail-name'>{{item.type_info}}</view>
           <view class='value'>{{(item.state == 1 ? '+' : '-') +item.money}}</view>

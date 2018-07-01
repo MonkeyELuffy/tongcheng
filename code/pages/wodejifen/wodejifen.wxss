@@ -16,11 +16,6 @@
   border-top: 10rpx solid #eee;
   font-weight: 600;
 }
-.jifen{
-  font-size: 28rpx;
-  color: #666;
-  font-weight: 500;
-}
 
 
 /*分类*/

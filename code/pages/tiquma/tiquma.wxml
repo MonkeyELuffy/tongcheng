@@ -18,7 +18,7 @@
         <view class='order-title p-10 kefu'>明细<span class='order-num'>{{orderDetail.day}} <span class='now-date' wx:if='{{orderDetail.day == nowDate}}'> 当日</span></span></view>
         <view class='order-detail-key' wx:for='{{orderDetail.items_list}}'>{{item.goods_name}}<span class='order-num'>x{{item.goods_number}}</span></view>
       </view>
-      <view class='order-title p-10 kefu'>联系客服 <image class='kefu-img' src='{{kefu}}'></image></view>
+      <view class='order-title p-10 kefu' bindtap='kefu'>联系客服 <image class='kefu-img' src='{{kefu}}'></image></view>
       <view class='order-title p-10'>
         <view>{{orderDetail.seller_name}}:</view>
         <view style='font-weight:500;'>{{orderDetail.take_address}}</view>

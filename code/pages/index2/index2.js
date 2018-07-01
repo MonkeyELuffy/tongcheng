@@ -110,9 +110,50 @@ Page({
       wx.hideLoading()
     }
   },
+  goDetail(e){
+    let that = this
+    let item = e.currentTarget.dataset.item
+    let page = ''
+    if (item.type == '1') {
+      page = '../shangjiadianpu/shangjiadianpu?seller_id=' + item.seller_id
+    }
+    if (item.type == '2') {
+      page = '../jiudianDetail/jiudianDetail?seller_id=' + item.seller_id
+    }
+    if (item.type == '3') {
+      page = '../qiandaohudenglu/qiandaohudenglu?seller_id=' + item.seller_id
+    }
+    var go = function (e) {
+      wx.navigateTo({
+        url: page
+      })
+    }
+    var data = { go, e }
+    this.clickTooFast(data, that)
+  },
   kefu() {
     wx.makePhoneCall({
       phoneNumber: app.globalData.phoneNumber,
+    })
+  },
+  /*==========
+  防止快速点击
+  ===========*/
+  clickTooFast: function (data) {
+    var lastTime = this.data.lastTime
+    var curTime = data.e.timeStamp
+    if (lastTime > 0) {
+      if (curTime - lastTime < 1000) {
+        console.log('点击太快了')
+        return
+      } else {
+        data.go(data.e)
+      }
+    } else {
+      data.go(data.e)
+    }
+    this.setData({
+      lastTime: curTime
     })
   },
 })

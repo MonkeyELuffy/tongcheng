@@ -45,7 +45,7 @@ Page({
       {
         img: '../../img/center/wode_jilu.png',
         name: '我的积分',
-        page: 'wodeguanzhu'
+        page: 'wodejifen'
       }, 
       {
         img: '../../img/center/wode_guanyu.png',

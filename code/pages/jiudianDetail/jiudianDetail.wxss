@@ -1,4 +1,5 @@
 /* pages/jiudianDetail/jiudianDetail.wxss */
+@import "../../iconfont/iconfont.wxss";
 @import "../dataItemTemp/dataItemTemp.wxss";
 .labels-contain{
   margin-top: 10rpx;
@@ -87,6 +88,7 @@
   font-size: 30rpx;
   font-weight: 600;
   color: #333;
+  margin-bottom: 4rpx;
 }
 .look-more{
   font-size: 26rpx;
@@ -136,6 +138,7 @@
   background-color: #fff;
   padding: 20rpx 30rpx;
   margin-top: 10rpx;
+  border-bottom: 4rpx solid #eee;
 }
 /* 酒店介绍 */
 .introduce-contain{
@@ -165,7 +168,7 @@
 .jiesuan-btn{
   background-color: #f68076;
   color: #fff;
-  padding: 30rpx 50rpx;
+  padding: 30rpx 150rpx;
 }
 .cancel-btn{
   background-color: #999;
@@ -326,4 +329,24 @@
   .order-detail-top{
     z-index: 1111;
     background-color: #fff;
+  }
+  .introduce-contain, .estab{
+    background-color: #fff;
+  }
+  .estab{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 40rpx 0;
+  }
+  .estab-item{
+    width: 24%;
+    font-size: 22rpx;
+    color: #333;
+    box-sizing: border-box;
+    padding: 10rpx 30rpx;
+    text-align: center;
+  }
+  .estab-text{
+    margin-bottom: 4rpx;
   }

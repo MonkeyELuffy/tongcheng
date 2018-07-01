@@ -139,13 +139,16 @@
   position: relative;
 }
 .hot-img{
-  width: 200rpx;
-  height: 200rpx;
-  margin-bottom: 20rpx;
+  width: 184rpx;
+  height: 184rpx;
+  box-sizing: border-box;
+  align-self: flex-start;
+  overflow: hidden;
 }
 .hot-name{
   color: #333;
-  font-size: 28rpx;
+  font-size: 30rpx;
+  font-weight: 600;
   flex: 1 1;
 }
 .hot-info{
@@ -161,6 +164,7 @@
 .hot-today{
   color: #666;
   font-size: 26rpx;
+  flex:1 1;
 }
 .hot-sale{
   font-size: 26rpx;
@@ -168,10 +172,11 @@
 }
 .hot-price{
   font-size: 28rpx;
-  color: #555;
+  color: #fa3f06;
   position: absolute;
   right: 30rpx;
   bottom: 20rpx;
+  font-weight: 600;
 }
 
 .bottom{

@@ -63,10 +63,10 @@ Page({
   onShow() {
     //获取选择的预定时间
     let chooseDate = wx.getStorageSync('chooseDate') || ''
-    let newCpnsId = wx.getStorageSync('newCpnsId') || ''
-    let changeCpnsId = wx.getStorageSync('changeCpnsId') || false
     let chooseDateText = wx.getStorageSync('chooseDateText') || ''
     let changeData = wx.getStorageSync('changeData') || false
+    let newCpnsId = wx.getStorageSync('newCpnsId') || ''
+    let changeCpnsId = wx.getStorageSync('changeCpnsId') || false
     if (changeData){
       // 判断是否是其他日期
       let showDate = false
@@ -101,6 +101,7 @@ Page({
     } else if (changeCpnsId){
 
       wx.setStorageSync('changeCpnsId', false)
+      this.getOrderInfo(this.data.orderDes)
     }else{
       // 没有改变预定时间说明是直接返回本页
       // 不需要重新请求数据，但是顶部的日期样式要变回来
@@ -308,5 +309,8 @@ Page({
     this.setData({
       lastTime: curTime
     })
+  },
+  onUnload(){
+    wx.setStorageSync('newCpnsId', '')
   }
 })

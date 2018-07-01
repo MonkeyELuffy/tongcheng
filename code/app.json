@@ -6,7 +6,6 @@
     "pages/jingdianlist/jingdianlist",
     "pages/jingdianjieshao/jingdianjieshao",
     "pages/tiquma/tiquma",
-    "pages/chooseDateForJiuDian/chooseDateForJiuDian",
     "pages/piaowu_pay/piaowu_pay",
     "pages/yudingpiaowu/yudingpiaowu",
     "pages/pingjiaItem/pingjiaItem",
@@ -74,8 +73,7 @@
     "pages/woyaozhongchou/woyaozhongchou",
     "pages/shenqingruzhu/shenqingruzhu",
     "pages/login/login",
-    "pages/switchcity/switchcity",
-    "template/datepiker/index"
+    "pages/switchcity/switchcity"
   ],
   "window": {
     "backgroundTextStyle": "light",
