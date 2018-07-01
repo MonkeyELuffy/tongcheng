@@ -1,4 +1,5 @@
 <!--pages/articleList/articleList.wxml-->
+<import src="../noMoreData/noMoreData.wxml"/>
 <view class='item' wx:for='{{dataList}}' data-item='{{item}}' bindtap='goDetail'>
   <image class='item-img' src='{{item.img_src}}'></image>
   <view class='text-contain'>
@@ -6,3 +7,5 @@
     <view class='desc'>{{item.desc}}</view>
   </view>
 </view>
+<!--nomoreData  -->
+<template is="noMoreData" data="{{showNomore}}"></template>
