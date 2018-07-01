@@ -113,6 +113,12 @@ App({
   DatePriceList: 'Ticket/date_price',
   // 游玩攻略
   GongLve: 'Article/index',
+  // 周边景点
+  Recommend: 'Store/recommend',
+  // 攻略文章列表
+  ArticleList: 'Article/getList',
+  // 文章详情
+  ArticleDetail: 'Article/getDetail',
 
   onLaunch: function () {
     //获取屏幕高度
@@ -234,7 +240,7 @@ App({
     member_id: null,
     //排序组件
     allPaiXuData: {
-      hangyepaixu: '../../img/paixu1.png',
+      hangyepaixu: '../../img/paixu2.png',
       xiaoliangpaixu: '../../img/paixu0.png',
       julipaixu: '../../img/paixu0.png',
       paixuList: ['../../img/paixu0.png', '../../img/paixu1.png', '../../img/paixu2.png'],
@@ -243,7 +249,7 @@ App({
     },
     //排序组件2
     allPaiXuData_2: {
-      jingdianpaixu: '../../img/paixu1.png',
+      jingdianpaixu: '../../img/paixu2.png',
       xiaoliangpaixu: '../../img/paixu0.png',
       jiagepaixu: '../../img/paixu0.png',
       julipaixu: '../../img/paixu0.png',

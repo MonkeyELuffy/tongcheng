@@ -1,43 +1,35 @@
-// pages/gonglve/gonglve.js
+// pages/articleList/articleList.js
 var util = require('../../utils/util.js');
 var app = getApp()
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    dataList: []
+    dataList:[]
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-    util.httpPost(app.globalUrl + app.GongLve, {}, this.processGongLveData);
+    let cat_id = options.cat_id
+    let title = options.title
+    wx.setNavigationBarTitle({
+      title: title,
+    })
+    util.httpPost(app.globalUrl + app.ArticleList, { cat_id: cat_id }, this.processArticleListData);
   },
-  processGongLveData(res){
-    if(res.suc == 'y'){
+  processArticleListData(res) {
+    if (res.suc == 'y') {
       let dataList = res.data
-      let keys = Object.keys(dataList)
-      let newList = []
-      for(let i in keys){
-        let menusItem = {
-          title: keys[i],
-          menusList: dataList[keys[i]]
-        }
-        newList.push(menusItem)
+      for (let i in dataList){
+        dataList[i].img_src = app.globalImageUrl + dataList[i].img_src
       }
       this.setData({
-        dataList: newList
+        dataList: dataList
       })
     }
   },
-  chooseType(e){
+  //进入文章详情
+  goDetail(e) {
     let item = e.currentTarget.dataset.item
     var go = function (e) {
       wx.navigateTo({
-        url: '../articleList/articleList?cat_id=' + item.id + '&title=' + item.cat_name
+        url: '../articleDetail/articleDetail?id=' + item.id
       })
     }
     var data = { go, e }

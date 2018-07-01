@@ -1,6 +1,9 @@
 {
   "pages": [
     "pages/index2/index2",
+    "pages/articleList/articleList",
+    "pages/articleDetail/articleDetail",
+    "pages/jingdianlist/jingdianlist",
     "pages/jingdianjieshao/jingdianjieshao",
     "pages/tiquma/tiquma",
     "pages/chooseDateForJiuDian/chooseDateForJiuDian",

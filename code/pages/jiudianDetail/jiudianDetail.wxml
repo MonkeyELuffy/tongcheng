@@ -22,24 +22,24 @@
       </view>
     </view>
     <!--选择时间  -->
-    <view class='time-contain flex-center' bindtap='chooseJiuDianDate'>
+    <view class='time-contain flex-center'>
       <!--入住  -->
       <view class='ruzhu-time'>
         <view class='time-title'>入住时间</view>
-        <!-- <picker mode="date" value="{{ruzhuTime}}" start="{{nowTime}}" bindchange="ruzhu"> -->
+         <picker mode="date" value="{{ruzhuTime}}" start="{{nowTime}}" bindchange="ruzhu"> 
           <view class="picker">
             {{ruzhuTimeText}}
           </view>
-        <!-- </picker> -->
+         </picker> 
       </view>
       <!--离店  -->
       <view class='ruzhu-time'>
         <view class='time-title'>离店时间</view>
-        <!-- <picker mode="date" value="{{lidianTime}}" start="{{lidianStarTime}}" bindchange="lidian"> -->
+         <picker mode="date" value="{{lidianTime}}" start="{{lidianStarTime}}" bindchange="lidian"> 
           <view class="picker">
             {{lidianTimeText}}
           </view>
-        <!-- </picker> -->
+         </picker> 
       </view>
     </view>
     <!--目前酒店房间状态  -->
@@ -109,7 +109,7 @@
       <view class='toast-title'>{{hotelOrderDetail.goods_name}}</view>
     </view>
     <!--订单详情内部滚动框  -->
-    <scroll-view class="data-list" style="max-height:{{scrollHeight-200}}px;" scroll-y="true" >
+    <scroll-view class="data-list" style="max-height:{{scrollHeight-100}}px;" scroll-y="true" >
       <!--轮播图组件  --> 
       <template is="imageSwiper" data="{{slider: hotelOrderDetail.img}}" ></template>
       <view class='toast-labels-contain flex-between'>

@@ -1,0 +1,10 @@
+<!--pages/articleDetail/articleDetail.wxml-->
+<import src="../../wxParse/wxParse.wxml"/> 
+<view class='title-contain'>
+  <view class='title'>{{detail.title}}</view>
+  <view class='des-contain'>
+    <view class='time'>{{detail.time}}</view>
+    <view class='attention'>{{detail.attention || 0}}人浏览</view>
+  </view>
+</view>
+<template class='content' is="wxParse" data="{{wxParseData:article.nodes}}"/> 

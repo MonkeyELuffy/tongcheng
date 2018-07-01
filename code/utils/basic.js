@@ -38,6 +38,24 @@ function goPage(page, that, e, params) {
   var data = { go, e, that, time: 1000 }
   clickTooFast(data)
 }
+function replacePage(page, that, e, params) {
+  var go = function (e) {
+    // 有参数的时候就传参
+    if (params) {
+      wx.redirectTo({
+        url: '../' + page + '/' + page + '?params=' + JSON.stringify(params)
+      })
+    } else {
+      wx.redirectTo({
+        url: '../' + page + '/' + page
+      })
+    }
+  }
+  // 直接写成clickTooFast(go, e, that)也可以传参的，但是这样子就限制了参数的顺序；
+  // 把参数外面再包裹一层对象，目标函数获取参数时候按照属性值获取，让传参更灵活；
+  var data = { go, e, that, time: 1000 }
+  clickTooFast(data)
+}
 
 // 防止按钮点击、页面跳转、提交等事件操作过快
 // time: 间隔时间;
@@ -123,7 +141,8 @@ function checkCard(str) {
 module.exports = {
   goPage: goPage,
   clickTooFast: clickTooFast,
-  checkedPhone: checkedPhone,
+  checkedPhone: checkedPhone, 
+  replacePage: replacePage, 
   checkNull: checkNull,
   checkCard: checkCard,
 }

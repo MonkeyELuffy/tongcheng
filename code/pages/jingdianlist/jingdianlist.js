@@ -1,7 +1,7 @@
 // pages/search/search.js
 var util = require('../../utils/util.js');
 const config = require('../../utils/config.js');
-var paixuTemp = require('../../utils/paixuTemp.js');
+var paixuTemp_2 = require('../../utils/paixuTemp_2.js');
 var bannerTemp = require('../../utils/bannerTemp.js');
 var navTemp = require('../../utils/navTemp.js');
 var dataItemTemp = require('../../utils/dataItemTemp.js');
@@ -16,7 +16,7 @@ Page({
   data: {
     scrollHeight: app.globalData.scrollHeight,
     // 排序组件所需data
-    allData: app.globalData.allPaiXuData,
+    allData_2: app.globalData.allPaiXuData_2,
     search_icon: '../../img/search.png',
     dataList: [],
     search_key: '',
@@ -24,26 +24,16 @@ Page({
     total_page: 1
   },
   onLoad: function (options) {
-    var store_str = JSON.parse(options.params).store_str || ''
-    var distance = JSON.parse(options.params).distance || ''
-    var trade_id = JSON.parse(options.params).trade_id || ''
     //数据初始化
     this.setData({
       bindDownLoad: true,
-      store_str: store_str,
-      distance: distance,
-      trade_id: trade_id,
-      dataList: [],
     })
     var params = {
-      order_by: this.data.allData.nowPaiXu,
-      type: '2',
+      order_by: this.data.allData_2.nowPaiXu,
       page_no: 1,
       page_size: 15,
-      cur_fixed: app.globalData.firstLongitude + ',' + app.globalData.firstLatitude,
-      store_str: store_str,
-      distance: distance,
-      trade_id: trade_id,
+      type: 3,
+      cur_fixed: app.globalData.firstLongitude + ',' + app.globalData.firstLatitude
     }
     this.loadData(params);
   },
@@ -169,7 +159,7 @@ Page({
     var item = e.currentTarget.dataset.item
     dataItemTemp.clickItem(e, that, item)
   },
-  hangyepaixu: function (e) {
+  jingdianpaixu: function (e) {
     // 数据初始化,但暂时不清空dataList
     this.setData({
       bindDownLoad: true,
@@ -177,7 +167,7 @@ Page({
       total_page: 1
     })
     var that = this
-    var nowPaiXu = paixuTemp.hangyepaixu(e, that)
+    var nowPaiXu = paixuTemp_2.jingdianpaixu(e, that)
     this.loadStorDataByOrder(e)
   },
   xiaoliangpaixu: function (e) {
@@ -188,7 +178,18 @@ Page({
       total_page: 1
     })
     var that = this
-    var nowPaiXu = paixuTemp.xiaoliangpaixu(e, that)
+    var nowPaiXu = paixuTemp_2.xiaoliangpaixu(e, that)
+    this.loadStorDataByOrder(e)
+  },
+  jiagepaixu: function (e) {
+    // 数据初始化,但暂时不清空dataList
+    this.setData({
+      bindDownLoad: true,
+      page_no: 1,
+      total_page: 1
+    })
+    var that = this
+    var nowPaiXu = paixuTemp_2.jiagepaixu(e, that)
     this.loadStorDataByOrder(e)
   },
   julipaixu: function (e) {
@@ -199,21 +200,19 @@ Page({
       total_page: 1
     })
     var that = this
-    var nowPaiXu = paixuTemp.julipaixu(e, that)
+    var nowPaiXu = paixuTemp_2.julipaixu(e, that)
+    console.log()
     this.loadStorDataByOrder(e)
   },
   // 点击排序重新请求数据，不能先清空dataList，会出现闪动；
   // 目前先单独处理，之后需要对请求data函数做处理，根据标志位判断当前的请求是加载下一页，还是完全更新数据
   loadStorDataByOrder(e) {
     var params = {
-      order_by: this.data.allData.nowPaiXu,
-      type: '2',
+      order_by: this.data.allData_2.nowPaiXu,
       page_no: 1,
       page_size: 15,
-      cur_fixed: app.globalData.firstLongitude + ',' + app.globalData.firstLatitude,
-      store_str: this.data.store_str,
-      distance: this.data.distance,
-      trade_id: this.data.trade_id,
+      type: 3,
+      cur_fixed: app.globalData.firstLongitude + ',' + app.globalData.firstLatitude
     }
     this.loadListDataByOrder(params);
   },
@@ -231,7 +230,7 @@ Page({
   processStoreByOrderData(res) {
     if (res.suc == 'y') {
       var dataList = []
-      console.log('获取商铺list成功', res.data);
+      console.log('获取景点list成功', res.data);
       if (app.globalData.hasLogin) {
         wx.hideLoading()
       }
@@ -247,7 +246,7 @@ Page({
         dataList: dataList,
       })
     } else {
-      console.log('获取商铺list错误', res);
+      console.log('获取景点list错误', res);
     }
   }
 })

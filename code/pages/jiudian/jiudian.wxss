@@ -146,6 +146,7 @@
   color: #f83030;
   font-size: 24rpx;
   padding: 0 10rpx;
+  font-weight: 600;
 }
 .fenlei-contianer .fenlei-list .fenlei-price-total .fenlei-total {
   color: #aaa;

@@ -24,6 +24,7 @@ Page({
       }],
     dataList: [],
     coupon_type: 1,
+    cpns_id:'',
     //返回分页数据的总页数
   },
   onLoad(options) {
@@ -58,12 +59,16 @@ Page({
       if (prevPage.route == 'pages/mine/mine' || that.data.coupon_type != 1) {
         return
       } else {
+        that.setData({
+          cpns_id: e.currentTarget.dataset.item.balanceid
+        })
         var params = {
           cpns_id: e.currentTarget.dataset.item.balanceid,
           token: app.globalData.userInfo.token,
           buy_key: app.globalData.orderData.buy_key,
-          address_id: app.globalData.orderData.address.address_id,
-          ship_type: app.globalData.orderData.ship_type,
+          address_id: app.globalData.orderData.address.address_id || '',
+          ship_type: app.globalData.orderData.ship_type || '',
+          time: app.globalData.orderData.time || '',
         }
         util.httpPost(app.globalUrl + app.CONFIRMINFO, params, that.processSubmitData);
       }
@@ -74,8 +79,15 @@ Page({
   processSubmitData: function (res) {
     if (res.suc == 'y') {
       console.log('获取最新订单数据成功', res.data);
+      //返回票务订单页面需要此参数
+      let cpns_id = this.data.cpns_id
+      wx.setStorageSync('newCpnsId', cpns_id)
+      wx.setStorageSync('changeCpnsId', true)
       this.goPayPage(res.data)
     } else {
+      //返回票务订单页面需要此参数
+      wx.setStorageSync('newCpnsId', '')
+      wx.setStorageSync('changeCpnsId', false)
       console.log('获取最新订单数据错误', res);
       wx.showModal({
         title: '提醒',

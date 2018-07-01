@@ -82,6 +82,7 @@ Page({
     this.loadBannerData();
     // 请求酒店类别的商铺，关键词type: 2
     var params = {
+      order_by: this.data.allData.nowPaiXu,
       page_no: 1,
       page_size: 15,
       type: '2',
@@ -309,15 +310,82 @@ Page({
     navTemp.clickNav(e, that, item)
   },
   hangyepaixu: function (e) {
+    // 数据初始化,但暂时不清空dataList
+    this.setData({
+      bindDownLoad: true,
+      page_no: 1,
+      total_page: 1
+    })
     var that = this
-    paixuTemp.hangyepaixu(e, that)
+    var nowPaiXu = paixuTemp.hangyepaixu(e, that)
+    this.loadStorDataByOrder(e)
   },
   xiaoliangpaixu: function (e) {
+    // 数据初始化,但暂时不清空dataList
+    this.setData({
+      bindDownLoad: true,
+      page_no: 1,
+      total_page: 1
+    })
     var that = this
-    paixuTemp.xiaoliangpaixu(e, that)
+    var nowPaiXu = paixuTemp.xiaoliangpaixu(e, that)
+    this.loadStorDataByOrder(e)
   },
   julipaixu: function (e) {
+    // 数据初始化,但暂时不清空dataList
+    this.setData({
+      bindDownLoad: true,
+      page_no: 1,
+      total_page: 1
+    })
     var that = this
-    paixuTemp.julipaixu(e, that)
+    var nowPaiXu = paixuTemp.julipaixu(e, that)
+    this.loadStorDataByOrder(e)
   },
+  // 点击排序重新请求数据，不能先清空dataList，会出现闪动；
+  // 目前先单独处理，之后需要对请求data函数做处理，根据标志位判断当前的请求是加载下一页，还是完全更新数据
+  loadStorDataByOrder(e) {
+    var params = {
+      order_by: this.data.allData.nowPaiXu,
+      page_no: 1,
+      total_page: 1,
+      page_size: 15,
+      type: '2',
+      cur_fixed: app.globalData.firstLongitude + ',' + app.globalData.firstLatitude
+    }
+    this.loadListDataByOrder(params);
+  },
+  loadListDataByOrder(params) {
+    var that = this
+    var allParams = {
+      that: that,
+      params: params,
+      app: app,
+      processData: that.processStoreByOrderData,
+      API: app.STORELIST
+    }
+    loadListData.loadListData(allParams)
+  },
+  processStoreByOrderData(res) {
+    if (res.suc == 'y') {
+      var dataList = []
+      console.log('获取商铺list成功', res.data);
+      if (app.globalData.hasLogin) {
+        wx.hideLoading()
+      }
+      for (var i in res.data.list) {
+        res.data.list[i].store_img_src = app.globalImageUrl + res.data.list[i].store_img_src
+        res.data.list[i].special = res.data.list[i].special.split(",");
+      }
+      //获取数据之后需要改变page和totalPage数值，保障上拉加载下一页数据的page值，其余没有需要修改的数据
+      dataList = dataList.concat(res.data.list)
+      this.setData({
+        page_no: this.data.page_no + 1,
+        total_page: res.data.total_page,
+        dataList: dataList,
+      })
+    } else {
+      console.log('获取商铺list错误', res);
+    }
+  }
 })

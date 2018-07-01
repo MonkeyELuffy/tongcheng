@@ -69,7 +69,7 @@
 }
 .position-image{
   width: 26rpx;
-  height: 40rpx;
+  height: 30rpx;
   margin-right: 10rpx;
 }
 

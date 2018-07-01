@@ -8,6 +8,8 @@
   color: #333;
   font-size: 34rpx;
   font-weight: 600;
+  background-color: #fff;
+  margin: 4rpx 0;
 }
 
 /*顶部信息  */
@@ -21,24 +23,26 @@
   font-size: 34rpx;
   color: #333;
   font-weight: 600;
+  width: 80%;
 }
 .info-des{
   font-size: 28rpx;
   color: #999;
+  padding-top: 20rpx;
 }
 .daohang-contain{
   position: absolute;
   right: 30rpx;
   top: 30rpx;
-  font-size: 28rpx;
-  color: #666;
+  font-size: 30rpx;
+  color: #333;
   display: flex;
   align-items: center;
 }
 .daohang-contain-img{
-  width: 40rpx;
-  height: 40rpx;
-  margin-right: 8rpx;
+  width: 46rpx;
+  height: 50rpx;
+  margin-right: 12rpx;
 }
 
 /*景点介绍  */
@@ -116,7 +120,7 @@
   border-radius: 8rpx;
   box-sizing: border-box;
   padding: 10rpx 20rpx;
-  background-color: #ccc;
+  background-color: #ddd;
   margin-top: 10rpx;
 }
 
@@ -125,11 +129,14 @@
   display: flex;
   box-sizing: border-box;
   padding: 30rpx;
+  background-color: #fff;
+  margin-top: 4rpx;
 }
 .tab{
   font-size: 34rpx;
   font-weight: 600;
   margin-right: 20rpx;
+  color: #333;
 }
 .list-2-info{
   background-color: #fff;
@@ -143,11 +150,21 @@
 .list-2-name{
   font-size: 30rpx;
   color: #333;
+  padding-right: 20rpx;
+  flex: 1 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .qi{
   color: #999;
   font-size: 28rpx;
   margin-left: 4rpx;
+}
+.price-img{
+  width: 30rpx;
+  height: 12rpx;
+  margin-left: 10rpx;
 }
 /*各个价格规格  */
 .list-2-prices{
@@ -161,10 +178,12 @@
 }
 .list-2-prices-left{
   width: 60%;
+  display: flex;
 }
 .list-2-price-name{
   font-size: 32rpx;
   color: #333;
+  padding-top: 30rpx;
 }
 .list-2-price-des{
   font-size: 28rpx;
@@ -178,6 +197,11 @@
   font-size: 28rpx;
   color: #888;
   margin-right: 10rpx;
+}
+.list-2-img{
+  width: 160rpx;
+  height: 160rpx;
+  margin-right: 20rpx;
 }
 
 /*查看更多  */
@@ -256,4 +280,7 @@
   font-size: 30rpx;
   color: #444;
   padding: 14rpx 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }

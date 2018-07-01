@@ -44,30 +44,30 @@ Page({
         text: '景点',
         page: 'jingdianmenpiao'
       },
-      {
-        id: 4,
-        img: '../../img/huodong1.png',
-        text: '积分换购',
-        page: 'wodejifen'
-      },
-      {
-        id: 5,
-        img: '../../img/youhuiquan.png',
-        text: '优惠券',
-        page: 'youhuiquan'
-      },
-      {
-        id: 6,
-        img: '../../img/jifen.png',
-        text: '向导',
-        // page: 'xiangdao'
-      },
-      {
-        id: 7,
-        img: '../../img/huodong.png',
-        text: '活动专区',
-        page: 'huodong'
-      },
+      // {
+      //   id: 4,
+      //   img: '../../img/huodong1.png',
+      //   text: '积分换购',
+      //   page: 'wodejifen'
+      // },
+      // {
+      //   id: 5,
+      //   img: '../../img/youhuiquan.png',
+      //   text: '优惠券',
+      //   page: 'youhuiquan'
+      // },
+      // {
+      //   id: 6,
+      //   img: '../../img/jifen.png',
+      //   text: '向导',
+      //   // page: 'xiangdao'
+      // },
+      // {
+      //   id: 7,
+      //   img: '../../img/huodong.png',
+      //   text: '活动专区',
+      //   page: 'huodong'
+      // },
     ],
     // 排序组件所需data
     allData: app.globalData.allPaiXuData,

@@ -55,6 +55,7 @@ Page({
       orderDes: params.orderDes,
       time: this.getEnterAndLeaveDate_2(0)
     })
+    wx.setStorageSync('newCpnsId', '')
     // 确认订单数据
     this.getOrderInfo(params.orderDes)
     this.getNowDate()
@@ -62,6 +63,8 @@ Page({
   onShow() {
     //获取选择的预定时间
     let chooseDate = wx.getStorageSync('chooseDate') || ''
+    let newCpnsId = wx.getStorageSync('newCpnsId') || ''
+    let changeCpnsId = wx.getStorageSync('changeCpnsId') || false
     let chooseDateText = wx.getStorageSync('chooseDateText') || ''
     let changeData = wx.getStorageSync('changeData') || false
     if (changeData){
@@ -92,7 +95,12 @@ Page({
         dateList: this.data.dateList
       })
       wx.setStorageSync('changeData', false)
+      wx.setStorageSync('chooseDate', '')
+      wx.setStorageSync('chooseDateText', '')
       this.getOrderInfo(this.data.orderDes)
+    } else if (changeCpnsId){
+
+      wx.setStorageSync('changeCpnsId', false)
     }else{
       // 没有改变预定时间说明是直接返回本页
       // 不需要重新请求数据，但是顶部的日期样式要变回来
@@ -150,7 +158,7 @@ Page({
       buy_key: params.product_id + '_' + this.data.orderInfo.goods_item[0].quantity || 1,
       member_id: app.globalData.member_id,
       time:this.data.time,
-      cpns_id: wx.getStorageSync('cpns_id')
+      cpns_id: wx.getStorageSync('newCpnsId') || ''
     }
     util.httpPost(app.globalUrl + app.TicketConfirmInfo, data, this.processTicketConfirmInfoData);
   },
@@ -161,7 +169,11 @@ Page({
         orderInfo: res.data
       })
     } else {
-      console.log('订单数据错误', res);
+      console.log('订单数据错误', res); 
+      wx.showModal({
+        title: '提醒',
+        content: res.msg,
+      })
     }
   },
   //支付
@@ -218,6 +230,8 @@ Page({
   chooseYouhui:function(e){
     var that = this
     var go = function (e) {
+      app.globalData.orderData = that.data.orderInfo
+      app.globalData.orderData.time = that.data.time
       wx.navigateTo({
         url: "../youhuiquanlingqu/youhuiquanlingqu"
       });

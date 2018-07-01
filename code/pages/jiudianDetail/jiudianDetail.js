@@ -35,16 +35,7 @@ Page({
     total:0,
     detail:{},
     hotelOrderDetail:{
-      labels:[{name:'上网',value:'WIFi和宽带'},
-        { name: '卫浴', value: '独立' },
-        { name: '窗户', value: '有' },],
-      msg:'入住说明入住说明入住说明入住说明入住说明入住说明入住说明入住说明入住说明入住说明入住说明入住说明入住说明入住说明入住说明入住说明入住说明入住说明入住说明',
-      dataList: [
-        { time: '2018-04-01', quantity: '1', price: '100.00' },
-        { time: '2018-04-01', quantity: '1', price: '100.00' },
-        { time: '2018-04-01', quantity: '1', price: '100.00' },
-        { time: '2018-04-01', quantity: '1', price: '100.00' },
-      ],
+      labels:[],
       total:'1',
       totalPrice:'100.00',
       img:'../../img/test.png',
@@ -100,11 +91,6 @@ Page({
       ruzhuTimeText: nowDateArr[1] + '月' + nowDateArr[2] + '日',
       lidianTimeText: nextDateArr[1] + '月' + nextDateArr[2] + '日',
     })
-  },
-  //选择酒店时间
-  chooseJiuDianDate(e){
-    let that = this
-    basic.goPage('chooseDateForJiuDian', that, e)
   },
   //导航去酒店
   daohang(){

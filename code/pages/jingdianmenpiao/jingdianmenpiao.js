@@ -24,29 +24,32 @@ Page({
         id: 0,
         img: '../../img/youshan.png',
         text: '游山玩水',
-        page: ''
+        page: 'jingdianlist',
+        trade_id: 133
       },
       {
         id: 1,
         img: '../../img/kaogu.png',
         text: '考古穿越',
-        page: ''
+        page: 'jingdianlist',
+        trade_id: 134
       },
       {
         id: 2,
         img: '../../img/shangqu.png',
         text: '夜游赏曲',
-        page: ''
+        page: 'jingdianlist',
+        trade_id: 135
       },
       {
         id: 3,
         img: '../../img/zizhu.png',
         text: '休闲自助',
-        page: ''
+        page: 'jingdianlist',
+        trade_id: 136
       },
     ],
     // 排序组件所需data
-    allData: app.globalData.allPaiXuData,
     allData_2: app.globalData.allPaiXuData_2,
     // 底部数据列表
     dataList: [],
@@ -72,7 +75,7 @@ Page({
   },
   loadStorData() {
     var params = {
-      order_by: this.data.allData.nowPaiXu,
+      order_by: this.data.allData_2.nowPaiXu,
       page_no: 1,
       page_size: 15,
       type: 3,
@@ -115,7 +118,7 @@ Page({
   // 下拉加载更多购物车数据
   bindDownLoad: function (e) {
     var params = {
-      order_by: this.data.allData.nowPaiXu,
+      order_by: this.data.allData_2.nowPaiXu,
       page_no: this.data.page_no,
       page_size: 15,
       type: 3,
@@ -253,13 +256,14 @@ Page({
     })
     var that = this
     var nowPaiXu = paixuTemp_2.julipaixu(e, that)
+    console.log()
     this.loadStorDataByOrder(e)
   },
   // 点击排序重新请求数据，不能先清空dataList，会出现闪动；
   // 目前先单独处理，之后需要对请求data函数做处理，根据标志位判断当前的请求是加载下一页，还是完全更新数据
   loadStorDataByOrder(e) {
     var params = {
-      order_by: this.data.allData.nowPaiXu,
+      order_by: this.data.allData_2.nowPaiXu,
       page_no: 1,
       page_size: 15,
       type: 3,

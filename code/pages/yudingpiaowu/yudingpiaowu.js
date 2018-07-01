@@ -55,7 +55,7 @@ Page({
     var page = 'piaowu_pay'
     let orderDes = this.data.orderDes
     let params = { orderDes }
-    basic.goPage(page, that, e, params)
+    basic.replacePage(page, that, e, params)
   },
   //关注或者取消关注商品
   payAttention() {

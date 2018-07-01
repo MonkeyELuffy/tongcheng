@@ -1,0 +1,8 @@
+<!--pages/articleList/articleList.wxml-->
+<view class='item' wx:for='{{dataList}}' data-item='{{item}}' bindtap='goDetail'>
+  <image class='item-img' src='{{item.img_src}}'></image>
+  <view class='text-contain'>
+    <view class='name'>{{item.title}}</view>
+    <view class='desc'>{{item.desc}}</view>
+  </view>
+</view>

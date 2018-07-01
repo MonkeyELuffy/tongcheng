@@ -25,7 +25,7 @@
 
   <view style="width:100%;height:40rpx;"></view>
 
-  <view class='kefu' bindtap='kefu'>客服</view>
+  <!-- <view class='kefu' bindtap='kefu'>客服</view> -->
 
 </view>
   </scroll-view>

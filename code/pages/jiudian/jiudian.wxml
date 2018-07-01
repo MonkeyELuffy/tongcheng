@@ -80,7 +80,7 @@
           <!-- <view class='haoping'>好评{{item.haoping}}%</view> -->
         </view>
         <view class="fenlei-price-total flex-between flex-all">
-          <view class="fenlei-price">{{item.store_star}}星级</view>
+          <view class="fenlei-price">￥{{item.price}}</view>
           <view class='juli'>{{item.cur_space}}</view>
         </view>
       </view>

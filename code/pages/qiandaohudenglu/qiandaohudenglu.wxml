@@ -10,7 +10,7 @@
     <view class='top-info'>
       <view class='info-name'>{{detail.seller_name}}</view>
       <view class='info-des'>{{detail.address}}</view>
-      <view class='daohang-contain'>
+      <view class='daohang-contain' bindtap='daohang'>
         <image class='daohang-contain-img' src='{{daohang}}'></image>
         <view>导航</view>
       </view>
@@ -20,7 +20,7 @@
     <view class='jingdian-des' bindtap='introduce'>景点介绍 <image class='more' src='{{more}}'></image></view>
 
     <!--必看推荐  -->
-    <view class='title'>必看推荐</view>
+    <!-- <view class='title'>必看推荐</view>
     <view class='list-1-item' wx:for='{{list_1}}'> 
       <image class='list-1-img' src='{{item.img}}'></image>
       <view class='list-1-info'>
@@ -34,43 +34,46 @@
         <view class='price'>￥{{item.price}}/人</view>
         <view class='buy-btn'>预定</view>
       </view>
-    </view>
+    </view> -->
 
     <!--tab菜单  -->
     <view class='tab-contain'>
-      <view class='tab' wx:for="{{tabList}}" data-item='{{item}}' style='color:{{item.checked ? "rgb(22,243,234)" : "#999"}}'>{{item.name}}</view>
+      <view class='tab' wx:for="{{tabList}}" data-item='{{item}}'>{{item.name}}</view>
     </view>
     <!--tab菜单下面的项目  -->
     <view class='list-2-item' wx:for="{{detail.goods_item.list}}">
-      <view class='list-2-info' bindtap='chooseType' data-item='{{item}}'>
-        <view class='list-2-name'>{{item.goods_name}}{{item.goods_body}}</view>
-        <view class='price'>￥{{item.shop_price}}<span class='qi'>起</span></view>
+      <view class='list-2-info' bindtap='chooseType' data-item='{{item}}' wx:for-index="index" data-index="{{index}}">
+        <view class='list-2-name'>{{item.goods_name}}</view>
+        <view class='price'>￥{{item.shop_price}}<span class='qi'>起</span><image class='price-img' src='{{item.open ? seeMore_1 : seeMore_0}}'></image></view>
       </view>
       <!--各个价格规格  -->
-      <view class='list-2-prices'  wx:for='{{proudctList}}'>
-        <!--左侧信息  -->
-        <view class='list-2-prices-left' >
-          <view class='list-2-price-name'>{{item.spec_info}}</view>
-          <!-- <view class='list-2-price-des'>{{item.des}}</view>
-          <view class='list-2-price-labels'>
-            <view class='list-2-price-label-item' wx:for='{{item.labels}}'>{{item.name}}</view>
-          </view> -->
-        </view>
-        <!--右侧预定按钮  -->
-        <view class='price-and-buy'>
-          <view class='price'>￥{{item.price}}</view>
-          <view class='buy-btn' bindtap='yuding' data-item='{{item}}'>预定</view>
+      <view wx:if='{{item.open}}' >
+        <view class='list-2-prices' wx:for='{{proudctList}}'>
+          <!--左侧信息  -->
+          <view class='list-2-prices-left' >
+            <image class='list-2-img' src='{{detail.store_img_src}}'></image>
+            <view class='list-2-price-name'>{{item.spec_info}}</view>
+            <!-- <view class='list-2-price-des'>{{item.des}}</view>
+            <view class='list-2-price-labels'>
+              <view class='list-2-price-label-item' wx:for='{{item.labels}}'>{{item.name}}</view>
+            </view> -->
+          </view>
+          <!--右侧预定按钮  -->
+          <view class='price-and-buy'>
+            <view class='price'>￥{{item.price}}</view>
+            <view class='buy-btn' bindtap='yuding' data-item='{{item}}'>预定</view>
+          </view>
         </view>
       </view>
     </view>
     <!--查看更多  -->
-    <view class='see-more' bindtap='seeMore'>
+    <!-- <view class='see-more' bindtap='seeMore'>
       <view>查看更多</view>
       <image class='see-more-img' src='{{seeMore}}'></image>
-    </view>
+    </view> -->
 
     <!--list-3  -->
-    <view class='title'>必看推荐</view>
+    <!-- <view class='title'>必看推荐</view>
     <view class='list-3-item' wx:for="{{list_3}}">
       <view class='list-3-name'>{{item.name}}</view>
       <view class='list-3-star-contain'>
@@ -86,17 +89,17 @@
       </view>
     </view>
     <!--查看更多  -->
-    <view class='see-more' bindtap='seeMore'>
+    <!-- <view class='see-more' bindtap='seeMore'>
       <view>查看更多</view>
       <image class='see-more-img' src='{{seeMore}}'></image>
-    </view>
+    </view> -->
 
     <!--周边景点  -->
     <view class='title'>周边景点</view>
     <view class='list-4-contain'>
-      <view class='list-4-item' wx:for='{{list_4}}'>
-        <image class='list-4-img' src='{{item.img}}'></image>
-        <view class='list-4-name'>{{item.name}}</view>
+      <view class='list-4-item' wx:for='{{list_4}}' bindtap='clickRecommend' data-item='{{item}}'>
+        <image class='list-4-img' src='{{item.store_img_src}}'></image>
+        <view class='list-4-name'>{{item.seller_name}}</view>
         <view class='price'>￥{{item.price}}起</view>
       </view>
     </view>

@@ -38,7 +38,7 @@
       <view class='hot-info'>
         <view class='hot-name'>{{item.goods_name}} {{item.goods_body}}</view>
         <view class='hot-today'>{{item.today}}</view>
-        <view class='hot-sale'>已售{{item.sale}}</view>
+        <view class='hot-sale'>已售{{item.sale || 0}}</view>
         <view class='hot-price'>￥{{item.shop_price}}/人</view>
       </view>
     </view>
